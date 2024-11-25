@@ -1,0 +1,630 @@
+﻿using UnityEngine;
+using System.Collections;
+ 
+public class Monster : MonoBehaviour {
+ 
+    public enum State {
+        Crawl,
+        Walk,
+        Die,
+    }
+ 
+    public State state;
+ 
+    IEnumerator CrawlState () {
+        Debug.Log("Crawl: Enter");
+        while (state == State.Crawl) {
+            yield return 0;
+        }
+        Debug.Log("Crawl: Exit");
+        NextState();
+    }
+ 
+    IEnumerator WalkState () {
+        Debug.Log("Walk: Enter");
+        while (state == State.Walk) {
+            yield return 0;
+        }
+        Debug.Log("Walk: Exit");
+        NextState();
+    }
+ 
+    IEnumerator DieState () {
+        Debug.Log("Die: Enter");
+        while (state == State.Die) {
+            yield return 0;
+        }
+        Debug.Log("Die: Exit");
+    }
+ 
+    void Start () {
+        NextState();
+    }
+ 
+    void NextState () {
+        string methodName = state.ToString() + "State";
+        System.Reflection.MethodInfo info =
+            GetType().GetMethod(methodName,
+                                System.Reflection.BindingFlags.NonPublic |
+                                System.Reflection.BindingFlags.Instance);
+        StartCoroutine((IEnumerator)info.Invoke(this, null));
+    }
+   
+}
+ 
+
+
+ using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Globalization;
+using UnityEngine;
+ 
+public class StateMachine : MonoBehaviour
+{
+    public enum State
+    {
+        A,
+        B,
+        C,
+    }
+ 
+    public enum Transition
+    {
+        ENTER,
+        ARRIVE,
+        EXIT
+    }
+ 
+ 
+    public State state;
+    public bool debugStates;
+    protected delegate IEnumerator Routine();
+    public void SetState(int state) { this.state = (State)state; }// for easy connection to UI dropdown
+    Dictionary<int, Dictionary<Transition, Routine>> states = new Dictionary<int, Dictionary<Transition, Routine>>();
+ 
+    void Start()
+    {
+        InitStateMachine();
+ 
+        //// Test
+        AssignCoroutine(State.A, Transition.ENTER, TestRoutine);
+        //AssignCoroutine(State.B, Transition.ENTER, TestRoutine);
+        AssignCoroutine(State.C, Transition.ENTER, TestRoutine);
+ 
+        StartStateMachine();
+    }
+ 
+    protected void InitStateMachine()
+    {
+        foreach (int key in Enum.GetValues(typeof(State)))
+        {
+            var transitions = new Dictionary<Transition, Routine>();
+            foreach (Transition t in Enum.GetValues(typeof(Transition)))
+            {
+                Routine r = null;
+                transitions.Add(t, r);
+            }
+            states.Add(key, transitions);
+        }
+    }
+ 
+    protected void StartStateMachine()
+    {
+        StartCoroutine(Evaluate());
+    }
+ 
+    protected void AssignCoroutine(State state, Transition transition, Routine routine)
+    {
+        states[(int)state][transition] = routine;
+    }
+ 
+    protected void AddCoroutine(State state, Transition transition, Routine routine, bool clearExisting = false)
+    {
+        if (clearExisting) { states[(int)state][transition] = null; }
+        states[(int)state][transition] += routine;
+    }
+ 
+    protected IEnumerator Evaluate()
+    {
+        while (true)
+        {
+            for (int i = 0; i < states.Count; i++)
+            {
+                if ((int)state == i)
+                {
+                    if (debugStates) { Debug.Log("ENTER: " + (State)i + "\n"); }
+                    if (states[i][Transition.ENTER] != null) { yield return states[i][Transition.ENTER].Invoke(); }
+ 
+                    if (debugStates) { Debug.Log("ARRIVE: " + (State)i + "\n"); }
+                    if (states[i][Transition.ARRIVE] != null) { yield return states[i][Transition.ARRIVE].Invoke(); }
+ 
+                    while ((int)state == i) { yield return null; } // yield until state change
+ 
+                    if (debugStates) { Debug.Log("EXIT: " + (State)i + "\n"); }
+                    if (states[i][Transition.EXIT] != null) { yield return states[i][Transition.EXIT].Invoke(); }
+                }
+            }
+        }
+    }
+ 
+    IEnumerator TestRoutine()
+    {
+        Debug.Log("Test Routine\n");
+        yield return new WaitForSeconds(1); // Simulate processing
+        yield break;
+    }
+}
+ 
+
+ //Use this for initiialization
+        public IEnumerator Start()
+        {
+    
+            switch (_events)
+            {
+                case Events.idle:
+                    InitMe();
+                    break;
+                case Events.ReadDowncount:
+
+                    break;
+
+                    
+            }
+            yield return 0;
+        }
+
+
+		Not used--------------------------------------
+
+		 /// <summary>
+        /// Data received Subscribe from clsSerialDevies for Osc.
+        /// </summary>
+        /// <param name="obj"></param>
+        private void QscDataReceived(string obj)
+        {
+            
+            OscDataReceive = obj;
+
+            StringStatus = "Data Received = " + OscDataReceive;
+
+            string strUp = OscDataReceive.Substring(2 - 0, 7);
+            string strDn = OscDataReceive.Substring(10 - 1, 6);
+
+            double dUpCount = Conversion.Val("&H" + strUp);
+            double dDownCount = Conversion.Val("&H" + strDn);
+
+            switch (Currentstates)
+            {
+                case ClassCommon.ProcessState.Empty_wait: //Upcount
+                    ClassCommon.dRefernce = (dUpCount + dDownCount) / 2;
+
+                    ChangeState(ClassCommon.ProcessState.Full_wait);
+                    //StartScaleReadTimeOut();
+                    break;
+
+                case ClassCommon.ProcessState.Full_wait: //downcount
+
+                    ClassCommon.dReading = (dUpCount + dDownCount) / 2;
+                    ClassCommon.dCalcForte = ClassCommon.dRefernce - ClassCommon.dReading;
+                    if(Settings.Default.Averaging)
+                    {
+
+                    }
+                    else
+                    {
+                        ClassCommon.dCalcForte2 = 0;     
+                       // CalculateMoisture();
+                        ChangeState(ClassCommon.ProcessState.Complete);
+                        bReadReady = false;
+                    }
+                    break;
+
+                case ClassCommon.ProcessState.Full2_Wait: //downcount2
+
+                    ClassCommon.dReading = (dUpCount + dDownCount) / 2;
+                    ClassCommon.dCalcForte2 = ClassCommon.dRefernce - ClassCommon.dReading;
+
+                    //CalculateMoisture();
+                    ChangeState(ClassCommon.ProcessState.Complete);
+                    StringStatus = "Done!";
+                    bReadReady = false;
+                    break;
+                case ClassCommon.ProcessState.OscTest_Wait:
+                    ChangeState(ClassCommon.ProcessState.Idle);
+                    break;
+                    
+            }
+            
+
+            Currentstates = ClassCommon.ProcessState.Idle;
+
+            ClassCommon.dforte = ClassCommon.dUpCnt - ClassCommon.dDCnt;
+        }
+
+		INSERT INTO BaleArchiveSep19([Index],[Empty],[SourceName],[LineName],[StockName],[CalibrationName],[GradeName],
+		[Status],[Weight],[WeightStatus],[OrigWeight],[OrigWeightStatus],[Forte],[ForteStatus],[ForteAveraging],[Forte1],
+		[Forte1Status],[Forte2],[Forte2Status],[UpCount],[UpCountStatus],[DownCount],[DownCountStatus],[DownCount2],
+		[DownCount2Status],[Brightness],[BrightnessStatus],[BaleHeight],[BaleHeightStatus],[TimeStart],[TimeStartStatus],
+		[TimeComplete],[TimeCompleteStatus],[SourceID],[SourceIDStatus],[LineID],[StockID],[StockIDStatus],[GradeID],
+		[GradeIDStatus],[TareWeight],[TareWeightStatus],[Finish],[AllowanceStatus],[DropNumber],[DropTime],[Position],
+		[SheetCount],[SheetCountStatus],[SheetArea],[Moisture],[MoistureStatus],[NetWeight],[NetWeightStatus],[BDWeight],
+		[CalibrationID],[CalibrationIDStatus],[SerialNumber],[SeriAlNumberStatus],[LotNumber],[LotNumberStatus],
+		[LotBaleNumber],[PkgMoistMethod],[SpareSngFld1],[SpareSngFld2],[QualityUID],[LastInGroup],[MoistMes],[WtMes],
+		[ProdDayStart],[ProdDayEnd],[ShiftName],[MonthCode],[AsciiFld1],[AsciiFld2],[AsciiFld3],[AsciiFld4],[SR],[UID],
+		[OrderStr],[Package],[ResultDesc],[Temperature],[TemperatureStatus],[LotIdent],[Dirt],[BasisWeight],[QualityName],
+		[FC_IdentString],[StockLabel1],[GradeLabel1],[StockLabel2],[GradeLabel2],[FC_LotIdentString],[UnitBaleNumber],[UnitNumber],
+		[UnitNumberStatus],[UnitIdent],[WLAlarm],[WLAStatus],[SpareSngFld3],[StockLabel3],StockLabel4)
+		VALUES (2361,0,'A','Line 1','1.2DX44MM','4','1.2DX44MM',8,250,35,250,35,1969,32,0,1500,35,NULL,0,270129,32,268160,32,0,0,0,0,0,0,'9/18/2019 3:58:59 PM',3,'9/18/2019 3:58:59 PM',0,1,8,1,13,3,0,0,1.1,3,1,0,0,NULL,0,0,0,0,12.92527,32,248.9,3,216.729,2,3,53,3,1,3,52,0,24.3893,-8.935,NULL,0,'    ','Default','9/18/2019 3:58:59 PM',NULL,'A','J','1111','325','2014','hhhh',13,40829,NULL,' ','5000',27.33,32,'1',0,0,NULL,' ','1.2',NULL,'44',NULL,NULL,NULL,NULL,NULL,NULL,0,35,38.366,'1760',' ')
+
+
+		_Pos1.Add(new ChartData(){ Index = iRow,
+                                                    Value = Convert.ToDouble(item[GraphtypeSelect]),
+                                                    ChartColor = Brushes.Green });
+                        ditems.Add(Convert.ToDouble(item[GraphtypeSelect]));
+
+
+
+						<!--DataGrid not used for now 
+        <DataGrid x:Name="GridBaleData" IsReadOnly="True"  CanUserAddRows="False" Margin="5" Visibility="Hidden"
+                  AutoGenerateColumns="true" AutoGeneratingColumn="OnAutoGeneratingColumn" 
+                  SelectedIndex="{Binding SelectData, Mode=TwoWay}" SelectionMode="Single"
+                  Grid.Column="1" Grid.Row="3" HeadersVisibility="All" ItemsSource="{Binding lvDatatable}"
+                  VerticalAlignment="Stretch" FontSize="16" MinWidth="970" Width="auto"  
+                  Height="auto" Focusable="True" IsSynchronizedWithCurrentItem="false"
+                  EnableRowVirtualization="True" EnableColumnVirtualization="True"
+                  
+                  AlternatingRowBackground="#FFE5ECE2" HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="Gray">
+
+            <DataGrid.Effect>
+                <DropShadowEffect ShadowDepth="4"
+                                      Direction="330"
+                                      Color="Black"
+                                      Opacity="0.5"
+                                      BlurRadius="4"/>
+            </DataGrid.Effect>
+            <DataGrid.Columns>
+                <DataGridTextColumn>
+                    <DataGridTextColumn.Foreground>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="Black" Offset="0"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </LinearGradientBrush>
+                    </DataGridTextColumn.Foreground>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="FontWeight"  Value="Medium" />
+                    <Setter Property="Height" Value="30" />
+                    <Setter Property="BorderThickness" Value="0.5,0,0,0.5" />
+                    <Setter Property="BorderBrush" >
+                        <Setter.Value>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="Black" Offset="0"/>
+                                <GradientStop Color="White" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Background" Value="Beige" />
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+        </DataGrid>
+        -->
+
+		 <!--Xceed DataGrid-->
+        <xcdg:DataGridControl x:Name="DataGridControl" Grid.Column="1" Grid.Row="2" Margin="5" 
+                              AutoCreateColumns="True" 
+                              ItemScrollingBehavior="Immediate"
+                              SelectedIndex="{Binding SelectData, Mode=TwoWay}" 
+                              SelectionMode="Single" ReadOnly="True"
+                              Background="White"  
+                              NavigationBehavior="RowOnly"
+                              ItemsSource="{Binding lvDatatable}" 
+                              AllowDrag="False" FontWeight="Medium" AllowDetailToggle="False" Grid.ColumnSpan="2">
+
+           
+            <xcdg:DataGridControl.View>
+                <!--drag a column header here entfernen-->
+                <xcdg:TableflowView x:Name="FlowView" UseDefaultHeadersFooters="False" ContainerHeight="27" TextElement.FontSize="22" 
+                                    ColumnStretchMinWidth="100" ColumnStretchMode="All">
+                    <xcdg:TableflowView.FixedHeaders>
+                        <DataTemplate>
+                            <xcdg:ColumnManagerRow />
+                        </DataTemplate>
+                    </xcdg:TableflowView.FixedHeaders>
+                    <!--drag a column header here entfernen-->
+                </xcdg:TableflowView>
+           
+            </xcdg:DataGridControl.View>
+            
+
+        </xcdg:DataGridControl>
+
+
+         private Thread ProgressThread;
+
+         /*
+            ProgressThread = new Thread(new ThreadStart(ThreadStartingPoint));
+            ProgressThread.SetApartmentState(ApartmentState.STA);
+            ProgressThread.IsBackground = true;
+            ProgressThread.Name = "WaitForData";
+            ProgressThread.Start();
+            */
+
+               if (ProgressThread != null)
+                {
+                    ProgressThread.Abort();
+                    ProgressThread = null;
+                }
+
+
+                Copy access table to sql 
+
+string strConnect = @"Provider=Microsoft.ACE.OLEDB.12.0;data source=D:\Temp\MyDB.accdb";
+
+DataTable dt = new DataTable();
+using (OleDbConnection con = new OleDbConnection(strConnect))
+    {
+    OleDbCommand cmd = new OleDbCommand("SELECT * FROM MyTable", con);
+    con.Open();
+    OleDbDataAdapter da = new OleDbDataAdapter(cmd);
+    da.Fill(dt);
+    }
+
+
+    string strConnect = @"Data Source=GRIFFPC\SQLEXPRESS;Initial Catalog=Testing;Integrated Security=True";
+using (SqlConnection con = new SqlConnection(strConnect))
+    {
+    con.Open();
+    using (SqlBulkCopy bulk = new SqlBulkCopy(con))
+        {
+        bulk.DestinationTableName = "Test";
+        bulk.WriteToServer(dt);
+        }
+    }
+
+#region DispatcherMainTimer  Events ////////////////////////////////////////////////////////////////////////
+
+        private System.Windows.Threading.DispatcherTimer dispatcherMainTimer;
+        
+        /// <summary>
+        /// System.Windows.Threading.DispatcherTimer
+        /// </summary>
+        private void InitializeMainTimer(string EventTag)
+        {
+            if (dispatcherMainTimer != null) dispatcherMainTimer = null;
+            dispatcherMainTimer = new System.Windows.Threading.DispatcherTimer();
+            dispatcherMainTimer.Interval = TimeSpan.FromSeconds(60);
+            dispatcherMainTimer.Tick += new EventHandler(DispatcherMainTimer_Tick);
+            dispatcherMainTimer.Tag = EventTag;
+            dispatcherMainTimer.Start();
+        }
+
+        private void DispatcherMainTimer_Tick(object sender, EventArgs e)
+        {
+            Application.Current.Dispatcher.Invoke(new Action(() => { CheckTimeofEvent(DateTime.Now); }));
+        }
+
+        /// <summary>
+        /// Reset Serial number after DayEnd time, everyday or the first day on every month
+        /// </summary>
+        /// <param name="timenow"></param>
+        private void CheckTimeofEvent(DateTime timenow)
+        {
+            
+            string HourNow = timenow.ToString("HH:mm");
+            string DayEndHour = DayEndTime.AddMinutes(1).ToString("HH:mm");
+            //For 1st of the month and after day end.
+            string Today = timenow.ToString("dd");
+
+            //ShiftOneTime
+            string SfOne = ShiftOneTime.ToString("HH:mm");
+            //ShiftTwoTime
+            string SfTwo = ShiftTwoTime.ToString("HH:mm");
+            ////ShiftThreeTime
+            string SfThree = ShiftThreeTime.ToString("HH:mm");
+
+           
+           // LastShutdown = LastShutdown.AddDays(-1);
+
+            if (SNDayEndCheck)
+            {
+                //Case 1  Restart program the day after
+                if (LastShutdown.Day < DateTime.Now.Day)
+                    if (LastShutdown.Hour >= DayEndTime.Hour) 
+                    {
+                        bResetSerialNumber = true;
+                        DayEndTime = DayEndTime;
+                    } 
+                
+                //Case 2 DayEnded 
+                if (HourNow == DayEndHour) 
+                {
+                    bResetSerialNumber = true;
+                    DayEndTime = DayEndTime;
+
+                    Console.WriteLine("Day End Occurred");
+                    MainWindow.AppWindows.ClsLog.LogMessage(MsgTypes.INFO, MsgSources.SYSEVENT, "Day End Occurred @ " + DateTime.Now);
+
+                    if ((DayEndRepCheck == true) & (bPrintDayEnd == false))
+                    {
+                        InitializePrintEventTimer((int)ClassCommon.PrntEvents.DayEnd);
+                    }
+                }
+            }
+            
+            if(SNMonthEndCheck)
+            {
+                if ((Today == "01") & (HourNow == DayEndHour)) 
+                {
+                    bResetSerialNumber = true;
+                    MainWindow.AppWindows.ClsLog.LogMessage(MsgTypes.INFO, MsgSources.SYSEVENT, "End of Month @ " + DateTime.Now);
+                    InitializePrintEventTimer((int)ClassCommon.PrntEvents.MonthEnd);
+                    ClassCommon._iIndex = 0;
+                }
+            }
+
+            //Shift Reports, print data within the time frame of shift
+            if(ShiftRepCheck)
+            {
+                if(ShiftOneCheck)
+                {
+                    if(SfOne == HourNow)
+                    {
+                        Console.WriteLine("Shift One Occurred");
+                        MainWindow.AppWindows.ClsLog.LogMessage(MsgTypes.INFO, MsgSources.SYSEVENT, "Shift One @ " + DateTime.Now);
+                        InitializePrintEventTimer((int)ClassCommon.PrntEvents.ShiftOne);
+                        shiftName = Settings.Default.ShiftOneName;
+                    }
+                }
+                if(ShiftTwoCheck)
+                {
+                    if (SfTwo == HourNow)
+                    {
+                        Console.WriteLine("Shift Two Occurred");
+                        MainWindow.AppWindows.ClsLog.LogMessage(MsgTypes.INFO, MsgSources.SYSEVENT, "Shift Two @ " + DateTime.Now);
+                        InitializePrintEventTimer((int)ClassCommon.PrntEvents.ShiftTwo);
+                        shiftName = Settings.Default.ShiftTwoName;
+                    }
+                }
+                if(ShiftThreeCheck)
+                {
+                    if (SfThree == HourNow)
+                    {
+                        Console.WriteLine("Shift Three Occurred");
+                        MainWindow.AppWindows.ClsLog.LogMessage(MsgTypes.INFO, MsgSources.SYSEVENT, "Shift Three @ " + DateTime.Now);
+                        InitializePrintEventTimer((int)ClassCommon.PrntEvents.ShiftThree);
+                        shiftName = Settings.Default.ShiftThreeName;
+                    }
+                }
+            }
+
+            Console.WriteLine("HourNow= " + HourNow + "  DayEndHour= " + DayEndHour + "  Today= " + Today);
+        }
+
+#endregion DispatcherMainTimer   Events /////////////////////////////////////////////////////////////////////
+
+ #region New Thread
+        
+        private void ThreadStartingPoint()
+        {
+            try
+            {
+                //LoadUpdate = new LoadingWIndow();
+                //LoadUpdate.Show();
+
+                //  System.Windows.Threading.Dispatcher.Run();
+                //System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => { StartThread(); }));
+            }
+            catch (ThreadAbortException e)
+            {
+                Console.WriteLine("Thread - caught ThreadAbortException - resetting.");
+                Console.WriteLine("Exception message: {0}", e.Message);
+                Thread.ResetAbort();
+                //LoadUpdate = null;
+                //System.Windows.Threading.Dispatcher.InvokeShutdown();
+            }
+        }
+
+        private void StartThread()
+        {
+            System.Windows.Threading.Dispatcher.Run();
+        }
+
+#endregion New Thread
+
+
+
+ /*
+            string HourNow = timenow.ToString("HH:mm");
+            string DayEndHour = Settings.Default.DayEndTime.AddMinutes(1).ToString("HH:mm");
+         
+            //For 1st of the month and after day end.
+            string Today = timenow.ToString("dd");
+
+            //ShiftOneTime
+            string SfOne = Settings.Default.ShiftOneTime.ToString("HH:mm");
+            //ShiftTwoTime
+            string SfTwo = Settings.Default.ShiftTwoTime.ToString("HH:mm");
+            ////ShiftThreeTime
+            string SfThree = Settings.Default.ShiftThreeTime.ToString("HH:mm");
+
+            //For printing!
+            var d3 = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, Settings.Default.DayEndTime.Hour, Settings.Default.DayEndTime.Minute, 00);
+            var d4 = d3.AddDays(-1);
+            string strStartDate = d4.ToString();
+            string strEndDate = d3.ToString();
+
+            var dSf1 = new DateTime(d3.Year, d3.Month, d3.Day, Settings.Default.ShiftOneTime.Hour, Settings.Default.DayEndTime.Minute, 00);
+            var dSf2 = new DateTime(d3.Year, d3.Month, d3.Day, Settings.Default.ShiftTwoTime.Hour, Settings.Default.DayEndTime.Minute, 00);
+
+            var dSf3 = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, Settings.Default.ShiftThreeTime.Hour, Settings.Default.DayEndTime.Minute, 00);
+
+            string strfOne = dSf1.ToString();
+            string strfTwo = dSf2.ToString();
+            string strfThree = dSf3.ToString();
+            */
+
+
+             <Button Grid.Column="2" Content="Delete Stock" Grid.Row="1"
+                                                 Command="{Binding DeleteStockCommand}" Margin="0,0,20,0"
+                                                Style="{StaticResource RoundButtonTemplate}"
+                                            HorizontalAlignment="Right" Height="30"  VerticalAlignment="Center" Width="100">
+                                            <Button.Background>
+                                                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                                    <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                                    <GradientStop Color="#FFEBEBEB" Offset="0.643"/>
+                                                    <GradientStop Color="#FFA80000" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Button.Background>
+                                        </Button>
+
+
+                                          <Button Grid.Column="1" Content="New Stock" Grid.Row="1" Margin="20,0,0,0" Grid.ColumnSpan="2"
+                                                Command="{Binding CreateStockCommand}" Style="{StaticResource RoundButtonTemplate}"
+                                            HorizontalAlignment="Left" Height="30"  VerticalAlignment="Center" Width="100">
+                                            <Button.Background>
+                                                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                                    <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                                    <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                                    <GradientStop Color="#FFDDDDDD" Offset="0.639"/>
+                                                    <GradientStop Color="#FFF99402" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Button.Background>
+                                        </Button>
+
+                                        <Button x:Name="btnApply" Content="Apply" HorizontalAlignment="Center" Grid.Column ="3" 
+                                        Command="{Binding ModifyProdApplyCommand}"
+                                        VerticalAlignment="Center" Width="100" Height="35"  Cursor="Hand" >
+                                    <Button.Background>
+                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                            <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                            <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                            <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                            <GradientStop Color="#FF0C7436" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+                                </Button>
+
+                                 <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Center" 
+                                            Grid.Column="4" Command="{Binding ModifyProdCancelCommand}"
+                                            VerticalAlignment="Center" Width="100" Height="35"  Cursor="Hand">
+                                    <Button.Background>
+                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                            <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                            <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                            <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                            <GradientStop Color="#FFA80000" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+                                </Button>
+
+
+                                new rhread(()= => 
+                                    {
+                                    Thread.Current.IsBackground  =  true;
+                                    call somthing();
+                                    }).Start();

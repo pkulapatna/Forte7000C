@@ -1,0 +1,523 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ForteDataDataSet" targetNamespace="http://tempuri.org/ForteDataDataSet.xsd" xmlns:mstns="http://tempuri.org/ForteDataDataSet.xsd" xmlns="http://tempuri.org/ForteDataDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ForteDataConnectionString1" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ForteDataConnectionString1 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Forte7000C.Properties.Settings.GlobalReference.Default.ForteDataConnectionString1" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="BaleArchiveOct20TableAdapter" GeneratorDataComponentClassName="BaleArchiveOct20TableAdapter" Name="BaleArchiveOct20" UserDataComponentName="BaleArchiveOct20TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ForteDataConnectionString1 (Settings)" DbObjectName="ForteData.dbo.BaleArchiveOct20" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [dbo].[BaleArchiveOct20] ([Index], [Empty], [SourceName], [LineName], [StockName], [CalibrationName], [GradeName], [Status], [Weight], [WeightStatus], [OrigWeight], [OrigWeightStatus], [Forte], [ForteStatus], [ForteAveraging], [Forte1], [Forte1Status], [Forte2], [Forte2Status], [UpCount], [UpCountStatus], [DownCount], [DownCountStatus], [DownCount2], [DownCount2Status], [Brightness], [BrightnessStatus], [BaleHeight], [BaleHeightStatus], [TimeStart], [TimeStartStatus], [TimeComplete], [TimeCompleteStatus], [SourceID], [SourceIDStatus], [LineID], [StockID], [StockIDStatus], [GradeID], [GradeIDStatus], [TareWeight], [TareWeightStatus], [Finish], [AllowanceStatus], [DropNumber], [DropTime], [Position], [SheetCount], [SheetCountStatus], [SheetArea], [Moisture], [MoistureStatus], [NetWeight], [NetWeightStatus], [BDWeight], [CalibrationID], [CalibrationIDStatus], [SerialNumber], [SeriAlNumberStatus], [LotNumber], [LotNumberStatus], [LotBaleNumber], [PkgMoistMethod], [SpareSngFld1], [SpareSngFld2], [QualityUID], [LastInGroup], [MoistMes], [WtMes], [ProdDayStart], [ProdDayEnd], [ShiftName], [MonthCode], [AsciiFld1], [AsciiFld2], [AsciiFld3], [AsciiFld4], [SR], [UID], [OrderStr], [Package], [ResultDesc], [Temperature], [TemperatureStatus], [LotIdent], [Dirt], [BasisWeight], [QualityName], [FC_IdentString], [StockLabel1], [GradeLabel1], [StockLabel2], [GradeLabel2], [FC_LotIdentString], [UnitBaleNumber], [UnitNumber], [UnitNumberStatus], [UnitIdent], [WLAlarm], [WLAStatus], [JobNum], [SpareSngFld3], [StockLabel3], [StockLabel4]) VALUES (@Index, @Empty, @SourceName, @LineName, @StockName, @CalibrationName, @GradeName, @Status, @Weight, @WeightStatus, @OrigWeight, @OrigWeightStatus, @Forte, @ForteStatus, @ForteAveraging, @Forte1, @Forte1Status, @Forte2, @Forte2Status, @UpCount, @UpCountStatus, @DownCount, @DownCountStatus, @DownCount2, @DownCount2Status, @Brightness, @BrightnessStatus, @BaleHeight, @BaleHeightStatus, @TimeStart, @TimeStartStatus, @TimeComplete, @TimeCompleteStatus, @SourceID, @SourceIDStatus, @LineID, @StockID, @StockIDStatus, @GradeID, @GradeIDStatus, @TareWeight, @TareWeightStatus, @Finish, @AllowanceStatus, @DropNumber, @DropTime, @Position, @SheetCount, @SheetCountStatus, @SheetArea, @Moisture, @MoistureStatus, @NetWeight, @NetWeightStatus, @BDWeight, @CalibrationID, @CalibrationIDStatus, @SerialNumber, @SeriAlNumberStatus, @LotNumber, @LotNumberStatus, @LotBaleNumber, @PkgMoistMethod, @SpareSngFld1, @SpareSngFld2, @QualityUID, @LastInGroup, @MoistMes, @WtMes, @ProdDayStart, @ProdDayEnd, @ShiftName, @MonthCode, @AsciiFld1, @AsciiFld2, @AsciiFld3, @AsciiFld4, @SR, @UID, @OrderStr, @Package, @ResultDesc, @Temperature, @TemperatureStatus, @LotIdent, @Dirt, @BasisWeight, @QualityName, @FC_IdentString, @StockLabel1, @GradeLabel1, @StockLabel2, @GradeLabel2, @FC_LotIdentString, @UnitBaleNumber, @UnitNumber, @UnitNumberStatus, @UnitIdent, @WLAlarm, @WLAStatus, @JobNum, @SpareSngFld3, @StockLabel3, @StockLabel4)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Index" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Index" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@Empty" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="Empty" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@SourceName" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="SourceName" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@LineName" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="LineName" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@StockName" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="StockName" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@CalibrationName" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="CalibrationName" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@GradeName" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="GradeName" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@Status" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="Status" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Single" Direction="Input" ParameterName="@Weight" Precision="0" ProviderType="Real" Scale="0" Size="0" SourceColumn="Weight" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@WeightStatus" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="WeightStatus" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Single" Direction="Input" ParameterName="@OrigWeight" Precision="0" ProviderType="Real" Scale="0" Size="0" SourceColumn="OrigWeight" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@OrigWeightStatus" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="OrigWeightStatus" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Forte" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Forte" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@ForteStatus" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="ForteStatus" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@ForteAveraging" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="ForteAveraging" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Forte1" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Forte1" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@Forte1Status" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="Forte1Status" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Forte2" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Forte2" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@Forte2Status" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="Forte2Status" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@UpCount" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="UpCount" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@UpCountStatus" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="UpCountStatus" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@DownCount" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="DownCount" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@DownCountStatus" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="DownCountStatus" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@DownCount2" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="DownCount2" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@DownCount2Status" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="DownCount2Status" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Single" Direction="Input" ParameterName="@Brightness" Precision="0" ProviderType="Real" Scale="0" Size="0" SourceColumn="Brightness" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@BrightnessStatus" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="BrightnessStatus" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Single" Direction="Input" ParameterName="@BaleHeight" Precision="0" ProviderType="Real" Scale="0" Size="0" SourceColumn="BaleHeight" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@BaleHeightStatus" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="BaleHeightStatus" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@TimeStart" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="TimeStart" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@TimeStartStatus" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="TimeStartStatus" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@TimeComplete" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="TimeComplete" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@TimeCompleteStatus" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="TimeCompleteStatus" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@SourceID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="SourceID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@SourceIDStatus" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="SourceIDStatus" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@LineID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="LineID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@StockID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="StockID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@StockIDStatus" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="StockIDStatus" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@GradeID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="GradeID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@GradeIDStatus" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="GradeIDStatus" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Single" Direction="Input" ParameterName="@TareWeight" Precision="0" ProviderType="Real" Scale="0" Size="0" SourceColumn="TareWeight" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@TareWeightStatus" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="TareWeightStatus" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Single" Direction="Input" ParameterName="@Finish" Precision="0" ProviderType="Real" Scale="0" Size="0" SourceColumn="Finish" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@AllowanceStatus" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="AllowanceStatus" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@DropNumber" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="DropNumber" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@DropTime" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="DropTime" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Byte" Direction="Input" ParameterName="@Position" Precision="0" ProviderType="TinyInt" Scale="0" Size="0" SourceColumn="Position" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@SheetCount" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="SheetCount" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@SheetCountStatus" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="SheetCountStatus" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Single" Direction="Input" ParameterName="@SheetArea" Precision="0" ProviderType="Real" Scale="0" Size="0" SourceColumn="SheetArea" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Single" Direction="Input" ParameterName="@Moisture" Precision="0" ProviderType="Real" Scale="0" Size="0" SourceColumn="Moisture" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@MoistureStatus" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="MoistureStatus" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Single" Direction="Input" ParameterName="@NetWeight" Precision="0" ProviderType="Real" Scale="0" Size="0" SourceColumn="NetWeight" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@NetWeightStatus" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="NetWeightStatus" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Single" Direction="Input" ParameterName="@BDWeight" Precision="0" ProviderType="Real" Scale="0" Size="0" SourceColumn="BDWeight" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@CalibrationID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="CalibrationID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@CalibrationIDStatus" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="CalibrationIDStatus" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@SerialNumber" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="SerialNumber" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@SeriAlNumberStatus" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="SeriAlNumberStatus" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@LotNumber" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="LotNumber" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@LotNumberStatus" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="LotNumberStatus" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@LotBaleNumber" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="LotBaleNumber" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@PkgMoistMethod" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="PkgMoistMethod" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Single" Direction="Input" ParameterName="@SpareSngFld1" Precision="0" ProviderType="Real" Scale="0" Size="0" SourceColumn="SpareSngFld1" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Single" Direction="Input" ParameterName="@SpareSngFld2" Precision="0" ProviderType="Real" Scale="0" Size="0" SourceColumn="SpareSngFld2" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@QualityUID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="QualityUID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@LastInGroup" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="LastInGroup" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@MoistMes" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="MoistMes" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@WtMes" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="WtMes" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@ProdDayStart" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="ProdDayStart" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@ProdDayEnd" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="ProdDayEnd" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@ShiftName" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="ShiftName" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@MonthCode" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="MonthCode" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@AsciiFld1" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="AsciiFld1" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@AsciiFld2" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="AsciiFld2" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@AsciiFld3" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="AsciiFld3" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@AsciiFld4" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="AsciiFld4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Single" Direction="Input" ParameterName="@SR" Precision="0" ProviderType="Real" Scale="0" Size="0" SourceColumn="SR" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@UID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="UID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@OrderStr" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="OrderStr" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Package" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Package" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@ResultDesc" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="ResultDesc" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Single" Direction="Input" ParameterName="@Temperature" Precision="0" ProviderType="Real" Scale="0" Size="0" SourceColumn="Temperature" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@TemperatureStatus" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="TemperatureStatus" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@LotIdent" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="LotIdent" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Single" Direction="Input" ParameterName="@Dirt" Precision="0" ProviderType="Real" Scale="0" Size="0" SourceColumn="Dirt" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Single" Direction="Input" ParameterName="@BasisWeight" Precision="0" ProviderType="Real" Scale="0" Size="0" SourceColumn="BasisWeight" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@QualityName" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="QualityName" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@FC_IdentString" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="FC_IdentString" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@StockLabel1" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="StockLabel1" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@GradeLabel1" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="GradeLabel1" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@StockLabel2" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="StockLabel2" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@GradeLabel2" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="GradeLabel2" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@FC_LotIdentString" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="FC_LotIdentString" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@UnitBaleNumber" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="UnitBaleNumber" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@UnitNumber" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="UnitNumber" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@UnitNumberStatus" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="UnitNumberStatus" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@UnitIdent" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="UnitIdent" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@WLAlarm" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="WLAlarm" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int16" Direction="Input" ParameterName="@WLAStatus" Precision="0" ProviderType="SmallInt" Scale="0" Size="0" SourceColumn="WLAStatus" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@JobNum" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="JobNum" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Single" Direction="Input" ParameterName="@SpareSngFld3" Precision="0" ProviderType="Real" Scale="0" Size="0" SourceColumn="SpareSngFld3" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@StockLabel3" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="StockLabel3" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@StockLabel4" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="StockLabel4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT [Index], Empty, SourceName, LineName, StockName, CalibrationName, GradeName, Status, Weight, WeightStatus, OrigWeight, OrigWeightStatus, Forte, ForteStatus, ForteAveraging, Forte1, Forte1Status, Forte2, Forte2Status, UpCount, UpCountStatus, DownCount, DownCountStatus, DownCount2, DownCount2Status, Brightness, BrightnessStatus, BaleHeight, BaleHeightStatus, TimeStart, TimeStartStatus, TimeComplete, TimeCompleteStatus, SourceID, SourceIDStatus, LineID, StockID, StockIDStatus, GradeID, GradeIDStatus, TareWeight, TareWeightStatus, Finish, AllowanceStatus, DropNumber, DropTime, Position, SheetCount, SheetCountStatus, SheetArea, Moisture, MoistureStatus, NetWeight, NetWeightStatus, BDWeight, CalibrationID, CalibrationIDStatus, SerialNumber, SeriAlNumberStatus, LotNumber, LotNumberStatus, LotBaleNumber, PkgMoistMethod, SpareSngFld1, SpareSngFld2, QualityUID, LastInGroup, MoistMes, WtMes, ProdDayStart, ProdDayEnd, ShiftName, MonthCode, AsciiFld1, AsciiFld2, AsciiFld3, AsciiFld4, SR, UID, OrderStr, Package, ResultDesc, Temperature, TemperatureStatus, LotIdent, Dirt, BasisWeight, QualityName, FC_IdentString, StockLabel1, GradeLabel1, StockLabel2, GradeLabel2, FC_LotIdentString, UnitBaleNumber, UnitNumber, UnitNumberStatus, UnitIdent, WLAlarm, WLAStatus, JobNum, SpareSngFld3, StockLabel3, StockLabel4 FROM dbo.BaleArchiveOct20</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Index" DataSetColumn="Index" />
+              <Mapping SourceColumn="Empty" DataSetColumn="Empty" />
+              <Mapping SourceColumn="SourceName" DataSetColumn="SourceName" />
+              <Mapping SourceColumn="LineName" DataSetColumn="LineName" />
+              <Mapping SourceColumn="StockName" DataSetColumn="StockName" />
+              <Mapping SourceColumn="CalibrationName" DataSetColumn="CalibrationName" />
+              <Mapping SourceColumn="GradeName" DataSetColumn="GradeName" />
+              <Mapping SourceColumn="Status" DataSetColumn="Status" />
+              <Mapping SourceColumn="Weight" DataSetColumn="Weight" />
+              <Mapping SourceColumn="WeightStatus" DataSetColumn="WeightStatus" />
+              <Mapping SourceColumn="OrigWeight" DataSetColumn="OrigWeight" />
+              <Mapping SourceColumn="OrigWeightStatus" DataSetColumn="OrigWeightStatus" />
+              <Mapping SourceColumn="Forte" DataSetColumn="Forte" />
+              <Mapping SourceColumn="ForteStatus" DataSetColumn="ForteStatus" />
+              <Mapping SourceColumn="ForteAveraging" DataSetColumn="ForteAveraging" />
+              <Mapping SourceColumn="Forte1" DataSetColumn="Forte1" />
+              <Mapping SourceColumn="Forte1Status" DataSetColumn="Forte1Status" />
+              <Mapping SourceColumn="Forte2" DataSetColumn="Forte2" />
+              <Mapping SourceColumn="Forte2Status" DataSetColumn="Forte2Status" />
+              <Mapping SourceColumn="UpCount" DataSetColumn="UpCount" />
+              <Mapping SourceColumn="UpCountStatus" DataSetColumn="UpCountStatus" />
+              <Mapping SourceColumn="DownCount" DataSetColumn="DownCount" />
+              <Mapping SourceColumn="DownCountStatus" DataSetColumn="DownCountStatus" />
+              <Mapping SourceColumn="DownCount2" DataSetColumn="DownCount2" />
+              <Mapping SourceColumn="DownCount2Status" DataSetColumn="DownCount2Status" />
+              <Mapping SourceColumn="Brightness" DataSetColumn="Brightness" />
+              <Mapping SourceColumn="BrightnessStatus" DataSetColumn="BrightnessStatus" />
+              <Mapping SourceColumn="BaleHeight" DataSetColumn="BaleHeight" />
+              <Mapping SourceColumn="BaleHeightStatus" DataSetColumn="BaleHeightStatus" />
+              <Mapping SourceColumn="TimeStart" DataSetColumn="TimeStart" />
+              <Mapping SourceColumn="TimeStartStatus" DataSetColumn="TimeStartStatus" />
+              <Mapping SourceColumn="TimeComplete" DataSetColumn="TimeComplete" />
+              <Mapping SourceColumn="TimeCompleteStatus" DataSetColumn="TimeCompleteStatus" />
+              <Mapping SourceColumn="SourceID" DataSetColumn="SourceID" />
+              <Mapping SourceColumn="SourceIDStatus" DataSetColumn="SourceIDStatus" />
+              <Mapping SourceColumn="LineID" DataSetColumn="LineID" />
+              <Mapping SourceColumn="StockID" DataSetColumn="StockID" />
+              <Mapping SourceColumn="StockIDStatus" DataSetColumn="StockIDStatus" />
+              <Mapping SourceColumn="GradeID" DataSetColumn="GradeID" />
+              <Mapping SourceColumn="GradeIDStatus" DataSetColumn="GradeIDStatus" />
+              <Mapping SourceColumn="TareWeight" DataSetColumn="TareWeight" />
+              <Mapping SourceColumn="TareWeightStatus" DataSetColumn="TareWeightStatus" />
+              <Mapping SourceColumn="Finish" DataSetColumn="Finish" />
+              <Mapping SourceColumn="AllowanceStatus" DataSetColumn="AllowanceStatus" />
+              <Mapping SourceColumn="DropNumber" DataSetColumn="DropNumber" />
+              <Mapping SourceColumn="DropTime" DataSetColumn="DropTime" />
+              <Mapping SourceColumn="Position" DataSetColumn="Position" />
+              <Mapping SourceColumn="SheetCount" DataSetColumn="SheetCount" />
+              <Mapping SourceColumn="SheetCountStatus" DataSetColumn="SheetCountStatus" />
+              <Mapping SourceColumn="SheetArea" DataSetColumn="SheetArea" />
+              <Mapping SourceColumn="Moisture" DataSetColumn="Moisture" />
+              <Mapping SourceColumn="MoistureStatus" DataSetColumn="MoistureStatus" />
+              <Mapping SourceColumn="NetWeight" DataSetColumn="NetWeight" />
+              <Mapping SourceColumn="NetWeightStatus" DataSetColumn="NetWeightStatus" />
+              <Mapping SourceColumn="BDWeight" DataSetColumn="BDWeight" />
+              <Mapping SourceColumn="CalibrationID" DataSetColumn="CalibrationID" />
+              <Mapping SourceColumn="CalibrationIDStatus" DataSetColumn="CalibrationIDStatus" />
+              <Mapping SourceColumn="SerialNumber" DataSetColumn="SerialNumber" />
+              <Mapping SourceColumn="SeriAlNumberStatus" DataSetColumn="SeriAlNumberStatus" />
+              <Mapping SourceColumn="LotNumber" DataSetColumn="LotNumber" />
+              <Mapping SourceColumn="LotNumberStatus" DataSetColumn="LotNumberStatus" />
+              <Mapping SourceColumn="LotBaleNumber" DataSetColumn="LotBaleNumber" />
+              <Mapping SourceColumn="PkgMoistMethod" DataSetColumn="PkgMoistMethod" />
+              <Mapping SourceColumn="SpareSngFld1" DataSetColumn="SpareSngFld1" />
+              <Mapping SourceColumn="SpareSngFld2" DataSetColumn="SpareSngFld2" />
+              <Mapping SourceColumn="QualityUID" DataSetColumn="QualityUID" />
+              <Mapping SourceColumn="LastInGroup" DataSetColumn="LastInGroup" />
+              <Mapping SourceColumn="MoistMes" DataSetColumn="MoistMes" />
+              <Mapping SourceColumn="WtMes" DataSetColumn="WtMes" />
+              <Mapping SourceColumn="ProdDayStart" DataSetColumn="ProdDayStart" />
+              <Mapping SourceColumn="ProdDayEnd" DataSetColumn="ProdDayEnd" />
+              <Mapping SourceColumn="ShiftName" DataSetColumn="ShiftName" />
+              <Mapping SourceColumn="MonthCode" DataSetColumn="MonthCode" />
+              <Mapping SourceColumn="AsciiFld1" DataSetColumn="AsciiFld1" />
+              <Mapping SourceColumn="AsciiFld2" DataSetColumn="AsciiFld2" />
+              <Mapping SourceColumn="AsciiFld3" DataSetColumn="AsciiFld3" />
+              <Mapping SourceColumn="AsciiFld4" DataSetColumn="AsciiFld4" />
+              <Mapping SourceColumn="SR" DataSetColumn="SR" />
+              <Mapping SourceColumn="UID" DataSetColumn="UID" />
+              <Mapping SourceColumn="OrderStr" DataSetColumn="OrderStr" />
+              <Mapping SourceColumn="Package" DataSetColumn="Package" />
+              <Mapping SourceColumn="ResultDesc" DataSetColumn="ResultDesc" />
+              <Mapping SourceColumn="Temperature" DataSetColumn="Temperature" />
+              <Mapping SourceColumn="TemperatureStatus" DataSetColumn="TemperatureStatus" />
+              <Mapping SourceColumn="LotIdent" DataSetColumn="LotIdent" />
+              <Mapping SourceColumn="Dirt" DataSetColumn="Dirt" />
+              <Mapping SourceColumn="BasisWeight" DataSetColumn="BasisWeight" />
+              <Mapping SourceColumn="QualityName" DataSetColumn="QualityName" />
+              <Mapping SourceColumn="FC_IdentString" DataSetColumn="FC_IdentString" />
+              <Mapping SourceColumn="StockLabel1" DataSetColumn="StockLabel1" />
+              <Mapping SourceColumn="GradeLabel1" DataSetColumn="GradeLabel1" />
+              <Mapping SourceColumn="StockLabel2" DataSetColumn="StockLabel2" />
+              <Mapping SourceColumn="GradeLabel2" DataSetColumn="GradeLabel2" />
+              <Mapping SourceColumn="FC_LotIdentString" DataSetColumn="FC_LotIdentString" />
+              <Mapping SourceColumn="UnitBaleNumber" DataSetColumn="UnitBaleNumber" />
+              <Mapping SourceColumn="UnitNumber" DataSetColumn="UnitNumber" />
+              <Mapping SourceColumn="UnitNumberStatus" DataSetColumn="UnitNumberStatus" />
+              <Mapping SourceColumn="UnitIdent" DataSetColumn="UnitIdent" />
+              <Mapping SourceColumn="WLAlarm" DataSetColumn="WLAlarm" />
+              <Mapping SourceColumn="WLAStatus" DataSetColumn="WLAStatus" />
+              <Mapping SourceColumn="JobNum" DataSetColumn="JobNum" />
+              <Mapping SourceColumn="SpareSngFld3" DataSetColumn="SpareSngFld3" />
+              <Mapping SourceColumn="StockLabel3" DataSetColumn="StockLabel3" />
+              <Mapping SourceColumn="StockLabel4" DataSetColumn="StockLabel4" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ForteDataDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="ForteDataDataSet" msprop:Generator_UserDSName="ForteDataDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="BaleArchiveOct20" msprop:Generator_TableClassName="BaleArchiveOct20DataTable" msprop:Generator_TableVarName="tableBaleArchiveOct20" msprop:Generator_TablePropName="BaleArchiveOct20" msprop:Generator_RowDeletingName="BaleArchiveOct20RowDeleting" msprop:Generator_RowChangingName="BaleArchiveOct20RowChanging" msprop:Generator_RowEvHandlerName="BaleArchiveOct20RowChangeEventHandler" msprop:Generator_RowDeletedName="BaleArchiveOct20RowDeleted" msprop:Generator_UserTableName="BaleArchiveOct20" msprop:Generator_RowChangedName="BaleArchiveOct20RowChanged" msprop:Generator_RowEvArgName="BaleArchiveOct20RowChangeEvent" msprop:Generator_RowClassName="BaleArchiveOct20Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Index" msprop:Generator_ColumnVarNameInTable="columnIndex" msprop:Generator_ColumnPropNameInRow="Index" msprop:Generator_ColumnPropNameInTable="IndexColumn" msprop:Generator_UserColumnName="Index" type="xs:int" minOccurs="0" />
+              <xs:element name="Empty" msprop:Generator_ColumnVarNameInTable="columnEmpty" msprop:Generator_ColumnPropNameInRow="Empty" msprop:Generator_ColumnPropNameInTable="EmptyColumn" msprop:Generator_UserColumnName="Empty" type="xs:boolean" minOccurs="0" />
+              <xs:element name="SourceName" msprop:Generator_ColumnVarNameInTable="columnSourceName" msprop:Generator_ColumnPropNameInRow="SourceName" msprop:Generator_ColumnPropNameInTable="SourceNameColumn" msprop:Generator_UserColumnName="SourceName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LineName" msprop:Generator_ColumnVarNameInTable="columnLineName" msprop:Generator_ColumnPropNameInRow="LineName" msprop:Generator_ColumnPropNameInTable="LineNameColumn" msprop:Generator_UserColumnName="LineName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StockName" msprop:Generator_ColumnVarNameInTable="columnStockName" msprop:Generator_ColumnPropNameInRow="StockName" msprop:Generator_ColumnPropNameInTable="StockNameColumn" msprop:Generator_UserColumnName="StockName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CalibrationName" msprop:Generator_ColumnVarNameInTable="columnCalibrationName" msprop:Generator_ColumnPropNameInRow="CalibrationName" msprop:Generator_ColumnPropNameInTable="CalibrationNameColumn" msprop:Generator_UserColumnName="CalibrationName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GradeName" msprop:Generator_ColumnVarNameInTable="columnGradeName" msprop:Generator_ColumnPropNameInRow="GradeName" msprop:Generator_ColumnPropNameInTable="GradeNameColumn" msprop:Generator_UserColumnName="GradeName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Status" msprop:Generator_ColumnVarNameInTable="columnStatus" msprop:Generator_ColumnPropNameInRow="Status" msprop:Generator_ColumnPropNameInTable="StatusColumn" msprop:Generator_UserColumnName="Status" type="xs:short" minOccurs="0" />
+              <xs:element name="Weight" msprop:Generator_ColumnVarNameInTable="columnWeight" msprop:Generator_ColumnPropNameInRow="Weight" msprop:Generator_ColumnPropNameInTable="WeightColumn" msprop:Generator_UserColumnName="Weight" type="xs:float" minOccurs="0" />
+              <xs:element name="WeightStatus" msprop:Generator_ColumnVarNameInTable="columnWeightStatus" msprop:Generator_ColumnPropNameInRow="WeightStatus" msprop:Generator_ColumnPropNameInTable="WeightStatusColumn" msprop:Generator_UserColumnName="WeightStatus" type="xs:short" minOccurs="0" />
+              <xs:element name="OrigWeight" msprop:Generator_ColumnVarNameInTable="columnOrigWeight" msprop:Generator_ColumnPropNameInRow="OrigWeight" msprop:Generator_ColumnPropNameInTable="OrigWeightColumn" msprop:Generator_UserColumnName="OrigWeight" type="xs:float" minOccurs="0" />
+              <xs:element name="OrigWeightStatus" msprop:Generator_ColumnVarNameInTable="columnOrigWeightStatus" msprop:Generator_ColumnPropNameInRow="OrigWeightStatus" msprop:Generator_ColumnPropNameInTable="OrigWeightStatusColumn" msprop:Generator_UserColumnName="OrigWeightStatus" type="xs:short" minOccurs="0" />
+              <xs:element name="Forte" msprop:Generator_ColumnVarNameInTable="columnForte" msprop:Generator_ColumnPropNameInRow="Forte" msprop:Generator_ColumnPropNameInTable="ForteColumn" msprop:Generator_UserColumnName="Forte" type="xs:int" minOccurs="0" />
+              <xs:element name="ForteStatus" msprop:Generator_ColumnVarNameInTable="columnForteStatus" msprop:Generator_ColumnPropNameInRow="ForteStatus" msprop:Generator_ColumnPropNameInTable="ForteStatusColumn" msprop:Generator_UserColumnName="ForteStatus" type="xs:short" minOccurs="0" />
+              <xs:element name="ForteAveraging" msprop:Generator_ColumnVarNameInTable="columnForteAveraging" msprop:Generator_ColumnPropNameInRow="ForteAveraging" msprop:Generator_ColumnPropNameInTable="ForteAveragingColumn" msprop:Generator_UserColumnName="ForteAveraging" type="xs:boolean" minOccurs="0" />
+              <xs:element name="Forte1" msprop:Generator_ColumnVarNameInTable="columnForte1" msprop:Generator_ColumnPropNameInRow="Forte1" msprop:Generator_ColumnPropNameInTable="Forte1Column" msprop:Generator_UserColumnName="Forte1" type="xs:int" minOccurs="0" />
+              <xs:element name="Forte1Status" msprop:Generator_ColumnVarNameInTable="columnForte1Status" msprop:Generator_ColumnPropNameInRow="Forte1Status" msprop:Generator_ColumnPropNameInTable="Forte1StatusColumn" msprop:Generator_UserColumnName="Forte1Status" type="xs:short" minOccurs="0" />
+              <xs:element name="Forte2" msprop:Generator_ColumnVarNameInTable="columnForte2" msprop:Generator_ColumnPropNameInRow="Forte2" msprop:Generator_ColumnPropNameInTable="Forte2Column" msprop:Generator_UserColumnName="Forte2" type="xs:int" minOccurs="0" />
+              <xs:element name="Forte2Status" msprop:Generator_ColumnVarNameInTable="columnForte2Status" msprop:Generator_ColumnPropNameInRow="Forte2Status" msprop:Generator_ColumnPropNameInTable="Forte2StatusColumn" msprop:Generator_UserColumnName="Forte2Status" type="xs:short" minOccurs="0" />
+              <xs:element name="UpCount" msprop:Generator_ColumnVarNameInTable="columnUpCount" msprop:Generator_ColumnPropNameInRow="UpCount" msprop:Generator_ColumnPropNameInTable="UpCountColumn" msprop:Generator_UserColumnName="UpCount" type="xs:int" minOccurs="0" />
+              <xs:element name="UpCountStatus" msprop:Generator_ColumnVarNameInTable="columnUpCountStatus" msprop:Generator_ColumnPropNameInRow="UpCountStatus" msprop:Generator_ColumnPropNameInTable="UpCountStatusColumn" msprop:Generator_UserColumnName="UpCountStatus" type="xs:short" minOccurs="0" />
+              <xs:element name="DownCount" msprop:Generator_ColumnVarNameInTable="columnDownCount" msprop:Generator_ColumnPropNameInRow="DownCount" msprop:Generator_ColumnPropNameInTable="DownCountColumn" msprop:Generator_UserColumnName="DownCount" type="xs:int" minOccurs="0" />
+              <xs:element name="DownCountStatus" msprop:Generator_ColumnVarNameInTable="columnDownCountStatus" msprop:Generator_ColumnPropNameInRow="DownCountStatus" msprop:Generator_ColumnPropNameInTable="DownCountStatusColumn" msprop:Generator_UserColumnName="DownCountStatus" type="xs:short" minOccurs="0" />
+              <xs:element name="DownCount2" msprop:Generator_ColumnVarNameInTable="columnDownCount2" msprop:Generator_ColumnPropNameInRow="DownCount2" msprop:Generator_ColumnPropNameInTable="DownCount2Column" msprop:Generator_UserColumnName="DownCount2" type="xs:int" minOccurs="0" />
+              <xs:element name="DownCount2Status" msprop:Generator_ColumnVarNameInTable="columnDownCount2Status" msprop:Generator_ColumnPropNameInRow="DownCount2Status" msprop:Generator_ColumnPropNameInTable="DownCount2StatusColumn" msprop:Generator_UserColumnName="DownCount2Status" type="xs:short" minOccurs="0" />
+              <xs:element name="Brightness" msprop:Generator_ColumnVarNameInTable="columnBrightness" msprop:Generator_ColumnPropNameInRow="Brightness" msprop:Generator_ColumnPropNameInTable="BrightnessColumn" msprop:Generator_UserColumnName="Brightness" type="xs:float" minOccurs="0" />
+              <xs:element name="BrightnessStatus" msprop:Generator_ColumnVarNameInTable="columnBrightnessStatus" msprop:Generator_ColumnPropNameInRow="BrightnessStatus" msprop:Generator_ColumnPropNameInTable="BrightnessStatusColumn" msprop:Generator_UserColumnName="BrightnessStatus" type="xs:short" minOccurs="0" />
+              <xs:element name="BaleHeight" msprop:Generator_ColumnVarNameInTable="columnBaleHeight" msprop:Generator_ColumnPropNameInRow="BaleHeight" msprop:Generator_ColumnPropNameInTable="BaleHeightColumn" msprop:Generator_UserColumnName="BaleHeight" type="xs:float" minOccurs="0" />
+              <xs:element name="BaleHeightStatus" msprop:Generator_ColumnVarNameInTable="columnBaleHeightStatus" msprop:Generator_ColumnPropNameInRow="BaleHeightStatus" msprop:Generator_ColumnPropNameInTable="BaleHeightStatusColumn" msprop:Generator_UserColumnName="BaleHeightStatus" type="xs:short" minOccurs="0" />
+              <xs:element name="TimeStart" msprop:Generator_ColumnVarNameInTable="columnTimeStart" msprop:Generator_ColumnPropNameInRow="TimeStart" msprop:Generator_ColumnPropNameInTable="TimeStartColumn" msprop:Generator_UserColumnName="TimeStart" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="TimeStartStatus" msprop:Generator_ColumnVarNameInTable="columnTimeStartStatus" msprop:Generator_ColumnPropNameInRow="TimeStartStatus" msprop:Generator_ColumnPropNameInTable="TimeStartStatusColumn" msprop:Generator_UserColumnName="TimeStartStatus" type="xs:short" minOccurs="0" />
+              <xs:element name="TimeComplete" msprop:Generator_ColumnVarNameInTable="columnTimeComplete" msprop:Generator_ColumnPropNameInRow="TimeComplete" msprop:Generator_ColumnPropNameInTable="TimeCompleteColumn" msprop:Generator_UserColumnName="TimeComplete" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="TimeCompleteStatus" msprop:Generator_ColumnVarNameInTable="columnTimeCompleteStatus" msprop:Generator_ColumnPropNameInRow="TimeCompleteStatus" msprop:Generator_ColumnPropNameInTable="TimeCompleteStatusColumn" msprop:Generator_UserColumnName="TimeCompleteStatus" type="xs:short" minOccurs="0" />
+              <xs:element name="SourceID" msprop:Generator_ColumnVarNameInTable="columnSourceID" msprop:Generator_ColumnPropNameInRow="SourceID" msprop:Generator_ColumnPropNameInTable="SourceIDColumn" msprop:Generator_UserColumnName="SourceID" type="xs:int" minOccurs="0" />
+              <xs:element name="SourceIDStatus" msprop:Generator_ColumnVarNameInTable="columnSourceIDStatus" msprop:Generator_ColumnPropNameInRow="SourceIDStatus" msprop:Generator_ColumnPropNameInTable="SourceIDStatusColumn" msprop:Generator_UserColumnName="SourceIDStatus" type="xs:short" minOccurs="0" />
+              <xs:element name="LineID" msprop:Generator_ColumnVarNameInTable="columnLineID" msprop:Generator_ColumnPropNameInRow="LineID" msprop:Generator_ColumnPropNameInTable="LineIDColumn" msprop:Generator_UserColumnName="LineID" type="xs:int" minOccurs="0" />
+              <xs:element name="StockID" msprop:Generator_ColumnVarNameInTable="columnStockID" msprop:Generator_ColumnPropNameInRow="StockID" msprop:Generator_ColumnPropNameInTable="StockIDColumn" msprop:Generator_UserColumnName="StockID" type="xs:int" minOccurs="0" />
+              <xs:element name="StockIDStatus" msprop:Generator_ColumnVarNameInTable="columnStockIDStatus" msprop:Generator_ColumnPropNameInRow="StockIDStatus" msprop:Generator_ColumnPropNameInTable="StockIDStatusColumn" msprop:Generator_UserColumnName="StockIDStatus" type="xs:short" minOccurs="0" />
+              <xs:element name="GradeID" msprop:Generator_ColumnVarNameInTable="columnGradeID" msprop:Generator_ColumnPropNameInRow="GradeID" msprop:Generator_ColumnPropNameInTable="GradeIDColumn" msprop:Generator_UserColumnName="GradeID" type="xs:int" minOccurs="0" />
+              <xs:element name="GradeIDStatus" msprop:Generator_ColumnVarNameInTable="columnGradeIDStatus" msprop:Generator_ColumnPropNameInRow="GradeIDStatus" msprop:Generator_ColumnPropNameInTable="GradeIDStatusColumn" msprop:Generator_UserColumnName="GradeIDStatus" type="xs:short" minOccurs="0" />
+              <xs:element name="TareWeight" msprop:Generator_ColumnVarNameInTable="columnTareWeight" msprop:Generator_ColumnPropNameInRow="TareWeight" msprop:Generator_ColumnPropNameInTable="TareWeightColumn" msprop:Generator_UserColumnName="TareWeight" type="xs:float" minOccurs="0" />
+              <xs:element name="TareWeightStatus" msprop:Generator_ColumnVarNameInTable="columnTareWeightStatus" msprop:Generator_ColumnPropNameInRow="TareWeightStatus" msprop:Generator_ColumnPropNameInTable="TareWeightStatusColumn" msprop:Generator_UserColumnName="TareWeightStatus" type="xs:short" minOccurs="0" />
+              <xs:element name="Finish" msprop:Generator_ColumnVarNameInTable="columnFinish" msprop:Generator_ColumnPropNameInRow="Finish" msprop:Generator_ColumnPropNameInTable="FinishColumn" msprop:Generator_UserColumnName="Finish" type="xs:float" minOccurs="0" />
+              <xs:element name="AllowanceStatus" msprop:Generator_ColumnVarNameInTable="columnAllowanceStatus" msprop:Generator_ColumnPropNameInRow="AllowanceStatus" msprop:Generator_ColumnPropNameInTable="AllowanceStatusColumn" msprop:Generator_UserColumnName="AllowanceStatus" type="xs:short" minOccurs="0" />
+              <xs:element name="DropNumber" msprop:Generator_ColumnVarNameInTable="columnDropNumber" msprop:Generator_ColumnPropNameInRow="DropNumber" msprop:Generator_ColumnPropNameInTable="DropNumberColumn" msprop:Generator_UserColumnName="DropNumber" type="xs:int" minOccurs="0" />
+              <xs:element name="DropTime" msprop:Generator_ColumnVarNameInTable="columnDropTime" msprop:Generator_ColumnPropNameInRow="DropTime" msprop:Generator_ColumnPropNameInTable="DropTimeColumn" msprop:Generator_UserColumnName="DropTime" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Position" msprop:Generator_ColumnVarNameInTable="columnPosition" msprop:Generator_ColumnPropNameInRow="Position" msprop:Generator_ColumnPropNameInTable="PositionColumn" msprop:Generator_UserColumnName="Position" type="xs:unsignedByte" minOccurs="0" />
+              <xs:element name="SheetCount" msprop:Generator_ColumnVarNameInTable="columnSheetCount" msprop:Generator_ColumnPropNameInRow="SheetCount" msprop:Generator_ColumnPropNameInTable="SheetCountColumn" msprop:Generator_UserColumnName="SheetCount" type="xs:short" minOccurs="0" />
+              <xs:element name="SheetCountStatus" msprop:Generator_ColumnVarNameInTable="columnSheetCountStatus" msprop:Generator_ColumnPropNameInRow="SheetCountStatus" msprop:Generator_ColumnPropNameInTable="SheetCountStatusColumn" msprop:Generator_UserColumnName="SheetCountStatus" type="xs:short" minOccurs="0" />
+              <xs:element name="SheetArea" msprop:Generator_ColumnVarNameInTable="columnSheetArea" msprop:Generator_ColumnPropNameInRow="SheetArea" msprop:Generator_ColumnPropNameInTable="SheetAreaColumn" msprop:Generator_UserColumnName="SheetArea" type="xs:float" minOccurs="0" />
+              <xs:element name="Moisture" msprop:Generator_ColumnVarNameInTable="columnMoisture" msprop:Generator_ColumnPropNameInRow="Moisture" msprop:Generator_ColumnPropNameInTable="MoistureColumn" msprop:Generator_UserColumnName="Moisture" type="xs:float" minOccurs="0" />
+              <xs:element name="MoistureStatus" msprop:Generator_ColumnVarNameInTable="columnMoistureStatus" msprop:Generator_ColumnPropNameInRow="MoistureStatus" msprop:Generator_ColumnPropNameInTable="MoistureStatusColumn" msprop:Generator_UserColumnName="MoistureStatus" type="xs:short" minOccurs="0" />
+              <xs:element name="NetWeight" msprop:Generator_ColumnVarNameInTable="columnNetWeight" msprop:Generator_ColumnPropNameInRow="NetWeight" msprop:Generator_ColumnPropNameInTable="NetWeightColumn" msprop:Generator_UserColumnName="NetWeight" type="xs:float" minOccurs="0" />
+              <xs:element name="NetWeightStatus" msprop:Generator_ColumnVarNameInTable="columnNetWeightStatus" msprop:Generator_ColumnPropNameInRow="NetWeightStatus" msprop:Generator_ColumnPropNameInTable="NetWeightStatusColumn" msprop:Generator_UserColumnName="NetWeightStatus" type="xs:short" minOccurs="0" />
+              <xs:element name="BDWeight" msprop:Generator_ColumnVarNameInTable="columnBDWeight" msprop:Generator_ColumnPropNameInRow="BDWeight" msprop:Generator_ColumnPropNameInTable="BDWeightColumn" msprop:Generator_UserColumnName="BDWeight" type="xs:float" minOccurs="0" />
+              <xs:element name="CalibrationID" msprop:Generator_ColumnVarNameInTable="columnCalibrationID" msprop:Generator_ColumnPropNameInRow="CalibrationID" msprop:Generator_ColumnPropNameInTable="CalibrationIDColumn" msprop:Generator_UserColumnName="CalibrationID" type="xs:int" minOccurs="0" />
+              <xs:element name="CalibrationIDStatus" msprop:Generator_ColumnVarNameInTable="columnCalibrationIDStatus" msprop:Generator_ColumnPropNameInRow="CalibrationIDStatus" msprop:Generator_ColumnPropNameInTable="CalibrationIDStatusColumn" msprop:Generator_UserColumnName="CalibrationIDStatus" type="xs:short" minOccurs="0" />
+              <xs:element name="SerialNumber" msprop:Generator_ColumnVarNameInTable="columnSerialNumber" msprop:Generator_ColumnPropNameInRow="SerialNumber" msprop:Generator_ColumnPropNameInTable="SerialNumberColumn" msprop:Generator_UserColumnName="SerialNumber" type="xs:int" minOccurs="0" />
+              <xs:element name="SeriAlNumberStatus" msprop:Generator_ColumnVarNameInTable="columnSeriAlNumberStatus" msprop:Generator_ColumnPropNameInRow="SeriAlNumberStatus" msprop:Generator_ColumnPropNameInTable="SeriAlNumberStatusColumn" msprop:Generator_UserColumnName="SeriAlNumberStatus" type="xs:short" minOccurs="0" />
+              <xs:element name="LotNumber" msprop:Generator_ColumnVarNameInTable="columnLotNumber" msprop:Generator_ColumnPropNameInRow="LotNumber" msprop:Generator_ColumnPropNameInTable="LotNumberColumn" msprop:Generator_UserColumnName="LotNumber" type="xs:int" minOccurs="0" />
+              <xs:element name="LotNumberStatus" msprop:Generator_ColumnVarNameInTable="columnLotNumberStatus" msprop:Generator_ColumnPropNameInRow="LotNumberStatus" msprop:Generator_ColumnPropNameInTable="LotNumberStatusColumn" msprop:Generator_UserColumnName="LotNumberStatus" type="xs:short" minOccurs="0" />
+              <xs:element name="LotBaleNumber" msprop:Generator_ColumnVarNameInTable="columnLotBaleNumber" msprop:Generator_ColumnPropNameInRow="LotBaleNumber" msprop:Generator_ColumnPropNameInTable="LotBaleNumberColumn" msprop:Generator_UserColumnName="LotBaleNumber" type="xs:int" minOccurs="0" />
+              <xs:element name="PkgMoistMethod" msprop:Generator_ColumnVarNameInTable="columnPkgMoistMethod" msprop:Generator_ColumnPropNameInRow="PkgMoistMethod" msprop:Generator_ColumnPropNameInTable="PkgMoistMethodColumn" msprop:Generator_UserColumnName="PkgMoistMethod" type="xs:int" minOccurs="0" />
+              <xs:element name="SpareSngFld1" msprop:Generator_ColumnVarNameInTable="columnSpareSngFld1" msprop:Generator_ColumnPropNameInRow="SpareSngFld1" msprop:Generator_ColumnPropNameInTable="SpareSngFld1Column" msprop:Generator_UserColumnName="SpareSngFld1" type="xs:float" minOccurs="0" />
+              <xs:element name="SpareSngFld2" msprop:Generator_ColumnVarNameInTable="columnSpareSngFld2" msprop:Generator_ColumnPropNameInRow="SpareSngFld2" msprop:Generator_ColumnPropNameInTable="SpareSngFld2Column" msprop:Generator_UserColumnName="SpareSngFld2" type="xs:float" minOccurs="0" />
+              <xs:element name="QualityUID" msprop:Generator_ColumnVarNameInTable="columnQualityUID" msprop:Generator_ColumnPropNameInRow="QualityUID" msprop:Generator_ColumnPropNameInTable="QualityUIDColumn" msprop:Generator_UserColumnName="QualityUID" type="xs:int" minOccurs="0" />
+              <xs:element name="LastInGroup" msprop:Generator_ColumnVarNameInTable="columnLastInGroup" msprop:Generator_ColumnPropNameInRow="LastInGroup" msprop:Generator_ColumnPropNameInTable="LastInGroupColumn" msprop:Generator_UserColumnName="LastInGroup" type="xs:boolean" minOccurs="0" />
+              <xs:element name="MoistMes" msprop:Generator_ColumnVarNameInTable="columnMoistMes" msprop:Generator_ColumnPropNameInRow="MoistMes" msprop:Generator_ColumnPropNameInTable="MoistMesColumn" msprop:Generator_UserColumnName="MoistMes" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="WtMes" msprop:Generator_ColumnVarNameInTable="columnWtMes" msprop:Generator_ColumnPropNameInRow="WtMes" msprop:Generator_ColumnPropNameInTable="WtMesColumn" msprop:Generator_UserColumnName="WtMes" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ProdDayStart" msprop:Generator_ColumnVarNameInTable="columnProdDayStart" msprop:Generator_ColumnPropNameInRow="ProdDayStart" msprop:Generator_ColumnPropNameInTable="ProdDayStartColumn" msprop:Generator_UserColumnName="ProdDayStart" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ProdDayEnd" msprop:Generator_ColumnVarNameInTable="columnProdDayEnd" msprop:Generator_ColumnPropNameInRow="ProdDayEnd" msprop:Generator_ColumnPropNameInTable="ProdDayEndColumn" msprop:Generator_UserColumnName="ProdDayEnd" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ShiftName" msprop:Generator_ColumnVarNameInTable="columnShiftName" msprop:Generator_ColumnPropNameInRow="ShiftName" msprop:Generator_ColumnPropNameInTable="ShiftNameColumn" msprop:Generator_UserColumnName="ShiftName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MonthCode" msprop:Generator_ColumnVarNameInTable="columnMonthCode" msprop:Generator_ColumnPropNameInRow="MonthCode" msprop:Generator_ColumnPropNameInTable="MonthCodeColumn" msprop:Generator_UserColumnName="MonthCode" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AsciiFld1" msprop:Generator_ColumnVarNameInTable="columnAsciiFld1" msprop:Generator_ColumnPropNameInRow="AsciiFld1" msprop:Generator_ColumnPropNameInTable="AsciiFld1Column" msprop:Generator_UserColumnName="AsciiFld1" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AsciiFld2" msprop:Generator_ColumnVarNameInTable="columnAsciiFld2" msprop:Generator_ColumnPropNameInRow="AsciiFld2" msprop:Generator_ColumnPropNameInTable="AsciiFld2Column" msprop:Generator_UserColumnName="AsciiFld2" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AsciiFld3" msprop:Generator_ColumnVarNameInTable="columnAsciiFld3" msprop:Generator_ColumnPropNameInRow="AsciiFld3" msprop:Generator_ColumnPropNameInTable="AsciiFld3Column" msprop:Generator_UserColumnName="AsciiFld3" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AsciiFld4" msprop:Generator_ColumnVarNameInTable="columnAsciiFld4" msprop:Generator_ColumnPropNameInRow="AsciiFld4" msprop:Generator_ColumnPropNameInTable="AsciiFld4Column" msprop:Generator_UserColumnName="AsciiFld4" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SR" msprop:Generator_ColumnVarNameInTable="columnSR" msprop:Generator_ColumnPropNameInRow="SR" msprop:Generator_ColumnPropNameInTable="SRColumn" msprop:Generator_UserColumnName="SR" type="xs:float" minOccurs="0" />
+              <xs:element name="UID" msprop:Generator_ColumnVarNameInTable="columnUID" msprop:Generator_ColumnPropNameInRow="UID" msprop:Generator_ColumnPropNameInTable="UIDColumn" msprop:Generator_UserColumnName="UID" type="xs:int" minOccurs="0" />
+              <xs:element name="OrderStr" msprop:Generator_ColumnVarNameInTable="columnOrderStr" msprop:Generator_ColumnPropNameInRow="OrderStr" msprop:Generator_ColumnPropNameInTable="OrderStrColumn" msprop:Generator_UserColumnName="OrderStr" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Package" msprop:Generator_ColumnVarNameInTable="columnPackage" msprop:Generator_ColumnPropNameInRow="Package" msprop:Generator_ColumnPropNameInTable="PackageColumn" msprop:Generator_UserColumnName="Package" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ResultDesc" msprop:Generator_ColumnVarNameInTable="columnResultDesc" msprop:Generator_ColumnPropNameInRow="ResultDesc" msprop:Generator_ColumnPropNameInTable="ResultDescColumn" msprop:Generator_UserColumnName="ResultDesc" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Temperature" msprop:Generator_ColumnVarNameInTable="columnTemperature" msprop:Generator_ColumnPropNameInRow="Temperature" msprop:Generator_ColumnPropNameInTable="TemperatureColumn" msprop:Generator_UserColumnName="Temperature" type="xs:float" minOccurs="0" />
+              <xs:element name="TemperatureStatus" msprop:Generator_ColumnVarNameInTable="columnTemperatureStatus" msprop:Generator_ColumnPropNameInRow="TemperatureStatus" msprop:Generator_ColumnPropNameInTable="TemperatureStatusColumn" msprop:Generator_UserColumnName="TemperatureStatus" type="xs:short" minOccurs="0" />
+              <xs:element name="LotIdent" msprop:Generator_ColumnVarNameInTable="columnLotIdent" msprop:Generator_ColumnPropNameInRow="LotIdent" msprop:Generator_ColumnPropNameInTable="LotIdentColumn" msprop:Generator_UserColumnName="LotIdent" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="16" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Dirt" msprop:Generator_ColumnVarNameInTable="columnDirt" msprop:Generator_ColumnPropNameInRow="Dirt" msprop:Generator_ColumnPropNameInTable="DirtColumn" msprop:Generator_UserColumnName="Dirt" type="xs:float" minOccurs="0" />
+              <xs:element name="BasisWeight" msprop:Generator_ColumnVarNameInTable="columnBasisWeight" msprop:Generator_ColumnPropNameInRow="BasisWeight" msprop:Generator_ColumnPropNameInTable="BasisWeightColumn" msprop:Generator_UserColumnName="BasisWeight" type="xs:float" minOccurs="0" />
+              <xs:element name="QualityName" msprop:Generator_ColumnVarNameInTable="columnQualityName" msprop:Generator_ColumnPropNameInRow="QualityName" msprop:Generator_ColumnPropNameInTable="QualityNameColumn" msprop:Generator_UserColumnName="QualityName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FC_IdentString" msprop:Generator_ColumnVarNameInTable="columnFC_IdentString" msprop:Generator_ColumnPropNameInRow="FC_IdentString" msprop:Generator_ColumnPropNameInTable="FC_IdentStringColumn" msprop:Generator_UserColumnName="FC_IdentString" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StockLabel1" msprop:Generator_ColumnVarNameInTable="columnStockLabel1" msprop:Generator_ColumnPropNameInRow="StockLabel1" msprop:Generator_ColumnPropNameInTable="StockLabel1Column" msprop:Generator_UserColumnName="StockLabel1" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GradeLabel1" msprop:Generator_ColumnVarNameInTable="columnGradeLabel1" msprop:Generator_ColumnPropNameInRow="GradeLabel1" msprop:Generator_ColumnPropNameInTable="GradeLabel1Column" msprop:Generator_UserColumnName="GradeLabel1" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StockLabel2" msprop:Generator_ColumnVarNameInTable="columnStockLabel2" msprop:Generator_ColumnPropNameInRow="StockLabel2" msprop:Generator_ColumnPropNameInTable="StockLabel2Column" msprop:Generator_UserColumnName="StockLabel2" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GradeLabel2" msprop:Generator_ColumnVarNameInTable="columnGradeLabel2" msprop:Generator_ColumnPropNameInRow="GradeLabel2" msprop:Generator_ColumnPropNameInTable="GradeLabel2Column" msprop:Generator_UserColumnName="GradeLabel2" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FC_LotIdentString" msprop:Generator_ColumnVarNameInTable="columnFC_LotIdentString" msprop:Generator_ColumnPropNameInRow="FC_LotIdentString" msprop:Generator_ColumnPropNameInTable="FC_LotIdentStringColumn" msprop:Generator_UserColumnName="FC_LotIdentString" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="UnitBaleNumber" msprop:Generator_ColumnVarNameInTable="columnUnitBaleNumber" msprop:Generator_ColumnPropNameInRow="UnitBaleNumber" msprop:Generator_ColumnPropNameInTable="UnitBaleNumberColumn" msprop:Generator_UserColumnName="UnitBaleNumber" type="xs:short" minOccurs="0" />
+              <xs:element name="UnitNumber" msprop:Generator_ColumnVarNameInTable="columnUnitNumber" msprop:Generator_ColumnPropNameInRow="UnitNumber" msprop:Generator_ColumnPropNameInTable="UnitNumberColumn" msprop:Generator_UserColumnName="UnitNumber" type="xs:int" minOccurs="0" />
+              <xs:element name="UnitNumberStatus" msprop:Generator_ColumnVarNameInTable="columnUnitNumberStatus" msprop:Generator_ColumnPropNameInRow="UnitNumberStatus" msprop:Generator_ColumnPropNameInTable="UnitNumberStatusColumn" msprop:Generator_UserColumnName="UnitNumberStatus" type="xs:short" minOccurs="0" />
+              <xs:element name="UnitIdent" msprop:Generator_ColumnVarNameInTable="columnUnitIdent" msprop:Generator_ColumnPropNameInRow="UnitIdent" msprop:Generator_ColumnPropNameInTable="UnitIdentColumn" msprop:Generator_UserColumnName="UnitIdent" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="WLAlarm" msprop:Generator_ColumnVarNameInTable="columnWLAlarm" msprop:Generator_ColumnPropNameInRow="WLAlarm" msprop:Generator_ColumnPropNameInTable="WLAlarmColumn" msprop:Generator_UserColumnName="WLAlarm" type="xs:short" minOccurs="0" />
+              <xs:element name="WLAStatus" msprop:Generator_ColumnVarNameInTable="columnWLAStatus" msprop:Generator_ColumnPropNameInRow="WLAStatus" msprop:Generator_ColumnPropNameInTable="WLAStatusColumn" msprop:Generator_UserColumnName="WLAStatus" type="xs:short" minOccurs="0" />
+              <xs:element name="JobNum" msprop:Generator_ColumnVarNameInTable="columnJobNum" msprop:Generator_ColumnPropNameInRow="JobNum" msprop:Generator_ColumnPropNameInTable="JobNumColumn" msprop:Generator_UserColumnName="JobNum" type="xs:int" minOccurs="0" />
+              <xs:element name="SpareSngFld3" msprop:Generator_ColumnVarNameInTable="columnSpareSngFld3" msprop:Generator_ColumnPropNameInRow="SpareSngFld3" msprop:Generator_ColumnPropNameInTable="SpareSngFld3Column" msprop:Generator_UserColumnName="SpareSngFld3" type="xs:float" minOccurs="0" />
+              <xs:element name="StockLabel3" msprop:Generator_ColumnVarNameInTable="columnStockLabel3" msprop:Generator_ColumnPropNameInRow="StockLabel3" msprop:Generator_ColumnPropNameInTable="StockLabel3Column" msprop:Generator_UserColumnName="StockLabel3" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StockLabel4" msprop:Generator_ColumnVarNameInTable="columnStockLabel4" msprop:Generator_ColumnPropNameInRow="StockLabel4" msprop:Generator_ColumnPropNameInTable="StockLabel4Column" msprop:Generator_UserColumnName="StockLabel4" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

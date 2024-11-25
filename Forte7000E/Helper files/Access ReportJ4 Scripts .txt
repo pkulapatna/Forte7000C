@@ -1,0 +1,2246 @@
+﻿-- DBWScript v3.10
+-- Database: C:\Users\Porntep\Documents\Porntep ForteSystem Projects\ForteSystem_DongYang\Reports\ReportsJ4.mdb
+
+CREATE TABLE [BaleArchive] (
+	[Index] INTEGER,
+	[Empty] BIT NOT NULL,
+	[SourceName] NVARCHAR(255),
+	[LineName] NVARCHAR(255),
+	[StockName] NVARCHAR(255),
+	[CalibrationName] NVARCHAR(255),
+	[GradeName] NVARCHAR(255),
+	[Status] SMALLINT,
+	[Weight] REAL,
+	[WeightStatus] SMALLINT,
+	[OrigWeight] REAL,
+	[OrigWeightStatus] SMALLINT,
+	[Forte] INTEGER,
+	[ForteStatus] SMALLINT,
+	[ForteAveraging] BIT NOT NULL,
+	[Forte1] INTEGER,
+	[Forte1Status] SMALLINT,
+	[Forte2] INTEGER,
+	[Forte2Status] SMALLINT,
+	[UpCount] INTEGER,
+	[UpCountStatus] SMALLINT,
+	[DownCount] INTEGER,
+	[DownCountStatus] SMALLINT,
+	[DownCount2] INTEGER,
+	[DownCount2Status] SMALLINT,
+	[Brightness] REAL,
+	[BrightnessStatus] SMALLINT,
+	[BaleHeight] REAL,
+	[BaleHeightStatus] SMALLINT,
+	[TimeStart] DATETIME,
+	[TimeStartStatus] SMALLINT,
+	[TimeComplete] DATETIME,
+	[TimeCompleteStatus] SMALLINT,
+	[SourceID] INTEGER,
+	[SourceIDStatus] SMALLINT,
+	[LineID] INTEGER,
+	[StockID] INTEGER,
+	[StockIDStatus] SMALLINT,
+	[GradeID] INTEGER,
+	[GradeIDStatus] SMALLINT,
+	[TareWeight] REAL,
+	[TareWeightStatus] SMALLINT,
+	[Finish] REAL,
+	[AllowanceStatus] SMALLINT,
+	[DropNumber] INTEGER,
+	[DropTime] DATETIME,
+	[Position] TINYINT,
+	[SheetCount] SMALLINT,
+	[SheetCountStatus] SMALLINT,
+	[Moisture] REAL,
+	[SheetArea] REAL DEFAULT 0,
+	[MoistureStatus] SMALLINT,
+	[NetWeight] REAL,
+	[NetWeightStatus] SMALLINT,
+	[BDWeight] REAL,
+	[CalibrationID] INTEGER,
+	[CalibrationIDStatus] SMALLINT,
+	[SerialNumber] INTEGER,
+	[SeriAlNumberStatus] SMALLINT,
+	[LotNumber] INTEGER,
+	[LotNumberStatus] SMALLINT,
+	[LotBaleNumber] INTEGER,
+	[PkgMoistMethod] INTEGER,
+	[SpareSngFld1] REAL,
+	[SpareSngFld2] REAL,
+	[QualityUID] INTEGER,
+	[LastInGroup] BIT NOT NULL,
+	[MoistMes] NVARCHAR(255),
+	[WtMes] NVARCHAR(255),
+	[ProdDayStart] DATETIME,
+	[ProdDayEnd] DATETIME,
+	[ShiftName] NVARCHAR(255),
+	[MonthCode] NVARCHAR(255),
+	[AsciiFld1] NVARCHAR(255),
+	[AsciiFld2] NVARCHAR(255),
+	[AsciiFld3] NVARCHAR(255),
+	[AsciiFld4] NVARCHAR(255),
+	[SR] REAL,
+	[OrderStr] NVARCHAR(25),
+	[Package] NVARCHAR(12),
+	[ResultDesc] NVARCHAR(4),
+	[UID] INTEGER,
+	[Temperature] REAL DEFAULT 0,
+	[TemperatureStatus] SMALLINT,
+	[LotIdent] NVARCHAR(16),
+	[Dirt] REAL DEFAULT 0,
+	[BasisWeight] REAL DEFAULT 0,
+	[QualityName] NVARCHAR(50),
+	[FC_IdentString] NVARCHAR(50),
+	[FC_LotIdentString] NVARCHAR(25),
+	[StockLabel1] NVARCHAR(50),
+	[GradeLabel1] NVARCHAR(50),
+	[StockLabel2] NVARCHAR(50),
+	[GradeLabel2] NVARCHAR(50),
+	[UnitBaleNumber] SMALLINT,
+	[UnitNumber] INTEGER,
+	[UnitNumberStatus] SMALLINT,
+	[UnitIdent] NVARCHAR(20),
+	[WLAlarm] SMALLINT DEFAULT 0,
+	[WLAStatus] SMALLINT DEFAULT 0,
+	[SpareSngFld3] REAL,
+	[StockLabel3] NVARCHAR(50),
+	[StockLabel4] NVARCHAR(50)
+);
+GO
+
+CREATE TABLE [BaleSim] (
+	[Index] INTEGER,
+	[Empty] BIT NOT NULL,
+	[SourceName] NVARCHAR(255),
+	[LineName] NVARCHAR(255),
+	[StockName] NVARCHAR(255),
+	[CalibrationName] NVARCHAR(255),
+	[GradeName] NVARCHAR(255),
+	[Status] SMALLINT,
+	[Weight] REAL,
+	[WeightStatus] SMALLINT,
+	[OrigWeight] REAL,
+	[OrigWeightStatus] SMALLINT,
+	[Forte] SMALLINT,
+	[ForteStatus] SMALLINT,
+	[UpCount] INTEGER,
+	[UpCountStatus] SMALLINT,
+	[DownCount] INTEGER,
+	[DownCountStatus] SMALLINT,
+	[Brightness] REAL,
+	[BrightnessStatus] SMALLINT,
+	[BaleHigh] REAL,
+	[BaleHighStatus] SMALLINT,
+	[TimeStart] DATETIME,
+	[TimeStartStatus] SMALLINT,
+	[TimeComplete] DATETIME,
+	[TimeCompleteStatus] SMALLINT,
+	[SourceID] INTEGER,
+	[SourceStatus] SMALLINT,
+	[LineID] INTEGER,
+	[LineStatus] SMALLINT,
+	[StockID] INTEGER,
+	[StockStatus] SMALLINT,
+	[GradeID] INTEGER,
+	[GradeStatus] SMALLINT,
+	[TareWeight] REAL,
+	[TareWeightStatus] NVARCHAR(255),
+	[DropNumber] INTEGER,
+	[DropTime] DATETIME,
+	[Position] TINYINT,
+	[SheetCounter] SMALLINT,
+	[ShCountStatus] SMALLINT,
+	[Moisture] REAL,
+	[MoistStatus] SMALLINT,
+	[NetWeight] REAL,
+	[NetStatus] SMALLINT,
+	[BDWeight] REAL,
+	[CalibrationID] INTEGER,
+	[CalibrationIDStatus] SMALLINT,
+	[SerialNumber] INTEGER,
+	[SNStatus] SMALLINT,
+	[NumberInSource] INTEGER,
+	[NSrcStatus] SMALLINT,
+	[NumberInLine] INTEGER,
+	[NLnStatus] SMALLINT,
+	[NumberInStock] INTEGER,
+	[NStkStatus] SMALLINT,
+	[NumberInGrade] INTEGER,
+	[NGrStatus] SMALLINT,
+	[GrLotNumber] INTEGER,
+	[GrLNStatus] SMALLINT,
+	[GrLotBaleNumber] INTEGER,
+	[GrLotBNStatus] SMALLINT,
+	[GlLotNumber] INTEGER,
+	[GlLNStatus] SMALLINT,
+	[GlLotBaleNumber] INTEGER,
+	[GlLotBNStatus] SMALLINT,
+	[StkLotNumber] INTEGER,
+	[StkLNStatus] SMALLINT,
+	[StkLotBaleNumber] INTEGER,
+	[StkLotBNStatus] SMALLINT,
+	[SrcLotNumber] INTEGER,
+	[SrcLNStatus] SMALLINT,
+	[SrcLotBaleNumber] INTEGER,
+	[SrcLotBNStatus] SMALLINT,
+	[LnLotNumber] INTEGER,
+	[LnLNStatus] SMALLINT,
+	[LnLotBaleNumber] INTEGER,
+	[LnLotBNStatus] SMALLINT,
+	[PackagingID] INTEGER,
+	[Dirt] REAL,
+	[Viscosity] REAL,
+	[Shiveness] REAL,
+	[LastInGroup] BIT NOT NULL DEFAULT 0,
+	[WLAlarm] SMALLINT DEFAULT 0,
+	[WLAStatus] SMALLINT DEFAULT 0
+);
+GO
+
+CREATE TABLE [BaleSimPool] (
+	[Index] INTEGER,
+	[Empty] BIT NOT NULL,
+	[SourceName] NVARCHAR(255),
+	[LineName] NVARCHAR(255),
+	[StockName] NVARCHAR(255),
+	[CalibrationName] NVARCHAR(255),
+	[GradeName] NVARCHAR(255),
+	[Status] SMALLINT,
+	[Weight] REAL,
+	[WeightStatus] SMALLINT,
+	[OrigWeight] REAL,
+	[OrigWeightStatus] SMALLINT,
+	[Forte] INTEGER,
+	[ForteStatus] SMALLINT,
+	[ForteAveraging] BIT NOT NULL,
+	[Forte1] INTEGER,
+	[Forte1Status] SMALLINT,
+	[Forte2] INTEGER,
+	[Forte2Status] SMALLINT,
+	[UpCount] INTEGER,
+	[UpCountStatus] SMALLINT,
+	[DownCount] INTEGER,
+	[DownCountStatus] SMALLINT,
+	[DownCount2] INTEGER,
+	[DownCount2Status] SMALLINT,
+	[Brightness] REAL,
+	[BrightnessStatus] SMALLINT,
+	[BaleHeight] REAL,
+	[BaleHeightStatus] SMALLINT,
+	[TimeStart] DATETIME,
+	[TimeStartStatus] SMALLINT,
+	[TimeComplete] DATETIME,
+	[TimeCompleteStatus] SMALLINT,
+	[SourceID] INTEGER,
+	[SourceIDStatus] SMALLINT,
+	[LineID] INTEGER,
+	[StockID] INTEGER,
+	[StockIDStatus] SMALLINT,
+	[GradeID] INTEGER,
+	[GradeIDStatus] SMALLINT,
+	[TareWeight] REAL,
+	[TareWeightStatus] SMALLINT,
+	[Finish] REAL,
+	[AllowanceStatus] SMALLINT,
+	[DropNumber] INTEGER,
+	[DropTime] DATETIME,
+	[Position] TINYINT,
+	[SheetCount] SMALLINT,
+	[SheetCountStatus] SMALLINT,
+	[Moisture] REAL,
+	[SheetArea] REAL DEFAULT 0,
+	[MoistureStatus] SMALLINT,
+	[NetWeight] REAL,
+	[NetWeightStatus] SMALLINT,
+	[BDWeight] REAL,
+	[CalibrationID] INTEGER,
+	[CalibrationIDStatus] SMALLINT,
+	[SerialNumber] INTEGER,
+	[SeriAlNumberStatus] SMALLINT,
+	[LotNumber] INTEGER,
+	[LotNumberStatus] SMALLINT,
+	[LotBaleNumber] INTEGER,
+	[PkgMoistMethod] INTEGER,
+	[SpareSngFld1] REAL,
+	[SpareSngFld2] REAL,
+	[QualityUID] INTEGER,
+	[LastInGroup] BIT NOT NULL,
+	[MoistMes] NVARCHAR(255),
+	[WtMes] NVARCHAR(255),
+	[ProdDayStart] DATETIME,
+	[ProdDayEnd] DATETIME,
+	[ShiftName] NVARCHAR(255),
+	[MonthCode] NVARCHAR(255),
+	[AsciiFld1] NVARCHAR(255),
+	[AsciiFld2] NVARCHAR(255),
+	[AsciiFld3] NVARCHAR(255),
+	[AsciiFld4] NVARCHAR(255),
+	[SR] REAL,
+	[OrderStr] NVARCHAR(25),
+	[Package] NVARCHAR(12),
+	[ResultDesc] NVARCHAR(4),
+	[UID] INTEGER,
+	[Temperature] REAL DEFAULT 0,
+	[TemperatureStatus] SMALLINT,
+	[LotIdent] NVARCHAR(16),
+	[Dirt] REAL DEFAULT 0,
+	[BasisWeight] REAL DEFAULT 0,
+	[QualityName] NVARCHAR(50),
+	[FC_IdentString] NVARCHAR(50),
+	[FC_LotIdentString] NVARCHAR(25),
+	[StockLabel1] NVARCHAR(50),
+	[GradeLabel1] NVARCHAR(50),
+	[StockLabel2] NVARCHAR(50),
+	[GradeLabel2] NVARCHAR(50),
+	[UnitBaleNumber] SMALLINT,
+	[UnitNumber] INTEGER,
+	[UnitNumberStatus] SMALLINT,
+	[UnitIdent] NVARCHAR(20),
+	[WLAlarm] SMALLINT DEFAULT 0,
+	[WLAStatus] SMALLINT DEFAULT 0
+);
+GO
+
+CREATE TABLE [BaleTransaction] (
+	[Index] INTEGER,
+	[Empty] BIT NOT NULL,
+	[SourceName] NVARCHAR(255),
+	[LineName] NVARCHAR(255),
+	[StockName] NVARCHAR(255),
+	[CalibrationName] NVARCHAR(255),
+	[GradeName] NVARCHAR(255),
+	[Status] SMALLINT,
+	[Weight] REAL,
+	[WeightStatus] SMALLINT,
+	[OrigWeight] REAL,
+	[OrigWeightStatus] SMALLINT,
+	[Forte] INTEGER,
+	[ForteStatus] SMALLINT,
+	[ForteAveraging] BIT NOT NULL,
+	[Forte1] INTEGER,
+	[Forte1Status] SMALLINT,
+	[Forte2] INTEGER,
+	[Forte2Status] SMALLINT,
+	[UpCount] INTEGER,
+	[UpCountStatus] SMALLINT,
+	[DownCount] INTEGER,
+	[DownCountStatus] SMALLINT,
+	[DownCount2] INTEGER,
+	[DownCount2Status] SMALLINT,
+	[Brightness] REAL,
+	[BrightnessStatus] SMALLINT,
+	[BaleHeight] REAL,
+	[BaleHeightStatus] SMALLINT,
+	[TimeStart] DATETIME,
+	[TimeStartStatus] SMALLINT,
+	[TimeComplete] DATETIME,
+	[TimeCompleteStatus] SMALLINT,
+	[SourceID] INTEGER,
+	[SourceIDStatus] SMALLINT,
+	[LineID] INTEGER,
+	[StockID] INTEGER,
+	[StockIDStatus] SMALLINT,
+	[GradeID] INTEGER,
+	[GradeIDStatus] SMALLINT,
+	[TareWeight] REAL,
+	[TareWeightStatus] SMALLINT,
+	[Finish] REAL,
+	[AllowanceStatus] SMALLINT,
+	[DropNumber] INTEGER,
+	[DropTime] DATETIME,
+	[Position] TINYINT,
+	[SheetCount] SMALLINT,
+	[SheetCountStatus] SMALLINT,
+	[Moisture] REAL,
+	[SheetArea] REAL DEFAULT 0,
+	[MoistureStatus] SMALLINT,
+	[NetWeight] REAL,
+	[NetWeightStatus] SMALLINT,
+	[BDWeight] REAL,
+	[CalibrationID] INTEGER,
+	[CalibrationIDStatus] SMALLINT,
+	[SerialNumber] INTEGER,
+	[SerialNumberStatus] SMALLINT,
+	[LotNumber] INTEGER,
+	[LotNumberStatus] SMALLINT,
+	[LotBaleNumber] INTEGER,
+	[PkgMoistMethod] INTEGER,
+	[SpareSngFld1] REAL,
+	[SpareSngFld2] REAL,
+	[QualityUID] INTEGER,
+	[LastInGroup] BIT NOT NULL,
+	[MoistMes] NVARCHAR(255),
+	[WtMes] NVARCHAR(255),
+	[ProdDayStart] DATETIME,
+	[ProdDayEnd] DATETIME,
+	[ShiftName] NVARCHAR(255),
+	[MonthCode] NVARCHAR(255),
+	[AsciiFld1] NVARCHAR(255),
+	[AsciiFld2] NVARCHAR(255),
+	[AsciiFld3] NVARCHAR(255),
+	[AsciiFld4] NVARCHAR(255),
+	[SR] REAL,
+	[OrderStr] NVARCHAR(25),
+	[Package] NVARCHAR(12),
+	[ResultDesc] NVARCHAR(4),
+	[UID] INTEGER,
+	[Temperature] REAL DEFAULT 0,
+	[TemperatureStatus] SMALLINT,
+	[LotIdent] NVARCHAR(16),
+	[Dirt] REAL DEFAULT 0,
+	[BasisWeight] REAL DEFAULT 0,
+	[QualityName] NVARCHAR(50),
+	[FC_IdentString] NVARCHAR(50),
+	[FC_LotIdentString] NVARCHAR(25),
+	[StockLabel1] NVARCHAR(50),
+	[GradeLabel1] NVARCHAR(50),
+	[StockLabel2] NVARCHAR(50),
+	[GradeLabel2] NVARCHAR(50),
+	[UnitBaleNumber] SMALLINT,
+	[UnitNumber] INTEGER,
+	[UnitNumberStatus] SMALLINT,
+	[UnitIdent] NVARCHAR(20),
+	[WLAlarm] SMALLINT DEFAULT 0,
+	[WLAStatus] SMALLINT DEFAULT 0,
+	[SpareSngFld3] REAL,
+	[StockLabel3] NVARCHAR(50),
+	[StockLabel4] NVARCHAR(50)
+);
+GO
+
+CREATE TABLE [CustomTotals] (
+	[RecordIdent] NVARCHAR(10),
+	[Status] NVARCHAR(10),
+	[Empty] BIT NOT NULL,
+	[StartingTD] DATETIME,
+	[EndingTD] DATETIME,
+	[StartingPD] DATETIME,
+	[EndingPD] DATETIME,
+	[FinalizationTime] DATETIME,
+	[BaleCount] SMALLINT,
+	[TotNW] FLOAT,
+	[TotTW] REAL,
+	[TotBW] REAL,
+	[NW*NW] REAL,
+	[MeanNW] REAL,
+	[StdDevNW] REAL,
+	[MC*MC] REAL,
+	[MeanMC] REAL,
+	[StdDevMC] REAL,
+	[MinNW] REAL,
+	[MaxNW] REAL,
+	[RangeNW] REAL,
+	[MinMC] REAL,
+	[MaxMC] REAL,
+	[RangeMC] REAL,
+	[SpareSngFld1] REAL,
+	[SpareSngFld2] REAL,
+	[UnitCount] SMALLINT,
+	[SpareSngFld3] REAL
+);
+GO
+
+CREATE TABLE [DayPrevProd] (
+	[Index] SMALLINT,
+	[LotNum] INTEGER,
+	[LotStatus] NVARCHAR(255),
+	[Empty] BIT NOT NULL,
+	[PriGrp] SMALLINT,
+	[SecGrp] SMALLINT,
+	[GroupingID] SMALLINT,
+	[GroupText] NVARCHAR(255),
+	[OnHold] BIT NOT NULL,
+	[JobNum] INTEGER,
+	[OpenTD] DATETIME,
+	[CloseTD] DATETIME,
+	[CloseBySize] BIT NOT NULL,
+	[CloseByTime] BIT NOT NULL,
+	[BaleCount] SMALLINT,
+	[TotNW] FLOAT,
+	[MinNW] REAL,
+	[MinNWBale] INTEGER,
+	[MaxNW] REAL,
+	[MaxNWBale] INTEGER,
+	[NW*NW] REAL,
+	[MeanNW] REAL,
+	[RangeNW] REAL,
+	[StdDevNW] REAL,
+	[TotTW] REAL,
+	[TotBW] REAL,
+	[TotMC] REAL,
+	[MinMC] REAL,
+	[MinMCBale] INTEGER,
+	[MaxMC] REAL,
+	[MaxMCBale] INTEGER,
+	[MC*MC] REAL,
+	[RangeMC] REAL,
+	[StdDevMC] REAL,
+	[Action] NVARCHAR(16),
+	[SR] REAL DEFAULT 0,
+	[Finish] REAL DEFAULT 0,
+	[SpareSngFld1] REAL,
+	[SpareSngFld2] REAL,
+	[AsciiFld1] NVARCHAR(20),
+	[AsciiFld2] NVARCHAR(20),
+	[AsciiFld3] NVARCHAR(20),
+	[AsciiFld4] NVARCHAR(20),
+	[LotIdent] NVARCHAR(16),
+	[QualityUID] INTEGER,
+	[StockName] NVARCHAR(20),
+	[FC_IdentString] NVARCHAR(25),
+	[UnitCount] SMALLINT,
+	[MonthCode] NVARCHAR(20),
+	[SpareSngFld3] REAL
+);
+GO
+
+CREATE TABLE [DayPrevTotals] (
+	[Index] SMALLINT,
+	[LotNum] INTEGER,
+	[LotStatus] NVARCHAR(255),
+	[Empty] BIT NOT NULL,
+	[PriGrp] SMALLINT,
+	[SecGrp] SMALLINT,
+	[GroupingID] SMALLINT,
+	[GroupText] NVARCHAR(15),
+	[OnHold] BIT NOT NULL,
+	[JobNum] INTEGER,
+	[OpenTD] DATETIME,
+	[CloseTD] DATETIME,
+	[CloseBySize] BIT NOT NULL,
+	[CloseByTime] BIT NOT NULL,
+	[BaleCount] SMALLINT,
+	[TotNW] FLOAT,
+	[MinNW] REAL,
+	[MinNWBale] INTEGER,
+	[MaxNW] REAL,
+	[MaxNWBale] INTEGER,
+	[NW*NW] REAL,
+	[MeanNW] REAL,
+	[RangeNW] REAL,
+	[StdDevNW] REAL,
+	[TotTW] REAL,
+	[TotBW] REAL,
+	[TotMC] REAL,
+	[MinMC] REAL,
+	[MinMCBale] INTEGER,
+	[MaxMC] REAL,
+	[MaxMCBale] INTEGER,
+	[MC*MC] REAL,
+	[RangeMC] REAL,
+	[StdDevMC] REAL,
+	[Action] NVARCHAR(16),
+	[SR] REAL DEFAULT 0,
+	[Finish] REAL DEFAULT 0,
+	[SpareSngFld1] REAL,
+	[SpareSngFld2] REAL,
+	[AsciiFld1] NVARCHAR(20),
+	[AsciiFld2] NVARCHAR(20),
+	[AsciiFld3] NVARCHAR(20),
+	[AsciiFld4] NVARCHAR(20),
+	[LotIdent] NVARCHAR(16),
+	[QualityUID] INTEGER,
+	[StockName] NVARCHAR(20),
+	[FC_IdentString] NVARCHAR(25),
+	[UnitCount] SMALLINT,
+	[MonthCode] NVARCHAR(20),
+	[SpareSngFld3] REAL
+);
+GO
+
+CREATE TABLE [DayPrevTotalsRevA] (
+	[RecordIdent] NVARCHAR(10),
+	[Status] NVARCHAR(10),
+	[Empty] BIT NOT NULL,
+	[StartingTD] DATETIME,
+	[EndingTD] DATETIME,
+	[StartingPD] DATETIME,
+	[EndingPD] DATETIME,
+	[FinalizationTime] DATETIME,
+	[BaleCount] SMALLINT,
+	[TotNW] FLOAT,
+	[TotTW] REAL,
+	[TotBW] REAL,
+	[NW*NW] REAL,
+	[MeanNW] REAL,
+	[StdDevNW] REAL,
+	[MC*MC] REAL,
+	[MeanMC] REAL,
+	[StdDevMC] REAL,
+	[MinNW] REAL,
+	[MaxNW] REAL,
+	[RangeNW] REAL,
+	[MinMC] REAL,
+	[MaxMC] REAL,
+	[RangeMC] REAL,
+	[SpareSngFld1] REAL,
+	[SpareSngFld2] REAL,
+	[UnitCount] SMALLINT,
+	[SpareSngFld3] REAL
+);
+GO
+
+CREATE TABLE [DayProd] (
+	[Index] INTEGER,
+	[LotNum] INTEGER,
+	[LotStatus] NVARCHAR(255),
+	[Empty] BIT NOT NULL,
+	[PriGrp] SMALLINT,
+	[SecGrp] SMALLINT,
+	[GroupingID] SMALLINT,
+	[GroupText] NVARCHAR(255),
+	[OnHold] BIT NOT NULL,
+	[JobNum] INTEGER,
+	[OpenTD] DATETIME,
+	[CloseTD] DATETIME,
+	[CloseBySize] BIT NOT NULL,
+	[CloseByTime] BIT NOT NULL,
+	[BaleCount] SMALLINT,
+	[TotNW] FLOAT,
+	[MinNW] REAL,
+	[MinNWBale] INTEGER,
+	[MaxNW] REAL,
+	[MaxNWBale] INTEGER,
+	[NW*NW] REAL,
+	[MeanNW] REAL,
+	[RangeNW] REAL,
+	[StdDevNW] REAL,
+	[TotTW] REAL,
+	[TotBW] REAL,
+	[TotMC] REAL,
+	[MinMC] REAL,
+	[MinMCBale] INTEGER,
+	[MaxMC] REAL,
+	[MaxMCBale] INTEGER,
+	[MC*MC] REAL,
+	[RangeMC] REAL,
+	[StdDevMC] REAL,
+	[Action] NVARCHAR(16),
+	[SR] REAL DEFAULT 0,
+	[Finish] REAL DEFAULT 0,
+	[SpareSngFld1] REAL,
+	[SpareSngFld2] REAL,
+	[AsciiFld1] NVARCHAR(20),
+	[AsciiFld2] NVARCHAR(20),
+	[AsciiFld3] NVARCHAR(20),
+	[AsciiFld4] NVARCHAR(20),
+	[LotIdent] NVARCHAR(16),
+	[QualityUID] INTEGER,
+	[StockName] NVARCHAR(20),
+	[FC_IdentString] NVARCHAR(25),
+	[UnitCount] SMALLINT,
+	[MonthCode] NVARCHAR(20),
+	[SpareSngFld3] REAL
+);
+GO
+
+CREATE TABLE [DayTotals] (
+	[Index] INTEGER,
+	[LotNum] INTEGER,
+	[LotStatus] NVARCHAR(255),
+	[Empty] BIT NOT NULL,
+	[PriGrp] SMALLINT,
+	[SecGrp] SMALLINT,
+	[GroupingID] SMALLINT,
+	[GroupText] NVARCHAR(255),
+	[OnHold] BIT NOT NULL,
+	[JobNum] INTEGER,
+	[OpenTD] DATETIME,
+	[CloseTD] DATETIME,
+	[CloseBySize] BIT NOT NULL,
+	[CloseByTime] BIT NOT NULL,
+	[BaleCount] SMALLINT,
+	[TotNW] FLOAT,
+	[MinNW] REAL,
+	[MinNWBale] INTEGER,
+	[MaxNW] REAL,
+	[MaxNWBale] INTEGER,
+	[NW*NW] REAL,
+	[MeanNW] REAL,
+	[RangeNW] REAL,
+	[StdDevNW] REAL,
+	[TotTW] REAL,
+	[TotBW] REAL,
+	[TotMC] REAL,
+	[MinMC] REAL,
+	[MinMCBale] INTEGER,
+	[MaxMC] REAL,
+	[MaxMCBale] INTEGER,
+	[MC*MC] REAL,
+	[RangeMC] REAL,
+	[StdDevMC] REAL,
+	[Action] NVARCHAR(16),
+	[SR] REAL DEFAULT 0,
+	[Finish] REAL DEFAULT 0,
+	[SpareSngFld1] REAL,
+	[SpareSngFld2] REAL,
+	[AsciiFld1] NVARCHAR(20),
+	[AsciiFld2] NVARCHAR(20),
+	[AsciiFld3] NVARCHAR(20),
+	[AsciiFld4] NVARCHAR(20),
+	[LotIdent] NVARCHAR(16),
+	[QualityUID] INTEGER,
+	[StockName] NVARCHAR(20),
+	[FC_IdentString] NVARCHAR(25),
+	[UnitCount] SMALLINT,
+	[MonthCode] NVARCHAR(20),
+	[SpareSngFld3] REAL
+);
+GO
+
+CREATE TABLE [DayTotalsRevA] (
+	[RecordIdent] NVARCHAR(10),
+	[Status] NVARCHAR(10),
+	[Empty] BIT NOT NULL,
+	[StartingTD] DATETIME,
+	[EndingTD] DATETIME,
+	[StartingPD] DATETIME,
+	[EndingPD] DATETIME,
+	[FinalizationTime] DATETIME,
+	[BaleCount] SMALLINT,
+	[TotNW] FLOAT,
+	[TotTW] REAL,
+	[TotBW] REAL,
+	[NW*NW] REAL,
+	[MeanNW] REAL,
+	[StdDevNW] REAL,
+	[MC*MC] REAL,
+	[MeanMC] REAL,
+	[StdDevMC] REAL,
+	[MinNW] REAL,
+	[MaxNW] REAL,
+	[RangeNW] REAL,
+	[MinMC] REAL,
+	[MaxMC] REAL,
+	[RangeMC] REAL,
+	[SpareSngFld1] REAL,
+	[SpareSngFld2] REAL,
+	[UnitCount] SMALLINT,
+	[SpareSngFld3] REAL
+);
+GO
+
+CREATE TABLE [LotArchive] (
+	[Index] INTEGER,
+	[LotNum] INTEGER,
+	[LotStatus] NVARCHAR(255),
+	[Empty] BIT NOT NULL,
+	[PriGrp] SMALLINT,
+	[SecGrp] SMALLINT,
+	[GroupingID] SMALLINT,
+	[GroupText] NVARCHAR(255),
+	[OnHold] BIT NOT NULL,
+	[JobNum] INTEGER,
+	[OpenTD] DATETIME,
+	[CloseTD] DATETIME,
+	[CloseBySize] BIT NOT NULL,
+	[CloseByTime] BIT NOT NULL,
+	[BaleCount] SMALLINT,
+	[TotNW] FLOAT,
+	[MinNW] REAL,
+	[MinNWBale] INTEGER,
+	[MaxNW] REAL,
+	[MaxNWBale] INTEGER,
+	[NW*NW] REAL,
+	[MeanNW] REAL,
+	[RangeNW] REAL,
+	[StdDevNW] REAL,
+	[TotTW] REAL,
+	[TotBW] REAL,
+	[TotMC] REAL,
+	[MinMC] REAL,
+	[MinMCBale] INTEGER,
+	[MaxMC] REAL,
+	[MaxMCBale] INTEGER,
+	[MC*MC] REAL,
+	[RangeMC] REAL,
+	[StdDevMC] REAL,
+	[NextBaleNumber] REAL,
+	[BalesAssigned] REAL,
+	[ClosingSize] REAL,
+	[Action] NVARCHAR(16),
+	[SR] REAL DEFAULT 0,
+	[Finish] REAL DEFAULT 0,
+	[OrderStr] NVARCHAR(25),
+	[UID] INTEGER,
+	[SpareSngFld1] REAL,
+	[SpareSngFld2] REAL,
+	[AsciiFld1] NVARCHAR(20),
+	[AsciiFld2] NVARCHAR(20),
+	[AsciiFld3] NVARCHAR(20),
+	[AsciiFld4] NVARCHAR(20),
+	[LotIdent] NVARCHAR(16),
+	[QualityUID] INTEGER,
+	[StockName] NVARCHAR(20),
+	[FC_IdentString] NVARCHAR(25),
+	[UnitCount] SMALLINT,
+	[MonthCode] NVARCHAR(20),
+	[SpareSngFld3] REAL
+);
+GO
+
+CREATE TABLE [LotRecord] (
+	[Index] INTEGER,
+	[LotNum] INTEGER,
+	[LotStatus] NVARCHAR(15),
+	[Empty] BIT NOT NULL,
+	[PriGrp] INTEGER,
+	[SecGrp] INTEGER,
+	[GroupingID] SMALLINT,
+	[GroupText] NVARCHAR(20),
+	[OnHold] BIT NOT NULL,
+	[JobNum] INTEGER,
+	[OpenTD] DATETIME,
+	[CloseTD] DATETIME,
+	[CloseBySize] BIT NOT NULL,
+	[CloseByTime] BIT NOT NULL,
+	[BaleCount] INTEGER,
+	[TotNW] FLOAT,
+	[MinNW] REAL,
+	[MinNWBale] INTEGER,
+	[MaxNW] REAL,
+	[MaxNWBale] INTEGER,
+	[NW*NW] REAL,
+	[MeanNW] REAL,
+	[RangeNW] REAL,
+	[StdDevNW] REAL,
+	[TotTW] REAL,
+	[TotBW] REAL,
+	[TotMC] REAL,
+	[MinMC] REAL,
+	[MinMCBale] INTEGER,
+	[MaxMC] REAL,
+	[MaxMCBale] INTEGER,
+	[MC*MC] REAL,
+	[RangeMC] REAL,
+	[StdDevMC] REAL,
+	[BalesAssigned] INTEGER,
+	[Action] NVARCHAR(15),
+	[UID] INTEGER,
+	[SpareSngFld1] REAL,
+	[SpareSngFld2] REAL,
+	[AsciiFld1] NVARCHAR(20),
+	[AsciiFld2] NVARCHAR(20),
+	[AsciiFld3] NVARCHAR(20),
+	[AsciiFld4] NVARCHAR(20),
+	[LotIdent] NVARCHAR(16),
+	[QualityUID] INTEGER,
+	[StockName] NVARCHAR(20),
+	[FC_IdentString] NVARCHAR(25),
+	[UnitCount] SMALLINT,
+	[MonthCode] NVARCHAR(20),
+	[SpareSngFld3] REAL
+);
+GO
+
+CREATE TABLE [LotTransaction] (
+	[Index] INTEGER,
+	[LotNum] INTEGER,
+	[LotStatus] NVARCHAR(255),
+	[Empty] BIT NOT NULL,
+	[PriGrp] SMALLINT,
+	[SecGrp] SMALLINT,
+	[GroupingID] SMALLINT,
+	[GroupText] NVARCHAR(255),
+	[OnHold] BIT NOT NULL,
+	[JobNum] INTEGER,
+	[OpenTD] DATETIME,
+	[CloseTD] DATETIME,
+	[CloseBySize] BIT NOT NULL,
+	[CloseByTime] BIT NOT NULL,
+	[BaleCount] SMALLINT,
+	[TotNW] FLOAT,
+	[MinNW] REAL,
+	[MinNWBale] INTEGER,
+	[MaxNW] REAL,
+	[MaxNWBale] INTEGER,
+	[NW*NW] REAL,
+	[MeanNW] REAL,
+	[RangeNW] REAL,
+	[StdDevNW] REAL,
+	[TotTW] REAL,
+	[TotBW] REAL,
+	[TotMC] REAL,
+	[MinMC] REAL,
+	[MinMCBale] INTEGER,
+	[MaxMC] REAL,
+	[MaxMCBale] INTEGER,
+	[MC*MC] REAL,
+	[RangeMC] REAL,
+	[StdDevMC] REAL,
+	[NextBaleNumber] REAL,
+	[BalesAssigned] REAL,
+	[ClosingSize] REAL,
+	[Action] NVARCHAR(16),
+	[SR] REAL DEFAULT 0,
+	[Finish] REAL DEFAULT 0,
+	[OrderStr] NVARCHAR(25),
+	[UID] INTEGER,
+	[SpareSngFld1] REAL,
+	[SpareSngFld2] REAL,
+	[AsciiFld1] NVARCHAR(20),
+	[AsciiFld2] NVARCHAR(20),
+	[AsciiFld3] NVARCHAR(20),
+	[AsciiFld4] NVARCHAR(20),
+	[LotIdent] NVARCHAR(16),
+	[QualityUID] INTEGER,
+	[StockName] NVARCHAR(20),
+	[FC_IdentString] NVARCHAR(25),
+	[UnitCount] SMALLINT,
+	[MonthCode] NVARCHAR(20),
+	[SpareSngFld3] REAL
+);
+GO
+
+CREATE TABLE [OpenLots] (
+	[Index] INTEGER DEFAULT 0,
+	[LotNum] INTEGER,
+	[LotStatus] NVARCHAR(15),
+	[Empty] BIT NOT NULL,
+	[PriGrp] SMALLINT,
+	[SecGrp] SMALLINT,
+	[GroupingID] SMALLINT,
+	[GroupText] NVARCHAR(20),
+	[OnHold] BIT NOT NULL,
+	[JobNum] INTEGER,
+	[OpenTD] DATETIME,
+	[CloseTD] DATETIME,
+	[CloseBySize] BIT NOT NULL,
+	[CloseByTime] BIT NOT NULL,
+	[BaleCount] SMALLINT,
+	[TotNW] FLOAT,
+	[MinNW] REAL,
+	[MinNWBale] INTEGER,
+	[MaxNW] REAL,
+	[MaxNWBale] INTEGER,
+	[NW*NW] REAL,
+	[MeanNW] REAL,
+	[RangeNW] REAL,
+	[StdDevNW] REAL,
+	[TotTW] REAL,
+	[TotBW] REAL,
+	[TotMC] REAL DEFAULT 0,
+	[MinMC] REAL,
+	[MinMCBale] INTEGER,
+	[MaxMC] REAL,
+	[MaxMCBale] INTEGER,
+	[MC*MC] REAL,
+	[RangeMC] REAL,
+	[StdDevMC] REAL,
+	[NextBaleNumber] REAL DEFAULT 0,
+	[BalesAssigned] REAL DEFAULT 0,
+	[ClosingSize] REAL DEFAULT 0,
+	[Action] NVARCHAR(16),
+	[SR] REAL DEFAULT 0,
+	[Finish] REAL DEFAULT 0,
+	[OrderStr] NVARCHAR(25),
+	[UID] INTEGER,
+	[SpareSngFld1] REAL,
+	[SpareSngFld2] REAL,
+	[AsciiFld1] NVARCHAR(20),
+	[AsciiFld2] NVARCHAR(20),
+	[AsciiFld3] NVARCHAR(20),
+	[AsciiFld4] NVARCHAR(20),
+	[LotIdent] NVARCHAR(16),
+	[QualityUID] INTEGER,
+	[StockName] NVARCHAR(20),
+	[FC_IdentString] NVARCHAR(25),
+	[UnitCount] SMALLINT,
+	[MonthCode] NVARCHAR(20),
+	[SpareSngFld3] REAL
+);
+GO
+
+CREATE TABLE [OpenStacks] (
+	[StackID] INTEGER,
+	[UnitNum] INTEGER,
+	[UnitStatus] NVARCHAR(255),
+	[Empty] BIT NOT NULL,
+	[PriGrp] SMALLINT,
+	[SecGrp] SMALLINT,
+	[GroupingID] SMALLINT,
+	[GroupText] NVARCHAR(255),
+	[OnHold] BIT NOT NULL,
+	[JobNum] BIT NOT NULL,
+	[OpenTD] DATETIME,
+	[CloseTD] DATETIME,
+	[CloseBySize] BIT NOT NULL,
+	[CloseByTime] BIT NOT NULL,
+	[BaleCount] SMALLINT,
+	[TotNW] FLOAT,
+	[MinNW] REAL,
+	[MinNWBale] INTEGER,
+	[MaxNW] REAL,
+	[MaxNWBale] INTEGER,
+	[NW*NW] REAL,
+	[MeanNW] REAL,
+	[RangeNW] REAL,
+	[StdDevNW] REAL,
+	[TotTW] REAL,
+	[TotBW] REAL,
+	[TotMC] REAL,
+	[MinMC] REAL,
+	[MinMCBale] INTEGER,
+	[MaxMC] REAL,
+	[MaxMCBale] INTEGER,
+	[MC*MC] REAL,
+	[RangeMC] REAL,
+	[StdDevMC] REAL,
+	[NextBaleNumber] REAL,
+	[BalesAssigned] REAL,
+	[ClosingSize] REAL,
+	[Action] NVARCHAR(16),
+	[OrderStr] NVARCHAR(25),
+	[UID] INTEGER,
+	[AsciiFld1] NVARCHAR(20),
+	[AsciiFld2] NVARCHAR(20),
+	[AsciiFld3] NVARCHAR(20),
+	[AsciiFld4] NVARCHAR(20),
+	[UnitIdent] NVARCHAR(16),
+	[QualityUID] INTEGER,
+	[StockName] NVARCHAR(20),
+	[FC_IdentString] NVARCHAR(25),
+	[LotNumber] INTEGER,
+	[UnitBaleNumber] INTEGER,
+	[Bale1UID] INTEGER DEFAULT 0,
+	[Bale2UID] INTEGER DEFAULT 0,
+	[Bale3UID] INTEGER DEFAULT 0,
+	[Bale4UID] INTEGER DEFAULT 0,
+	[Bale5UID] INTEGER DEFAULT 0,
+	[Bale6UID] INTEGER DEFAULT 0,
+	[Bale7UID] INTEGER DEFAULT 0,
+	[Bale8UID] INTEGER DEFAULT 0,
+	[Bale9UID] INTEGER DEFAULT 0,
+	[Bale10UID] INTEGER DEFAULT 0
+);
+GO
+
+CREATE TABLE [OpenUnits] (
+	[Index] INTEGER,
+	[UnitNum] INTEGER,
+	[UnitStatus] NVARCHAR(255),
+	[Empty] BIT NOT NULL,
+	[PriGrp] SMALLINT,
+	[SecGrp] SMALLINT,
+	[GroupingID] SMALLINT,
+	[GroupText] NVARCHAR(255),
+	[OnHold] BIT NOT NULL,
+	[JobNum] BIT NOT NULL,
+	[OpenTD] DATETIME,
+	[CloseTD] DATETIME,
+	[CloseBySize] BIT NOT NULL,
+	[CloseByTime] BIT NOT NULL,
+	[BaleCount] SMALLINT,
+	[TotNW] FLOAT,
+	[MinNW] REAL,
+	[MinNWBale] INTEGER,
+	[MaxNW] REAL,
+	[MaxNWBale] INTEGER,
+	[NW*NW] REAL,
+	[MeanNW] REAL,
+	[RangeNW] REAL,
+	[StdDevNW] REAL,
+	[TotTW] REAL,
+	[TotBW] REAL,
+	[TotMC] REAL,
+	[MinMC] REAL,
+	[MinMCBale] INTEGER,
+	[MaxMC] REAL,
+	[MaxMCBale] INTEGER,
+	[MC*MC] REAL,
+	[RangeMC] REAL,
+	[StdDevMC] REAL,
+	[NextBaleNumber] REAL,
+	[BalesAssigned] REAL,
+	[ClosingSize] REAL,
+	[Action] NVARCHAR(16),
+	[OrderStr] NVARCHAR(25),
+	[UID] INTEGER,
+	[AsciiFld1] NVARCHAR(20),
+	[AsciiFld2] NVARCHAR(20),
+	[AsciiFld3] NVARCHAR(20),
+	[AsciiFld4] NVARCHAR(20),
+	[UnitIdent] NVARCHAR(16),
+	[QualityUID] INTEGER,
+	[StockName] NVARCHAR(20),
+	[FC_IdentString] NVARCHAR(25),
+	[LotNumber] INTEGER,
+	[UnitBaleNumber] INTEGER
+);
+GO
+
+CREATE TABLE [PeriodPrevProd] (
+	[Index] SMALLINT,
+	[LotNum] INTEGER,
+	[LotStatus] NVARCHAR(255),
+	[Empty] BIT NOT NULL,
+	[PriGrp] SMALLINT,
+	[SecGrp] SMALLINT,
+	[GroupingID] SMALLINT,
+	[GroupText] NVARCHAR(15),
+	[OnHold] BIT NOT NULL,
+	[JobNum] INTEGER,
+	[OpenTD] DATETIME,
+	[CloseTD] DATETIME,
+	[CloseBySize] BIT NOT NULL,
+	[CloseByTime] BIT NOT NULL,
+	[BaleCount] SMALLINT,
+	[TotNW] FLOAT,
+	[MinNW] REAL,
+	[MinNWBale] INTEGER,
+	[MaxNW] REAL,
+	[MaxNWBale] INTEGER,
+	[NW*NW] REAL,
+	[MeanNW] REAL,
+	[RangeNW] REAL,
+	[StdDevNW] REAL,
+	[TotTW] REAL,
+	[TotBW] REAL,
+	[TotMC] REAL,
+	[MinMC] REAL,
+	[MinMCBale] INTEGER,
+	[MaxMC] REAL,
+	[MaxMCBale] INTEGER,
+	[MC*MC] REAL,
+	[RangeMC] REAL,
+	[StdDevMC] REAL,
+	[Action] NVARCHAR(16),
+	[SpareSngFld1] REAL,
+	[SpareSngFld2] REAL,
+	[AsciiFld1] NVARCHAR(20),
+	[AsciiFld2] NVARCHAR(20),
+	[AsciiFld3] NVARCHAR(20),
+	[AsciiFld4] NVARCHAR(20),
+	[LotIdent] NVARCHAR(16),
+	[QualityUID] INTEGER,
+	[StockName] NVARCHAR(20),
+	[FC_IdentString] NVARCHAR(25),
+	[UnitCount] SMALLINT,
+	[MonthCode] NVARCHAR(20),
+	[SpareSngFld3] REAL
+);
+GO
+
+CREATE TABLE [PeriodPrevTotals] (
+	[Index] SMALLINT,
+	[LotNum] INTEGER,
+	[LotStatus] NVARCHAR(255),
+	[Empty] BIT NOT NULL,
+	[PriGrp] SMALLINT,
+	[SecGrp] SMALLINT,
+	[GroupingID] SMALLINT,
+	[GroupText] NVARCHAR(15),
+	[OnHold] BIT NOT NULL,
+	[JobNum] INTEGER,
+	[OpenTD] DATETIME,
+	[CloseTD] DATETIME,
+	[CloseBySize] BIT NOT NULL,
+	[CloseByTime] BIT NOT NULL,
+	[BaleCount] SMALLINT,
+	[TotNW] FLOAT,
+	[MinNW] REAL,
+	[MinNWBale] INTEGER,
+	[MaxNW] REAL,
+	[MaxNWBale] INTEGER,
+	[NW*NW] REAL,
+	[MeanNW] REAL,
+	[RangeNW] REAL,
+	[StdDevNW] REAL,
+	[TotTW] REAL,
+	[TotBW] REAL,
+	[TotMC] REAL,
+	[MinMC] REAL,
+	[MinMCBale] INTEGER,
+	[MaxMC] REAL,
+	[MaxMCBale] INTEGER,
+	[MC*MC] REAL,
+	[RangeMC] REAL,
+	[StdDevMC] REAL,
+	[Action] NVARCHAR(16),
+	[SpareSngFld1] REAL,
+	[SpareSngFld2] REAL,
+	[AsciiFld1] NVARCHAR(20),
+	[AsciiFld2] NVARCHAR(20),
+	[AsciiFld3] NVARCHAR(20),
+	[AsciiFld4] NVARCHAR(20),
+	[LotIdent] NVARCHAR(16),
+	[QualityUID] INTEGER,
+	[StockName] NVARCHAR(20),
+	[FC_IdentString] NVARCHAR(25),
+	[UnitCount] SMALLINT,
+	[MonthCode] NVARCHAR(20),
+	[SpareSngFld3] REAL
+);
+GO
+
+CREATE TABLE [PeriodPrevTotalsRevA] (
+	[RecordIdent] NVARCHAR(10),
+	[Status] NVARCHAR(10),
+	[Empty] BIT NOT NULL,
+	[StartingTD] DATETIME,
+	[EndingTD] DATETIME,
+	[StartingPD] DATETIME,
+	[EndingPD] DATETIME,
+	[FinalizationTime] DATETIME,
+	[BaleCount] SMALLINT,
+	[TotNW] FLOAT,
+	[TotTW] REAL,
+	[TotBW] REAL,
+	[NW*NW] REAL,
+	[MeanNW] REAL,
+	[StdDevNW] REAL,
+	[MC*MC] REAL,
+	[MeanMC] REAL,
+	[StdDevMC] REAL,
+	[MinNW] REAL,
+	[MaxNW] REAL,
+	[RangeNW] REAL,
+	[MinMC] REAL,
+	[MaxMC] REAL,
+	[RangeMC] REAL,
+	[SpareSngFld1] REAL,
+	[SpareSngFld2] REAL,
+	[UnitCount] SMALLINT,
+	[SpareSngFld3] REAL
+);
+GO
+
+CREATE TABLE [PeriodProd] (
+	[Index] INTEGER,
+	[LotNum] INTEGER,
+	[LotStatus] NVARCHAR(255),
+	[Empty] BIT NOT NULL,
+	[PriGrp] SMALLINT,
+	[SecGrp] SMALLINT,
+	[GroupingID] SMALLINT,
+	[GroupText] NVARCHAR(255),
+	[OnHold] BIT NOT NULL,
+	[JobNum] INTEGER,
+	[OpenTD] DATETIME,
+	[CloseTD] DATETIME,
+	[CloseBySize] BIT NOT NULL,
+	[CloseByTime] BIT NOT NULL,
+	[BaleCount] SMALLINT,
+	[TotNW] FLOAT,
+	[MinNW] REAL,
+	[MinNWBale] INTEGER,
+	[MaxNW] REAL,
+	[MaxNWBale] INTEGER,
+	[NW*NW] REAL,
+	[MeanNW] REAL,
+	[RangeNW] REAL,
+	[StdDevNW] REAL,
+	[TotTW] REAL,
+	[TotBW] REAL,
+	[TotMC] REAL,
+	[MinMC] REAL,
+	[MinMCBale] INTEGER,
+	[MaxMC] REAL,
+	[MaxMCBale] INTEGER,
+	[MC*MC] REAL,
+	[RangeMC] REAL,
+	[StdDevMC] REAL,
+	[Action] NVARCHAR(16),
+	[SR] REAL DEFAULT 0,
+	[Finish] REAL DEFAULT 0,
+	[SpareSngFld1] REAL,
+	[SpareSngFld2] REAL,
+	[AsciiFld1] NVARCHAR(20),
+	[AsciiFld2] NVARCHAR(20),
+	[AsciiFld3] NVARCHAR(20),
+	[AsciiFld4] NVARCHAR(20),
+	[LotIdent] NVARCHAR(16),
+	[QualityUID] INTEGER,
+	[StockName] NVARCHAR(20),
+	[FC_IdentString] NVARCHAR(25),
+	[UnitCount] SMALLINT,
+	[MonthCode] NVARCHAR(20),
+	[SpareSngFld3] REAL
+);
+GO
+
+CREATE TABLE [PeriodTotals] (
+	[Index] INTEGER,
+	[LotNum] INTEGER,
+	[LotStatus] NVARCHAR(255),
+	[Empty] BIT NOT NULL,
+	[PriGrp] SMALLINT,
+	[SecGrp] SMALLINT,
+	[GroupingID] SMALLINT,
+	[GroupText] NVARCHAR(255),
+	[OnHold] BIT NOT NULL,
+	[JobNum] INTEGER,
+	[OpenTD] DATETIME,
+	[CloseTD] DATETIME,
+	[CloseBySize] BIT NOT NULL,
+	[CloseByTime] BIT NOT NULL,
+	[BaleCount] SMALLINT,
+	[TotNW] FLOAT,
+	[MinNW] REAL,
+	[MinNWBale] INTEGER,
+	[MaxNW] REAL,
+	[MaxNWBale] INTEGER,
+	[NW*NW] REAL,
+	[MeanNW] REAL,
+	[RangeNW] REAL,
+	[StdDevNW] REAL,
+	[TotTW] REAL,
+	[TotBW] REAL,
+	[TotMC] REAL,
+	[MinMC] REAL,
+	[MinMCBale] INTEGER,
+	[MaxMC] REAL,
+	[MaxMCBale] INTEGER,
+	[MC*MC] REAL,
+	[RangeMC] REAL,
+	[StdDevMC] REAL,
+	[Action] NVARCHAR(16),
+	[SR] REAL DEFAULT 0,
+	[Finish] REAL DEFAULT 0,
+	[SpareSngFld1] REAL,
+	[SpareSngFld2] REAL,
+	[AsciiFld1] NVARCHAR(20),
+	[AsciiFld2] NVARCHAR(20),
+	[AsciiFld3] NVARCHAR(20),
+	[AsciiFld4] NVARCHAR(20),
+	[LotIdent] NVARCHAR(16),
+	[QualityUID] INTEGER,
+	[StockName] NVARCHAR(20),
+	[FC_IdentString] NVARCHAR(25),
+	[UnitCount] SMALLINT,
+	[MonthCode] NVARCHAR(20),
+	[SpareSngFld3] REAL
+);
+GO
+
+CREATE TABLE [PeriodTotalsRevA] (
+	[RecordIdent] NVARCHAR(10),
+	[Status] NVARCHAR(10),
+	[Empty] BIT NOT NULL,
+	[StartingTD] DATETIME,
+	[EndingTD] DATETIME,
+	[StartingPD] DATETIME,
+	[EndingPD] DATETIME,
+	[FinalizationTime] DATETIME,
+	[BaleCount] SMALLINT,
+	[TotNW] FLOAT,
+	[TotTW] REAL,
+	[TotBW] REAL,
+	[NW*NW] REAL,
+	[MeanNW] REAL,
+	[StdDevNW] REAL,
+	[MC*MC] REAL,
+	[MeanMC] REAL,
+	[StdDevMC] REAL,
+	[MinNW] REAL,
+	[MaxNW] REAL,
+	[RangeNW] REAL,
+	[MinMC] REAL,
+	[MaxMC] REAL,
+	[RangeMC] REAL,
+	[SpareSngFld1] REAL,
+	[SpareSngFld2] REAL,
+	[UnitCount] SMALLINT,
+	[SpareSngFld3] REAL
+);
+GO
+
+CREATE TABLE [QualityArchive] (
+	[Index] INTEGER DEFAULT 0,
+	[DateOfEntry] DATETIME,
+	[Empty] BIT NOT NULL DEFAULT 0,
+	[UID] REAL,
+	[TimeOfTest] DATETIME,
+	[Brightness] REAL,
+	[Dirt] REAL,
+	[Dirt2] REAL,
+	[Shives] REAL,
+	[Viscosity] INTEGER,
+	[Pitch] REAL,
+	[LabMoisture] REAL,
+	[N1] REAL,
+	[N2] REAL,
+	[N3] REAL,
+	[N4] REAL,
+	[N5] REAL,
+	[S1] NVARCHAR(50),
+	[S2] NVARCHAR(50),
+	[S3] NVARCHAR(50),
+	[S4] NVARCHAR(50),
+	[S5] NVARCHAR(50)
+);
+GO
+
+CREATE TABLE [QualityTransaction] (
+	[Index] INTEGER,
+	[DateOfEntry] DATETIME,
+	[Empty] BIT NOT NULL,
+	[UID] REAL,
+	[TimeOfTest] DATETIME,
+	[Brightness] REAL,
+	[Dirt] REAL,
+	[Dirt2] REAL,
+	[Shives] REAL,
+	[Viscosity] INTEGER,
+	[Pitch] REAL,
+	[LabMoisture] REAL,
+	[N1] REAL,
+	[N2] REAL,
+	[N3] REAL,
+	[N4] REAL,
+	[N5] REAL,
+	[S1] NVARCHAR(50),
+	[S2] NVARCHAR(50),
+	[S3] NVARCHAR(50),
+	[S4] NVARCHAR(50),
+	[S5] NVARCHAR(50)
+);
+GO
+
+CREATE TABLE [RequiredTables] (
+	[Family] NVARCHAR(50),
+	[TableName] NVARCHAR(50),
+	[Grouping] INTEGER DEFAULT 0,
+	[SourceMdb] NVARCHAR(50),
+	[Template] NVARCHAR(25),
+	[Linked] BIT NOT NULL,
+	[Size] NVARCHAR(50)
+);
+GO
+
+CREATE TABLE [ShiftPrevProd] (
+	[Index] SMALLINT,
+	[LotNum] INTEGER,
+	[LotStatus] NVARCHAR(255),
+	[Empty] BIT NOT NULL,
+	[PriGrp] SMALLINT,
+	[SecGrp] SMALLINT,
+	[GroupingID] SMALLINT,
+	[GroupText] NVARCHAR(255),
+	[OnHold] BIT NOT NULL,
+	[JobNum] INTEGER,
+	[OpenTD] DATETIME,
+	[CloseTD] DATETIME,
+	[CloseBySize] BIT NOT NULL,
+	[CloseByTime] BIT NOT NULL,
+	[BaleCount] SMALLINT,
+	[TotNW] FLOAT,
+	[MinNW] REAL,
+	[MinNWBale] INTEGER,
+	[MaxNW] REAL,
+	[MaxNWBale] INTEGER,
+	[NW*NW] REAL,
+	[MeanNW] REAL,
+	[RangeNW] REAL,
+	[StdDevNW] REAL,
+	[TotTW] REAL,
+	[TotBW] REAL,
+	[TotMC] REAL,
+	[MinMC] REAL,
+	[MinMCBale] INTEGER,
+	[MaxMC] REAL,
+	[MaxMCBale] INTEGER,
+	[MC*MC] REAL,
+	[RangeMC] REAL,
+	[StdDevMC] REAL,
+	[Action] NVARCHAR(16),
+	[SR] REAL DEFAULT 0,
+	[Finish] REAL DEFAULT 0,
+	[SpareSngFld1] REAL,
+	[SpareSngFld2] REAL,
+	[AsciiFld1] NVARCHAR(20),
+	[AsciiFld2] NVARCHAR(20),
+	[AsciiFld3] NVARCHAR(20),
+	[AsciiFld4] NVARCHAR(20),
+	[LotIdent] NVARCHAR(16),
+	[QualityUID] INTEGER,
+	[StockName] NVARCHAR(20),
+	[FC_IdentString] NVARCHAR(25),
+	[UnitCount] SMALLINT,
+	[MonthCode] NVARCHAR(20),
+	[SpareSngFld3] REAL
+);
+GO
+
+CREATE TABLE [ShiftPrevTotals] (
+	[Index] SMALLINT,
+	[LotNum] INTEGER,
+	[LotStatus] NVARCHAR(255),
+	[Empty] BIT NOT NULL,
+	[PriGrp] SMALLINT,
+	[SecGrp] SMALLINT,
+	[GroupingID] SMALLINT,
+	[GroupText] NVARCHAR(15),
+	[OnHold] BIT NOT NULL,
+	[JobNum] INTEGER,
+	[OpenTD] DATETIME,
+	[CloseTD] DATETIME,
+	[CloseBySize] BIT NOT NULL,
+	[CloseByTime] BIT NOT NULL,
+	[BaleCount] SMALLINT,
+	[TotNW] FLOAT,
+	[MinNW] REAL,
+	[MinNWBale] INTEGER,
+	[MaxNW] REAL,
+	[MaxNWBale] INTEGER,
+	[NW*NW] REAL,
+	[MeanNW] REAL,
+	[RangeNW] REAL,
+	[StdDevNW] REAL,
+	[TotTW] REAL,
+	[TotBW] REAL,
+	[TotMC] REAL,
+	[MinMC] REAL,
+	[MinMCBale] INTEGER,
+	[MaxMC] REAL,
+	[MaxMCBale] INTEGER,
+	[MC*MC] REAL,
+	[RangeMC] REAL,
+	[StdDevMC] REAL,
+	[Action] NVARCHAR(16),
+	[SR] REAL DEFAULT 0,
+	[Finish] REAL DEFAULT 0,
+	[SpareSngFld1] REAL,
+	[SpareSngFld2] REAL,
+	[AsciiFld1] NVARCHAR(20),
+	[AsciiFld2] NVARCHAR(20),
+	[AsciiFld3] NVARCHAR(20),
+	[AsciiFld4] NVARCHAR(20),
+	[LotIdent] NVARCHAR(16),
+	[QualityUID] INTEGER,
+	[StockName] NVARCHAR(20),
+	[FC_IdentString] NVARCHAR(25),
+	[UnitCount] SMALLINT,
+	[MonthCode] NVARCHAR(20),
+	[SpareSngFld3] REAL
+);
+GO
+
+CREATE TABLE [ShiftPrevTotalsRevA] (
+	[RecordIdent] NVARCHAR(10),
+	[Status] NVARCHAR(10),
+	[Empty] BIT NOT NULL,
+	[StartingTD] DATETIME,
+	[EndingTD] DATETIME,
+	[StartingPD] DATETIME,
+	[EndingPD] DATETIME,
+	[FinalizationTime] DATETIME,
+	[BaleCount] SMALLINT,
+	[TotNW] FLOAT,
+	[TotTW] REAL,
+	[TotBW] REAL,
+	[NW*NW] REAL,
+	[MeanNW] REAL,
+	[StdDevNW] REAL,
+	[MC*MC] REAL,
+	[MeanMC] REAL,
+	[StdDevMC] REAL,
+	[MinNW] REAL,
+	[MaxNW] REAL,
+	[RangeNW] REAL,
+	[MinMC] REAL,
+	[MaxMC] REAL,
+	[RangeMC] REAL,
+	[SpareSngFld1] REAL,
+	[SpareSngFld2] REAL,
+	[UnitCount] SMALLINT,
+	[SpareSngFld3] REAL
+);
+GO
+
+CREATE TABLE [ShiftProd] (
+	[Index] INTEGER,
+	[LotNum] INTEGER,
+	[LotStatus] NVARCHAR(255),
+	[Empty] BIT NOT NULL,
+	[PriGrp] SMALLINT,
+	[SecGrp] SMALLINT,
+	[GroupingID] SMALLINT,
+	[GroupText] NVARCHAR(255),
+	[OnHold] BIT NOT NULL,
+	[JobNum] INTEGER,
+	[OpenTD] DATETIME,
+	[CloseTD] DATETIME,
+	[CloseBySize] BIT NOT NULL,
+	[CloseByTime] BIT NOT NULL,
+	[BaleCount] SMALLINT,
+	[TotNW] FLOAT,
+	[MinNW] REAL,
+	[MinNWBale] INTEGER,
+	[MaxNW] REAL,
+	[MaxNWBale] INTEGER,
+	[NW*NW] REAL,
+	[MeanNW] REAL,
+	[RangeNW] REAL,
+	[StdDevNW] REAL,
+	[TotTW] REAL,
+	[TotBW] REAL,
+	[TotMC] REAL,
+	[MinMC] REAL,
+	[MinMCBale] INTEGER,
+	[MaxMC] REAL,
+	[MaxMCBale] INTEGER,
+	[MC*MC] REAL,
+	[RangeMC] REAL,
+	[StdDevMC] REAL,
+	[Action] NVARCHAR(16),
+	[SR] REAL DEFAULT 0,
+	[Finish] REAL DEFAULT 0,
+	[SpareSngFld1] REAL,
+	[SpareSngFld2] REAL,
+	[AsciiFld1] NVARCHAR(20),
+	[AsciiFld2] NVARCHAR(20),
+	[AsciiFld3] NVARCHAR(20),
+	[AsciiFld4] NVARCHAR(20),
+	[LotIdent] NVARCHAR(16),
+	[QualityUID] INTEGER,
+	[StockName] NVARCHAR(20),
+	[FC_IdentString] NVARCHAR(25),
+	[UnitCount] SMALLINT,
+	[MonthCode] NVARCHAR(20),
+	[SpareSngFld3] REAL
+);
+GO
+
+CREATE TABLE [ShiftTotals] (
+	[Index] INTEGER,
+	[LotNum] INTEGER,
+	[LotStatus] NVARCHAR(255),
+	[Empty] BIT NOT NULL,
+	[PriGrp] SMALLINT,
+	[SecGrp] SMALLINT,
+	[GroupingID] SMALLINT,
+	[GroupText] NVARCHAR(255),
+	[OnHold] BIT NOT NULL,
+	[JobNum] INTEGER,
+	[OpenTD] DATETIME,
+	[CloseTD] DATETIME,
+	[CloseBySize] BIT NOT NULL,
+	[CloseByTime] BIT NOT NULL,
+	[BaleCount] SMALLINT,
+	[TotNW] FLOAT,
+	[MinNW] REAL,
+	[MinNWBale] INTEGER,
+	[MaxNW] REAL,
+	[MaxNWBale] INTEGER,
+	[NW*NW] REAL,
+	[MeanNW] REAL,
+	[RangeNW] REAL,
+	[StdDevNW] REAL,
+	[TotTW] REAL,
+	[TotBW] REAL,
+	[TotMC] REAL,
+	[MinMC] REAL,
+	[MinMCBale] INTEGER,
+	[MaxMC] REAL,
+	[MaxMCBale] INTEGER,
+	[MC*MC] REAL,
+	[RangeMC] REAL,
+	[StdDevMC] REAL,
+	[Action] NVARCHAR(16),
+	[SR] REAL DEFAULT 0,
+	[Finish] REAL DEFAULT 0,
+	[SpareSngFld1] REAL,
+	[SpareSngFld2] REAL,
+	[AsciiFld1] NVARCHAR(20),
+	[AsciiFld2] NVARCHAR(20),
+	[AsciiFld3] NVARCHAR(20),
+	[AsciiFld4] NVARCHAR(20),
+	[LotIdent] NVARCHAR(16),
+	[QualityUID] INTEGER,
+	[StockName] NVARCHAR(20),
+	[FC_IdentString] NVARCHAR(25),
+	[UnitCount] SMALLINT,
+	[MonthCode] NVARCHAR(20),
+	[SpareSngFld3] REAL
+);
+GO
+
+CREATE TABLE [ShiftTotalsRevA] (
+	[RecordIdent] NVARCHAR(10),
+	[Status] NVARCHAR(10),
+	[Empty] BIT NOT NULL,
+	[StartingTD] DATETIME,
+	[EndingTD] DATETIME,
+	[StartingPD] DATETIME,
+	[EndingPD] DATETIME,
+	[FinalizationTime] DATETIME,
+	[BaleCount] SMALLINT,
+	[TotNW] FLOAT,
+	[TotTW] REAL,
+	[TotBW] REAL,
+	[NW*NW] REAL,
+	[MeanNW] REAL,
+	[StdDevNW] REAL,
+	[MC*MC] REAL,
+	[MeanMC] REAL,
+	[StdDevMC] REAL,
+	[MinNW] REAL,
+	[MaxNW] REAL,
+	[RangeNW] REAL,
+	[MinMC] REAL,
+	[MaxMC] REAL,
+	[RangeMC] REAL,
+	[SpareSngFld1] REAL,
+	[SpareSngFld2] REAL,
+	[UnitCount] SMALLINT,
+	[SpareSngFld3] REAL
+);
+GO
+
+CREATE TABLE [SimBackup] (
+	[Index] INTEGER,
+	[Empty] BIT NOT NULL,
+	[SourceName] NVARCHAR(255),
+	[LineName] NVARCHAR(255),
+	[StockName] NVARCHAR(255),
+	[CalibrationName] NVARCHAR(255),
+	[GradeName] NVARCHAR(255),
+	[Status] SMALLINT,
+	[Weight] REAL,
+	[WeightStatus] SMALLINT,
+	[OrigWeight] REAL,
+	[OrigWeightStatus] SMALLINT,
+	[Forte] INTEGER,
+	[ForteStatus] SMALLINT,
+	[ForteAveraging] BIT NOT NULL,
+	[Forte1] INTEGER,
+	[Forte1Status] SMALLINT,
+	[Forte2] INTEGER,
+	[Forte2Status] SMALLINT,
+	[UpCount] INTEGER,
+	[UpCountStatus] SMALLINT,
+	[DownCount] INTEGER,
+	[DownCountStatus] SMALLINT,
+	[DownCount2] INTEGER,
+	[DownCount2Status] SMALLINT,
+	[Brightness] REAL,
+	[BrightnessStatus] SMALLINT,
+	[BaleHeight] REAL,
+	[BaleHeightStatus] SMALLINT,
+	[TimeStart] DATETIME,
+	[TimeStartStatus] SMALLINT,
+	[TimeComplete] DATETIME,
+	[TimeCompleteStatus] SMALLINT,
+	[SourceID] INTEGER,
+	[SourceIDStatus] SMALLINT,
+	[LineID] INTEGER,
+	[StockID] INTEGER,
+	[StockIDStatus] SMALLINT,
+	[GradeID] INTEGER,
+	[GradeIDStatus] SMALLINT,
+	[TareWeight] REAL,
+	[TareWeightStatus] SMALLINT,
+	[Finish] REAL,
+	[AllowanceStatus] SMALLINT,
+	[DropNumber] INTEGER,
+	[DropTime] DATETIME,
+	[Position] TINYINT,
+	[SheetCount] SMALLINT,
+	[SheetCountStatus] SMALLINT,
+	[Moisture] REAL,
+	[SheetArea] REAL DEFAULT 0,
+	[MoistureStatus] SMALLINT,
+	[NetWeight] REAL,
+	[NetWeightStatus] SMALLINT,
+	[BDWeight] REAL,
+	[CalibrationID] INTEGER,
+	[CalibrationIDStatus] SMALLINT,
+	[SerialNumber] INTEGER,
+	[SeriAlNumberStatus] SMALLINT,
+	[LotNumber] INTEGER,
+	[LotNumberStatus] SMALLINT,
+	[LotBaleNumber] INTEGER,
+	[PkgMoistMethod] INTEGER,
+	[SpareSngFld1] REAL,
+	[SpareSngFld2] REAL,
+	[QualityUID] INTEGER,
+	[LastInGroup] BIT NOT NULL,
+	[MoistMes] NVARCHAR(255),
+	[WtMes] NVARCHAR(255),
+	[ProdDayStart] DATETIME,
+	[ProdDayEnd] DATETIME,
+	[ShiftName] NVARCHAR(255),
+	[MonthCode] NVARCHAR(255),
+	[AsciiFld1] NVARCHAR(255),
+	[AsciiFld2] NVARCHAR(255),
+	[AsciiFld3] NVARCHAR(255),
+	[AsciiFld4] NVARCHAR(255),
+	[SR] REAL,
+	[OrderStr] NVARCHAR(25),
+	[Package] NVARCHAR(12),
+	[ResultDesc] NVARCHAR(4),
+	[UID] INTEGER,
+	[Temperature] REAL DEFAULT 0,
+	[TemperatureStatus] SMALLINT,
+	[LotIdent] NVARCHAR(16),
+	[Dirt] REAL DEFAULT 0,
+	[BasisWeight] REAL DEFAULT 0,
+	[QualityName] NVARCHAR(50),
+	[FC_IdentString] NVARCHAR(50),
+	[FC_LotIdentString] NVARCHAR(25),
+	[StockLabel1] NVARCHAR(50),
+	[GradeLabel1] NVARCHAR(50),
+	[StockLabel2] NVARCHAR(50),
+	[GradeLabel2] NVARCHAR(50),
+	[UnitBaleNumber] SMALLINT,
+	[UnitNumber] INTEGER,
+	[UnitNumberStatus] SMALLINT,
+	[UnitIdent] NVARCHAR(20)
+);
+GO
+
+CREATE TABLE [UnitArchive] (
+	[Index] INTEGER,
+	[UnitNum] INTEGER,
+	[UnitStatus] NVARCHAR(255),
+	[Empty] BIT NOT NULL,
+	[PriGrp] SMALLINT,
+	[SecGrp] SMALLINT,
+	[GroupingID] SMALLINT,
+	[GroupText] NVARCHAR(255),
+	[OnHold] BIT NOT NULL,
+	[JobNum] BIT NOT NULL,
+	[OpenTD] DATETIME,
+	[CloseTD] DATETIME,
+	[CloseBySize] BIT NOT NULL,
+	[CloseByTime] BIT NOT NULL,
+	[BaleCount] SMALLINT,
+	[TotNW] FLOAT,
+	[MinNW] REAL,
+	[MinNWBale] INTEGER,
+	[MaxNW] REAL,
+	[MaxNWBale] INTEGER,
+	[NW*NW] REAL,
+	[MeanNW] REAL,
+	[RangeNW] REAL,
+	[StdDevNW] REAL,
+	[TotTW] REAL,
+	[TotBW] REAL,
+	[TotMC] REAL,
+	[MinMC] REAL,
+	[MinMCBale] INTEGER,
+	[MaxMC] REAL,
+	[MaxMCBale] INTEGER,
+	[MC*MC] REAL,
+	[RangeMC] REAL,
+	[StdDevMC] REAL,
+	[NextBaleNumber] REAL,
+	[BalesAssigned] REAL,
+	[ClosingSize] REAL,
+	[Action] NVARCHAR(16),
+	[OrderStr] NVARCHAR(25),
+	[UID] INTEGER,
+	[AsciiFld1] NVARCHAR(20),
+	[AsciiFld2] NVARCHAR(20),
+	[AsciiFld3] NVARCHAR(20),
+	[AsciiFld4] NVARCHAR(20),
+	[UnitIdent] NVARCHAR(16),
+	[QualityUID] INTEGER,
+	[StockName] NVARCHAR(20),
+	[FC_IdentString] NVARCHAR(25),
+	[LotNumber] INTEGER,
+	[UnitBaleNumber] INTEGER
+);
+GO
+
+CREATE TABLE [UnitRecord] (
+	[Index] INTEGER,
+	[UnitNum] INTEGER,
+	[UnitStatus] NVARCHAR(255),
+	[Empty] BIT NOT NULL,
+	[PriGrp] INTEGER,
+	[SecGrp] INTEGER,
+	[GroupingID] INTEGER,
+	[GroupText] NVARCHAR(255),
+	[OnHold] BIT NOT NULL,
+	[JobNum] BIT NOT NULL,
+	[OpenTD] DATETIME,
+	[CloseTD] DATETIME,
+	[CloseBySize] BIT NOT NULL,
+	[CloseByTime] BIT NOT NULL,
+	[BaleCount] SMALLINT,
+	[TotNW] REAL,
+	[MinNW] REAL,
+	[MinNWBale] INTEGER,
+	[MaxNW] REAL,
+	[MaxNWBale] INTEGER,
+	[NW*NW] REAL,
+	[MeanNW] REAL,
+	[RangeNW] REAL,
+	[StdDevNW] REAL,
+	[TotTW] REAL,
+	[TotBW] REAL,
+	[TotMC] REAL,
+	[MinMC] REAL,
+	[MinMCBale] REAL,
+	[MaxMC] REAL,
+	[MaxMCBale] REAL,
+	[MC*MC] REAL,
+	[RangeMC] REAL,
+	[StdDevMC] REAL,
+	[NextBaleNumber] INTEGER,
+	[BalesAssigned] INTEGER,
+	[ClosingSize] INTEGER,
+	[Action] NVARCHAR(16),
+	[OrderStr] NVARCHAR(25),
+	[UID] INTEGER,
+	[AsciiFld1] NVARCHAR(40),
+	[AsciiFld2] NVARCHAR(40),
+	[AsciiFld3] NVARCHAR(40),
+	[AsciiFld4] NVARCHAR(40),
+	[UnitIdent] NVARCHAR(32),
+	[QualityUID] INTEGER,
+	[StockName] NVARCHAR(40),
+	[FC_IdentString] NVARCHAR(50),
+	[LotNumber] INTEGER,
+	[UnitBaleNumber] INTEGER
+);
+GO
+
+CREATE TABLE [UnitTransaction] (
+	[Index] INTEGER,
+	[UnitNum] INTEGER,
+	[UnitStatus] NVARCHAR(255),
+	[Empty] BIT NOT NULL,
+	[PriGrp] SMALLINT,
+	[SecGrp] SMALLINT,
+	[GroupingID] SMALLINT,
+	[GroupText] NVARCHAR(255),
+	[OnHold] BIT NOT NULL,
+	[JobNum] BIT NOT NULL,
+	[OpenTD] DATETIME,
+	[CloseTD] DATETIME,
+	[CloseBySize] BIT NOT NULL,
+	[CloseByTime] BIT NOT NULL,
+	[BaleCount] SMALLINT,
+	[TotNW] FLOAT,
+	[MinNW] REAL,
+	[MinNWBale] INTEGER,
+	[MaxNW] REAL,
+	[MaxNWBale] INTEGER,
+	[NW*NW] REAL,
+	[MeanNW] REAL,
+	[RangeNW] REAL,
+	[StdDevNW] REAL,
+	[TotTW] REAL,
+	[TotBW] REAL,
+	[TotMC] REAL,
+	[MinMC] REAL,
+	[MinMCBale] INTEGER,
+	[MaxMC] REAL,
+	[MaxMCBale] INTEGER,
+	[MC*MC] REAL,
+	[RangeMC] REAL,
+	[StdDevMC] REAL,
+	[NextBaleNumber] REAL,
+	[BalesAssigned] REAL,
+	[ClosingSize] REAL,
+	[Action] NVARCHAR(16),
+	[OrderStr] NVARCHAR(25),
+	[UID] INTEGER,
+	[AsciiFld1] NVARCHAR(20),
+	[AsciiFld2] NVARCHAR(20),
+	[AsciiFld3] NVARCHAR(20),
+	[AsciiFld4] NVARCHAR(20),
+	[UnitIdent] NVARCHAR(16),
+	[QualityUID] INTEGER,
+	[StockName] NVARCHAR(20),
+	[FC_IdentString] NVARCHAR(25),
+	[LotNumber] INTEGER,
+	[UnitBaleNumber] INTEGER
+);
+GO
+
+CREATE INDEX [BaleSim$CalibrationID]
+	ON [BaleSim] ([CalibrationID]);
+GO
+
+CREATE INDEX [BaleSim$GradeID]
+	ON [BaleSim] ([GradeID]);
+GO
+
+CREATE INDEX [BaleSim$LineID]
+	ON [BaleSim] ([LineID]);
+GO
+
+CREATE INDEX [BaleSim$NumberInGrade]
+	ON [BaleSim] ([NumberInGrade]);
+GO
+
+CREATE INDEX [BaleSim$NumberInLine]
+	ON [BaleSim] ([NumberInLine]);
+GO
+
+CREATE INDEX [BaleSim$NumberInSource]
+	ON [BaleSim] ([NumberInSource]);
+GO
+
+CREATE INDEX [BaleSim$NumberInStock]
+	ON [BaleSim] ([NumberInStock]);
+GO
+
+CREATE INDEX [BaleSim$PackagingID]
+	ON [BaleSim] ([PackagingID]);
+GO
+
+CREATE INDEX [BaleSim$SourceID]
+	ON [BaleSim] ([SourceID]);
+GO
+
+CREATE INDEX [BaleSim$StockID]
+	ON [BaleSim] ([StockID]);
+GO
+
+CREATE INDEX [BaleSimPool$CalibrationID]
+	ON [BaleSimPool] ([CalibrationID]);
+GO
+
+CREATE INDEX [BaleSimPool$GradeID]
+	ON [BaleSimPool] ([GradeID]);
+GO
+
+CREATE INDEX [BaleSimPool$LineID]
+	ON [BaleSimPool] ([LineID]);
+GO
+
+CREATE INDEX [BaleSimPool$MonthCode]
+	ON [BaleSimPool] ([MonthCode]);
+GO
+
+CREATE INDEX [BaleSimPool$QualityUID]
+	ON [BaleSimPool] ([QualityUID]);
+GO
+
+CREATE INDEX [BaleSimPool$SourceID]
+	ON [BaleSimPool] ([SourceID]);
+GO
+
+CREATE INDEX [BaleSimPool$StockID]
+	ON [BaleSimPool] ([StockID]);
+GO
+
+CREATE INDEX [BaleSimPool$UID]
+	ON [BaleSimPool] ([UID]);
+GO
+
+CREATE INDEX [DayProd$GroupingID]
+	ON [DayProd] ([GroupingID]);
+GO
+
+CREATE INDEX [DayProd$LotNum]
+	ON [DayProd] ([LotNum]);
+GO
+
+CREATE INDEX [DayTotals$GroupingID]
+	ON [DayTotals] ([GroupingID]);
+GO
+
+CREATE INDEX [DayTotals$LotNum]
+	ON [DayTotals] ([LotNum]);
+GO
+
+CREATE INDEX [LotArchive$GroupingID]
+	ON [LotArchive] ([GroupingID]);
+GO
+
+CREATE INDEX [LotArchive$LotNum]
+	ON [LotArchive] ([LotNum]);
+GO
+
+CREATE INDEX [LotTransaction$GroupingID]
+	ON [LotTransaction] ([GroupingID]);
+GO
+
+CREATE INDEX [LotTransaction$LotNum]
+	ON [LotTransaction] ([LotNum]);
+GO
+
+CREATE INDEX [OpenLots$GroupingID]
+	ON [OpenLots] ([GroupingID]);
+GO
+
+CREATE INDEX [OpenLots$LotNum]
+	ON [OpenLots] ([LotNum]);
+GO
+
+CREATE INDEX [OpenLots$PriGrp]
+	ON [OpenLots] ([PriGrp]);
+GO
+
+CREATE INDEX [OpenLots$SecGrp]
+	ON [OpenLots] ([SecGrp]);
+GO
+
+CREATE INDEX [OpenStacks$Bale10UID]
+	ON [OpenStacks] ([Bale10UID]);
+GO
+
+CREATE INDEX [OpenStacks$Bale1UID]
+	ON [OpenStacks] ([Bale1UID]);
+GO
+
+CREATE INDEX [OpenStacks$Bale2UID]
+	ON [OpenStacks] ([Bale2UID]);
+GO
+
+CREATE INDEX [OpenStacks$Bale3UID]
+	ON [OpenStacks] ([Bale3UID]);
+GO
+
+CREATE INDEX [OpenStacks$Bale4UID]
+	ON [OpenStacks] ([Bale4UID]);
+GO
+
+CREATE INDEX [OpenStacks$Bale5UID]
+	ON [OpenStacks] ([Bale5UID]);
+GO
+
+CREATE INDEX [OpenStacks$Bale6UID]
+	ON [OpenStacks] ([Bale6UID]);
+GO
+
+CREATE INDEX [OpenStacks$Bale7UID]
+	ON [OpenStacks] ([Bale7UID]);
+GO
+
+CREATE INDEX [OpenStacks$Bale8UID]
+	ON [OpenStacks] ([Bale8UID]);
+GO
+
+CREATE INDEX [OpenStacks$Bale9UID]
+	ON [OpenStacks] ([Bale9UID]);
+GO
+
+CREATE INDEX [OpenStacks$GroupingID]
+	ON [OpenStacks] ([GroupingID]);
+GO
+
+CREATE INDEX [OpenStacks$QualityUID]
+	ON [OpenStacks] ([QualityUID]);
+GO
+
+CREATE INDEX [OpenStacks$StackID]
+	ON [OpenStacks] ([StackID]);
+GO
+
+CREATE INDEX [OpenStacks$UID]
+	ON [OpenStacks] ([UID]);
+GO
+
+CREATE INDEX [OpenStacks$UnitNum]
+	ON [OpenStacks] ([UnitNum]);
+GO
+
+CREATE INDEX [OpenUnits$GroupingID]
+	ON [OpenUnits] ([GroupingID]);
+GO
+
+CREATE INDEX [OpenUnits$QualityUID]
+	ON [OpenUnits] ([QualityUID]);
+GO
+
+CREATE INDEX [OpenUnits$UID]
+	ON [OpenUnits] ([UID]);
+GO
+
+CREATE INDEX [OpenUnits$UnitNum]
+	ON [OpenUnits] ([UnitNum]);
+GO
+
+CREATE INDEX [PeriodProd$GroupingID]
+	ON [PeriodProd] ([GroupingID]);
+GO
+
+CREATE INDEX [PeriodProd$LotNum]
+	ON [PeriodProd] ([LotNum]);
+GO
+
+CREATE INDEX [PeriodTotals$GroupingID]
+	ON [PeriodTotals] ([GroupingID]);
+GO
+
+CREATE INDEX [PeriodTotals$LotNum]
+	ON [PeriodTotals] ([LotNum]);
+GO
+
+CREATE INDEX [ShiftProd$GroupingID]
+	ON [ShiftProd] ([GroupingID]);
+GO
+
+CREATE INDEX [ShiftProd$LotNum]
+	ON [ShiftProd] ([LotNum]);
+GO
+
+CREATE INDEX [ShiftTotals$GroupingID]
+	ON [ShiftTotals] ([GroupingID]);
+GO
+
+CREATE INDEX [ShiftTotals$LotNum]
+	ON [ShiftTotals] ([LotNum]);
+GO
+
+CREATE INDEX [SimBackup$CalibrationID]
+	ON [SimBackup] ([CalibrationID]);
+GO
+
+CREATE INDEX [SimBackup$GradeID]
+	ON [SimBackup] ([GradeID]);
+GO
+
+CREATE INDEX [SimBackup$LineID]
+	ON [SimBackup] ([LineID]);
+GO
+
+CREATE INDEX [SimBackup$MonthCode]
+	ON [SimBackup] ([MonthCode]);
+GO
+
+CREATE INDEX [SimBackup$QualityUID]
+	ON [SimBackup] ([QualityUID]);
+GO
+
+CREATE INDEX [SimBackup$SourceID]
+	ON [SimBackup] ([SourceID]);
+GO
+
+CREATE INDEX [SimBackup$StockID]
+	ON [SimBackup] ([StockID]);
+GO
+
+CREATE INDEX [SimBackup$UID]
+	ON [SimBackup] ([UID]);
+GO
+
+CREATE INDEX [UnitArchive$GroupingID]
+	ON [UnitArchive] ([GroupingID]);
+GO
+
+CREATE INDEX [UnitArchive$QualityUID]
+	ON [UnitArchive] ([QualityUID]);
+GO
+
+CREATE INDEX [UnitArchive$UID]
+	ON [UnitArchive] ([UID]);
+GO
+
+CREATE INDEX [UnitArchive$UnitNum]
+	ON [UnitArchive] ([UnitNum]);
+GO
+
+CREATE INDEX [UnitTransaction$GroupingID]
+	ON [UnitTransaction] ([GroupingID]);
+GO
+
+CREATE INDEX [UnitTransaction$QualityUID]
+	ON [UnitTransaction] ([QualityUID]);
+GO
+
+CREATE INDEX [UnitTransaction$UID]
+	ON [UnitTransaction] ([UID]);
+GO
+
+CREATE INDEX [UnitTransaction$UnitNum]
+	ON [UnitTransaction] ([UnitNum]);
+GO
+

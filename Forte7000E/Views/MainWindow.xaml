@@ -1,0 +1,2498 @@
+﻿<Window x:Class="Forte7000C.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
+        xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        mc:Ignorable="d" 
+        Title="Forté E7000 - 2.1" Height="800" Width="1400" 
+        WindowState="{Binding CurWindowState,Mode=TwoWay}" 
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen" 
+        SizeChanged="MainWin_SideChanged" Closing="Window_Closing" 
+        PreviewKeyDown="BtnInit_PreviewKeyDown" Icon="/images/Desk Top Icon.ICO" >
+    <Window.Resources>
+        <Style TargetType="{x:Type Border}">
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="DarkGray"/>
+        </Style>
+    </Window.Resources>
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="Black" Offset="0"/>
+            <GradientStop Color="White" Offset="0.47"/>
+        </LinearGradientBrush>
+    </Window.Background>
+
+    <Window.InputBindings>
+        <KeyBinding 
+            Command="{Binding InitializeCommand}" 
+            Key="F2"/>
+        <KeyBinding 
+            Command="{Binding ReadCommand}" 
+            Key="F3"/>
+    </Window.InputBindings>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedPageICommand}" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction Command="{Binding ClosedPageICommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Border>
+        <Grid Margin="4" >
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="350"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0"/>
+            </Grid.ColumnDefinitions>
+
+            <!--- Top most Row  -->
+            <Grid Grid.ColumnSpan="1" Grid.Column="1"  MouseLeftButtonDown="Grid_mouseDown">
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Transparent"/>
+                        <GradientStop Color="#FFDEDADA" Offset="1"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="0"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--- Menu Drop Down 
+            <StackPanel  Margin="10,0,0,0" Orientation="Horizontal" HorizontalAlignment="Left"  VerticalAlignment="Center">
+                <TextBlock Text="Menu" Width="auto"  FontWeight="Medium" Foreground="#FFF1E243"
+                           VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="18">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
+                </TextBlock>
+                <MaterialDesign:PopupBox HorizontalAlignment="Right" Foreground="White" VerticalAlignment="Center"
+                                         PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
+                    <StackPanel Width="120" Background="#FF167193">
+                        <Button Content="Login" Command="{Binding LogonCommand}" 
+                                FontSize="14" FontWeight="Medium" Foreground="AntiqueWhite" Cursor="Hand"/>
+                        <Separator Foreground="Black"/>
+                        <Button Content="Logout" Command="{Binding LogoutCommand}" 
+                                FontSize="14" FontWeight="Medium" Foreground="AntiqueWhite"  Cursor="Hand"/>
+                        <Separator Foreground="DarkGray"></Separator>
+                        <Button Content="ShowLog" Command="{Binding ViewLogCommand}" 
+                                FontSize="14" FontWeight="Medium" Foreground="AntiqueWhite" Cursor="Hand"/>
+                        <Separator Foreground="DarkGray"></Separator>
+                        <Button Content="ShowArchives" Command="{Binding ViewArchivesCommand}" 
+                                FontSize="14" FontWeight="Medium" Foreground="AntiqueWhite" Cursor="Hand"/>
+                    </StackPanel>
+                </MaterialDesign:PopupBox>
+            </StackPanel>
+            - End Menu Drop Down -->
+
+                <Label Grid.Column="0" Content="Forté E-7000" 
+                   FontWeight="Medium" HorizontalAlignment="Left" 
+                   FontSize="20" VerticalAlignment="Center" Margin="10,0,0,0"
+                   Background="Transparent" Foreground="White" FontFamily="Yu Gothic UI">
+                    <Label.Effect>
+                        <DropShadowEffect/>
+                    </Label.Effect>
+                </Label>
+
+                <!--- Menu Options on Row 0 -->
+                <StackPanel Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right" Background="{x:Null}">
+
+                    <Label Content="LogFile" Margin="10,0,-10,0"  Foreground="White" VerticalAlignment="Center" FontSize="16">
+                        <Label.Effect>
+                            <DropShadowEffect/>
+                        </Label.Effect>
+                    </Label>
+                    <Button  Width="38" Height="38" VerticalAlignment="Top" Cursor="Hand" 
+                         Command="{Binding ViewLogCommand}" BorderBrush="{x:Null}"
+                         Background="{x:Null}" Foreground="#FFF1E243" Margin="0,0,0,0" ToolTip="Show Log file">
+                        <MaterialDesign:PackIcon Kind="MessageAlert" Width="26" Height="26" Foreground="#FFF1E243">
+                            <MaterialDesign:PackIcon.Effect>
+                                <DropShadowEffect/>
+                            </MaterialDesign:PackIcon.Effect>
+                        </MaterialDesign:PackIcon>
+                    </Button>
+                    <Label Content="Archives" Margin="10,0,-10,0"  Foreground="White" VerticalAlignment="Center" FontSize="16">
+                        <Label.Effect>
+                            <DropShadowEffect/>
+                        </Label.Effect>
+                    </Label>
+                    <Button  Width="38" Height="38" VerticalAlignment="Top" Cursor="Hand"  
+                         Command="{Binding ViewArchivesCommand}" BorderBrush="{x:Null}"
+                         Background="{x:Null}" Foreground="#FFF1E243" Margin="0,0,0,0" ToolTip="Show Archives">
+                        <MaterialDesign:PackIcon Kind="History" Width="26" Height="26">
+                            <MaterialDesign:PackIcon.Effect>
+                                <DropShadowEffect/>
+                            </MaterialDesign:PackIcon.Effect>
+                        </MaterialDesign:PackIcon>
+                    </Button>
+
+                    <Label Content="Data Table" Margin="10,0,-10,0"  Foreground="White" VerticalAlignment="Center" FontSize="16">
+                        <Label.Effect>
+                            <DropShadowEffect/>
+                        </Label.Effect>
+                    </Label>
+
+                    <Button  Width="38" Height="38" VerticalAlignment="Top" Cursor="Hand" 
+                         BorderBrush="{x:Null}"  Command="{Binding ModSummaryTableCommand}"
+                         Background="{x:Null}" Foreground="#FFF1E243" Margin="0,0,0,0" ToolTip="Modify Summary Table">
+                        <MaterialDesign:PackIcon Kind="Table" Width="26" Height="26" Foreground="#FFF1E243" >
+                            <MaterialDesign:PackIcon.Effect>
+                                <DropShadowEffect/>
+                            </MaterialDesign:PackIcon.Effect>
+                        </MaterialDesign:PackIcon>
+                    </Button>
+
+                    <Label Content="Product" Margin="10,0,-10,0"  Foreground="White" VerticalAlignment="Center" FontSize="16">
+                        <Label.Effect>
+                            <DropShadowEffect/>
+                        </Label.Effect>
+                    </Label>
+
+                    <Button  Width="38" Height="38" VerticalAlignment="Top" Cursor="Hand" 
+                         BorderBrush="{x:Null}"  Command="{Binding ModifyProdCommand}"
+                         Background="{x:Null}" Foreground="#FFF1E243" Margin="0,0,0,0" ToolTip="Modify Material Spec.">
+                        <MaterialDesign:PackIcon Kind="Grade" Width="26" Height="26" Foreground="#FFF1E243" >
+                            <MaterialDesign:PackIcon.Effect>
+                                <DropShadowEffect/>
+                            </MaterialDesign:PackIcon.Effect>
+                        </MaterialDesign:PackIcon>
+                    </Button>
+
+                    <Label Content="Login" Margin="10,0,-10,0"  Foreground="White" VerticalAlignment="Center" FontSize="16">
+                        <Label.Effect>
+                            <DropShadowEffect/>
+                        </Label.Effect>
+                    </Label>
+
+                    <Button  Width="38" Height="38" VerticalAlignment="Top" Cursor="Hand"  
+                         Command="{Binding LogonCommand}" BorderBrush="{x:Null}"
+                         Background="{x:Null}" Foreground="#FFF1E243" Margin="0,0,0,0" ToolTip="Log in">
+                        <MaterialDesign:PackIcon Kind="Login" Width="26" Height="26" >
+                            <MaterialDesign:PackIcon.Effect>
+                                <DropShadowEffect/>
+                            </MaterialDesign:PackIcon.Effect>
+                        </MaterialDesign:PackIcon>
+                    </Button>
+
+                    <Label Content="Logout" Margin="10,0,-10,0"  Foreground="White" VerticalAlignment="Center" FontSize="16">
+                        <Label.Effect>
+                            <DropShadowEffect/>
+                        </Label.Effect>
+                    </Label>
+                    <Button  Width="38" Height="38" VerticalAlignment="Top" Cursor="Hand" 
+                         Command="{Binding LogoutCommand}" BorderBrush="{x:Null}"
+                         Background="{x:Null}" Foreground="#FFF1E243" Margin="0,0,0,0" ToolTip="Log out">
+                        <MaterialDesign:PackIcon Kind="Logout" Width="26" Height="26" >
+                            <MaterialDesign:PackIcon.Effect>
+                                <DropShadowEffect/>
+                            </MaterialDesign:PackIcon.Effect>
+                        </MaterialDesign:PackIcon>
+                    </Button>
+
+                    <Label Content="About" Margin="10,0,-10,0" Foreground="White" VerticalAlignment="Center" FontSize="16">
+                        <Label.Effect>
+                            <DropShadowEffect/>
+                        </Label.Effect>
+                    </Label>
+                    <Button  Width="38" Height="38" VerticalAlignment="Top" Cursor="Hand" 
+                         BorderBrush="{x:Null}" Command="{Binding ShowAboutCommand}"
+                         Background="{x:Null}" Foreground="#FFF1E243" Margin="0,0,0,0" ToolTip="About - Forté E7000">
+                        <MaterialDesign:PackIcon Kind="AboutOutline" Width="26" Height="26">
+                            <MaterialDesign:PackIcon.Effect>
+                                <DropShadowEffect/>
+                            </MaterialDesign:PackIcon.Effect>
+                        </MaterialDesign:PackIcon>
+                    </Button>
+
+                    <Label Content="ShutDown" Margin="10,0,-10,0" Foreground="White" VerticalAlignment="Center" FontSize="16">
+                        <Label.Effect>
+                            <DropShadowEffect/>
+                        </Label.Effect>
+                    </Label>
+                    <Button  Width="38" Height="38" VerticalAlignment="Top" Cursor="Hand" 
+                         Command="{Binding AppExitCommand}" BorderBrush="{x:Null}" 
+                         Background="{x:Null}" Foreground="#FFF1E243" Margin="0,0,0,0" ToolTip="Exit Program">
+                        <MaterialDesign:PackIcon Kind="Power" Width="26" Height="26">
+                            <MaterialDesign:PackIcon.Effect>
+                                <DropShadowEffect/>
+                            </MaterialDesign:PackIcon.Effect>
+                        </MaterialDesign:PackIcon>
+                    </Button>
+                </StackPanel>
+                <!--- End Menu Options on Row 0 -->
+            </Grid>
+            <!--- End Top most Row  -->
+
+            <!---  Row 1 -->
+            <TabControl x:Name="MainTab" Grid.Column="1" Grid.Row="1" TabStripPlacement="Left"
+                    ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                    Grid.ColumnSpan="2" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+                <TabControl.Resources>
+                    <Style TargetType="{x:Type TabPanel}">
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                    </Style>
+                    <Style TargetType="{x:Type TabItem}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type TabItem}">
+                                    <Grid x:Name="Panel">
+                                        <Border 
+                                        x:Name="Border"
+                                        Background="LightSkyBlue"
+                                        BorderBrush="Gray" 
+                                        BorderThickness="1,1,3,5" 
+                                        CornerRadius="1,1,6,6" >
+                                            <ContentPresenter x:Name="ContentSite"                  
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Stretch"
+                                            Width="100"
+                                            Height="70"
+                                            ContentSource="Header"
+                                            Cursor="Hand"
+                                            ToolTip="Click on tab to select Options"
+                                            Margin="0,0,0,0"/>
+                                        </Border>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter TargetName="Panel" Property="Background" Value="Transparent" />
+                                            <Setter Property="Foreground" Value="Black" />
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="False">
+                                            <Setter TargetName="Panel" Property="Background" Value="Transparent" />
+                                            <Setter Property="Foreground" Value="Gray" />
+                                            <Setter TargetName="Border" Property="Background" Value="White" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TabControl.Resources>
+
+                <TabItem x:Name="tabHome" IsSelected="True"  Height="68" Width="{Binding MainTabWidth}" VerticalAlignment="Top" >
+                    <TabItem.Header >
+                        <StackPanel Orientation="Horizontal">
+                            <MaterialDesign:PackIcon Kind="Home"
+                                                 VerticalAlignment="Center" Width="28" Height="28"/>
+                            <TextBlock Text="Home"  Margin="2,0,0,0"   VerticalAlignment="Center" 
+                                   FontWeight="Bold" FontSize="16" FontFamily="Arial"/>
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Grid Background="#FF6A7C8F">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="220"/>
+                            <RowDefinition Height="80"/>
+                            <RowDefinition Height="20"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Rectangle Name="animateRec" Grid.Column="2" Grid.Row="4" Margin="5" Fill="#FFC50303" >
+                            <Rectangle.Stroke>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="Black" Offset="0"/>
+                                    <GradientStop Color="#FFF74B4B" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Stroke>
+                            <Rectangle.Triggers>
+                                <EventTrigger RoutedEvent="Rectangle.Loaded">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="animateRec"
+                                                        Storyboard.TargetProperty="Opacity"
+                                                        From="1.0" To="0.0" Duration="0:0:5"
+                                                        AutoReverse="True" RepeatBehavior="Forever"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Rectangle.Triggers>
+                        </Rectangle>
+
+                        <Label  Grid.Column="1" Grid.Row="2" Margin="0,10,0,0" Panel.ZIndex="10"
+                            HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" Content="{Binding BigWeightLb}" Foreground="White">
+                            <Label.Effect>
+                                <DropShadowEffect/>
+                            </Label.Effect>
+                        </Label>
+                        <TextBox x:Name="Weight" Grid.Column="1" Grid.Row="2" Background="Black"
+                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                             Margin="5" Text="{Binding WeightDat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                             Foreground="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="120"/>
+
+                        <Label  Grid.Column="3" Grid.Row="2" Panel.ZIndex="10" Margin="0,10,0,0" 
+                            HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" Content="{Binding BigMoistLb}" Foreground="White">
+                            <Label.Effect>
+                                <DropShadowEffect/>
+                            </Label.Effect>
+                        </Label>
+
+                        <TextBox x:Name="Moisture" Grid.Column="3" Grid.Row="2" Background="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                             Margin="5" Text="{Binding MoistureDat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             Foreground="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="120"/>
+
+                        <Grid Grid.Column="1" Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="10"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button x:Name="btnRead" Grid.Column="2"  Width="120" Height="70" Cursor="Hand" Margin="0"
+                                ToolTip="Read Testcell Up count or Read Testcell Up count+ scale "
+                                Command="{Binding ReadCommand}" Opacity="{Binding ReadOpac}"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource RoundButtonTemplate}" Content="Read F3" FontSize="20">
+                                <Button.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="Black" Offset="0"/>
+                                        <GradientStop Color="White" Offset="1"/>
+                                        <GradientStop Color="#FF167193" Offset="0.03"/>
+                                        <GradientStop Color="#FFD7E7EC" Offset="0.837"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+
+                            <Button x:Name="_btnInit" Grid.Column="1"  Width="120" Height="70" Cursor="Hand" Margin="0" ToolTip="ReadEmpty or Scale+Empty"
+                                Command="{Binding Path=InitializeCommand}" Opacity="{Binding StartOpac}" 
+                                Style="{StaticResource RoundButtonTemplate}" Content="Initialize F2" FontSize="20" VerticalAlignment="Center">
+                                <Button.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="Black" Offset="0"/>
+                                        <GradientStop Color="White" Offset="1"/>
+                                        <GradientStop Color="#FF167193" Offset="0.03"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+
+                        </Grid>
+
+                        <Grid Grid.Row="2" Grid.Column="2" Grid.RowSpan="2">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="125"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="0"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBox  Background="Aquamarine"
+                                  VerticalAlignment="Top"
+                                  Height="120"
+                                  FontSize="20"
+                                  Text="{Binding instruction,UpdateSourceTrigger=PropertyChanged}"
+                                  TextWrapping="Wrap"
+                                  HorizontalScrollBarVisibility="Disabled"
+                                  VerticalScrollBarVisibility="Disabled"
+                                  AcceptsReturn="True"/>
+
+                            <Border Grid.Row="2" BorderThickness="0" Margin="0">
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF778DC7" Offset="0"/>
+                                        <GradientStop Color="#FF606061" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <Grid Grid.Row="2" Margin="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="5"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="120"/>
+                                        <ColumnDefinition Width="0"/>
+                                        <ColumnDefinition Width="10"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0"/>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="0"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Label Grid.Column="1"  Grid.Row="1" Content="Product :" Background="Transparent" Foreground="White"
+                                       HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="18">
+                                        <Label.Effect>
+                                            <DropShadowEffect/>
+                                        </Label.Effect>
+                                    </Label>
+
+                                    <ComboBox Grid.Column="1" Grid.Row="3" IsEnabled="{Binding BIdle}" Height="30" Width="140" HorizontalAlignment="Left"
+                                      ItemsSource="{Binding ProductList, UpdateSourceTrigger=PropertyChanged}" SelectedIndex="{Binding ProdSelectedIndex}" 
+                                      FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+
+                                    <Label Grid.Column="2" Grid.Row="1" Content="Calibrations :"  Background="Transparent" Foreground="White"
+                                       HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="18">
+                                        <Label.Effect>
+                                            <DropShadowEffect/>
+                                        </Label.Effect>
+                                    </Label>
+
+                                    <TextBox Grid.Column="2" Grid.Row="3" Text="{Binding SelCalValue}" VerticalAlignment="Center" HorizontalAlignment="Left"
+                                             Background="AntiqueWhite" Width="120" IsReadOnly="True" FontSize="18"/>
+
+                                    <Label Grid.Column="3" Grid.Row="1" Content="Serial # :" VerticalAlignment="Bottom" 
+                                            Background="Transparent" Foreground="White" FontSize="18"  HorizontalAlignment="Left">
+                                        <Label.Effect>
+                                            <DropShadowEffect/>
+                                        </Label.Effect>
+                                    </Label>
+
+                                    <TextBox x:Name="Serial"  Grid.Row="3" Grid.Column="3"
+                                             Background="AntiqueWhite"  MouseDoubleClick="SampleBox_dclick"
+                                             FontSize="18" Foreground="Black" 
+                                             Text="{Binding NewSerialNum,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+
+                                    <Label Grid.Column="2" Grid.Row="4" Content="Next Lot # :" VerticalAlignment="Bottom" 
+                                            Background="Transparent" Foreground="White" FontSize="18"  HorizontalAlignment="Right">
+                                        <Label.Effect>
+                                            <DropShadowEffect/>
+                                        </Label.Effect>
+                                    </Label>
+
+                                    <TextBox  x:Name="NextLotNum" Grid.Row="4" Grid.Column="3" 
+                                            Text="{Binding NextLotNumber, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                            PreviewTextInput="NumericOnly" MouseDoubleClick="NextLotNum_dclick"
+                                            Background="AntiqueWhite" FontSize="18"  Foreground="Black" IsReadOnly="True"/>
+
+                                    <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" Grid.ColumnSpan="2"
+                                                Visibility="{Binding ShowScaleEnter,UpdateSourceTrigger=PropertyChanged}">
+                                        <MaterialDesign:PackIcon Kind="Scale" Width="30" Height="30" Margin="5,5,0,0"
+                                                                 VerticalAlignment="Center" Foreground="White">
+                                            <MaterialDesign:PackIcon.Effect>
+                                                <DropShadowEffect/>
+                                            </MaterialDesign:PackIcon.Effect>
+                                        </MaterialDesign:PackIcon>
+                                        <TextBox x:Name="WeightEntry" MouseDoubleClick="WeightEntry_dclick"
+                                                 IsReadOnly="True" Margin="10,0,0,0" 
+                                                 Width="110" Background="AntiqueWhite" FontSize="18"/>
+
+
+
+                                    </StackPanel>
+                                    
+                                    
+                                    <TextBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="4" FontSize="18" 
+                                                Text="{Binding Currentstates}" Background="AntiqueWhite" Foreground="Black"/>
+
+                                    <xctk:BusyIndicator Grid.Column="1" Grid.Row="5" IsBusy="{Binding BActive,UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" 
+                                                    BusyContent="Please Wait!" Background="Red" Panel.ZIndex="99"
+                                                    HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    </xctk:BusyIndicator>
+                                </Grid>
+                            </Border>
+
+
+                            <Grid Grid.Row="1" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="70"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="70"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="50"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Content="SCALE :" Foreground="Azure"  FontSize="14" FontWeight="Medium" HorizontalAlignment="Right">
+                                    <Label.Effect>
+                                        <DropShadowEffect/>
+                                    </Label.Effect>
+                                </Label>
+
+                                <TextBox Grid.Column="1" Text="{Binding DevSCaleMode}" Foreground="Azure" Width="100" HorizontalContentAlignment="Center"
+                                      FontSize="18" FontWeight="Medium" Background="Gray" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                                <Label Grid.Column="2" Content="OSC. :" Foreground="Azure" FontSize="14" FontWeight="Medium" HorizontalAlignment="Right">
+                                    <Label.Effect>
+                                        <DropShadowEffect/>
+                                    </Label.Effect>
+                                </Label>
+
+                                <TextBox Grid.Column="3" Text="{Binding DevOscMode}"  Foreground="Azure" Width="100" HorizontalContentAlignment="Center"
+                                     FontSize="18" FontWeight="Medium" HorizontalAlignment="Left" Background="Gray"  VerticalAlignment="Top"/>
+                            </Grid>
+                        </Grid>
+
+                        <Grid Grid.Column="3" Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="10"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Column="1"  Width="120" Height="70" Cursor="Hand" Margin="0" Opacity="{Binding ResetOpac}"
+                                VerticalAlignment="Center"  Command="{Binding ReSetCommand}" 
+                                Style="{StaticResource RoundButtonTemplate}" Content="Reset" FontSize="20" Grid.RowSpan="2">
+                                <Button.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="Black" Offset="0"/>
+                                        <GradientStop Color="White" Offset="1"/>
+                                        <GradientStop Color="#FF938216" Offset="0.03"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+
+                            <Button Grid.Column="2"  Width="120" Height="70" Cursor="Hand" Command="{Binding AppExitCommand}"
+                                Margin="40,5,39,5" VerticalAlignment="Center"
+                                Style="{StaticResource RoundButtonTemplate}"  FontSize="20" Grid.RowSpan="2">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="EXIT" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                    <MaterialDesign:PackIcon Kind="ExitToApp"  Margin="10,0,0,0"
+                                                         VerticalAlignment="Center" Width="28" Height="28"/>
+                                </StackPanel>
+                                <Button.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="Black" Offset="0"/>
+                                        <GradientStop Color="White" Offset="1"/>
+                                        <GradientStop Color="#FF933216" Offset="0.03"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+
+                <TabItem  Width="{Binding MainTabWidth}"  Height="68"  IsEnabled="{Binding BLogin}">
+                    <TabItem.Header >
+                        <StackPanel Orientation="Horizontal">
+                            <MaterialDesign:PackIcon Kind="Settings" 
+                                                 VerticalAlignment="Center"  Width="28" Height="28"/>
+                            <TextBlock Text="Settings"  Margin="2,0,0,0"  VerticalAlignment="Center" 
+                                   FontSize="16" FontWeight="Bold" FontFamily="Arial"/>
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Grid Background="#FFCBD3D2">
+                        <TabControl TabStripPlacement="Top" Grid.RowSpan="2" >
+                            <TabControl.Resources>
+                                <Style TargetType="{x:Type TabPanel}">
+                                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                                </Style>
+                                <Style TargetType="{x:Type TabItem}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type TabItem}">
+                                                <Grid x:Name="Panel">
+                                                    <Border 
+                                                            x:Name="Border"
+                                                            Background="LightSkyBlue"
+                                                            BorderBrush="Gray" 
+                                                            BorderThickness="1,1,3,0" 
+                                                            CornerRadius="6,6,0,0" >
+                                                                            <ContentPresenter x:Name="ContentSite"
+                                                            VerticalAlignment="Center"
+                                                            HorizontalAlignment="Center"
+                                                            ContentSource="Header"
+                                                            Cursor="Hand"
+                                                            ToolTip="Click on tab to select Archives type"
+                                                            Margin="12,2,12,10"/>
+                                                    </Border>
+                                                </Grid>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsSelected" Value="True">
+                                                        <Setter TargetName="Panel" Property="Background" Value="Transparent" />
+                                                        <Setter Property="Foreground" Value="Black" />
+                                                    </Trigger>
+                                                    <Trigger Property="IsSelected" Value="False">
+                                                        <Setter TargetName="Panel" Property="Background" Value="Transparent" />
+                                                        <Setter Property="Foreground" Value="Gray" />
+                                                        <Setter TargetName="Border" Property="Background" Value="White" />
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </TabControl.Resources>
+
+                            <TabItem Header="System's" FontSize="16">
+                                <Grid >
+                                    <Grid.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="Black" Offset="0"/>
+                                            <GradientStop Color="CadetBlue" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Grid.Background>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="0"/>
+                                        <RowDefinition Height="20"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="5*"/>
+                                        <ColumnDefinition Width="250"/>
+                                        <ColumnDefinition Width="250"/>
+                                        <ColumnDefinition Width="400"/>
+                                        <ColumnDefinition Width="320"/>
+                                        <ColumnDefinition Width="0"/>
+                                        <ColumnDefinition Width="5*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <GroupBox Grid.Row="1" Grid.Column="1" FontSize="16" BorderThickness="0" 
+                                          Margin="5" Header="Moisture Type"  Foreground="Yellow">
+                                        <GroupBox.Effect>
+                                            <DropShadowEffect Color="Black" BlurRadius="10" Direction="721" ShadowDepth="2" RenderingBias="Quality" />
+                                        </GroupBox.Effect>
+                                        <Grid Margin="5">
+                                            <Grid.Background>
+                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                    <GradientStop Color="Black" Offset="0"/>
+                                                    <GradientStop Color="#FF535050" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Grid.Background>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="20"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="20"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="10"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="10"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="10"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="20"/>
+                                            </Grid.RowDefinitions>
+
+                                            <RadioButton x:Name="rbMC" Grid.Column="1" Grid.Row="1" GroupName="MType" 
+                                                         IsChecked="{Binding Path=MCChecked}" Style="{StaticResource RadioButtonRed}"
+                                                         Content="Moisture Content %" Foreground="White"/>
+                                            <RadioButton x:Name="rbMR" Grid.Column="1" Grid.Row="3" GroupName="MType"
+                                                         Style="{StaticResource RadioButtonRed}" IsChecked="{Binding Path=MRChecked}"
+                                                         Content="Moisture Regain %" Foreground="White"/>
+
+                                            <RadioButton x:Name="rbAD" Grid.Column="1" Grid.Row="5" GroupName="MType" 
+                                                         Style="{StaticResource RadioButtonRed}" Foreground="White"
+                                                         IsChecked="{Binding Path=ADChecked}" Content="AirDry %" />
+
+                                            <RadioButton x:Name="rbBD" Grid.Column="1" Grid.Row="7" GroupName="MType" 
+                                                         Style="{StaticResource RadioButtonRed}" Foreground="White"
+                                                         IsChecked="{Binding Path=BDChecked}" Content="BoneDry %" />
+                                        </Grid>
+                                    </GroupBox>
+
+                                    <GroupBox Grid.Row="1" Grid.Column="2" Margin="5" FontSize="16"
+                                          Header="Weight Unit" BorderThickness="0" Foreground="Yellow">
+                                        <GroupBox.Effect>
+                                            <DropShadowEffect Color="Black" BlurRadius="10" Direction="721" ShadowDepth="2" RenderingBias="Quality" />
+                                        </GroupBox.Effect>
+                                        <Grid Margin="5">
+                                            <Grid.Background>
+                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                    <GradientStop Color="Black" Offset="0"/>
+                                                    <GradientStop Color="#FF535050" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Grid.Background>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="20"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="5"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="5"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="5"/>
+                                            </Grid.RowDefinitions>
+
+                                            <RadioButton x:Name="rbKg" Grid.Column="1" Grid.Row="2" GroupName="SysUnit" Foreground="White" 
+                                                     IsChecked="{Binding Path=KGChecked,UpdateSourceTrigger=PropertyChanged}" 
+                                                     Content="Metric (kgs.)" Style="{StaticResource RadioButtonRed}"/>
+                                            <RadioButton x:Name="rbLb" Grid.Column="1" Grid.Row="3" GroupName="SysUnit" Foreground="White"
+                                                    IsChecked="{Binding Path=LBChecked, UpdateSourceTrigger=PropertyChanged}"
+                                                    Content="English (Lbs.)" Style="{StaticResource RadioButtonRed}"/>
+                                        </Grid>
+                                    </GroupBox>
+
+                                    <GroupBox Grid.Row="1" Grid.Column="3" Margin="5" Header="Measurement Mode" FontSize="16" Foreground="Yellow" BorderThickness="0">
+                                        <GroupBox.Effect>
+                                            <DropShadowEffect Color="Black" BlurRadius="10" Direction="721" ShadowDepth="2" RenderingBias="Quality" />
+                                        </GroupBox.Effect>
+                                        <Grid Margin="5">
+                                            <Grid.Background>
+                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                    <GradientStop Color="Black" Offset="0"/>
+                                                    <GradientStop Color="#FF535050" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Grid.Background>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="10"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="90"/>
+                                                <ColumnDefinition Width="90"/>
+                                                <ColumnDefinition Width="5"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="2"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="10"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="10"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="5"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Rectangle Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="3" Fill="#FF444444" RadiusX="11" RadiusY="11"/>
+                                            <Rectangle Grid.Row="4"  Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="3" Fill="#FF444444" RadiusX="11" RadiusY="11"/>
+                                            <Rectangle Grid.Row="7"  Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="3" Fill="#FF444444" RadiusX="11" RadiusY="11"/>
+
+
+                                            <Label Grid.Column="1" Grid.Row="1" Content="Weight Input" 
+                                               VerticalContentAlignment="Center" Foreground="White" Grid.RowSpan="2"/>
+                                            <RadioButton Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Foreground="White"
+                                                     Margin="120,0,0,0" Grid.ColumnSpan="2" Content="Auto" GroupName="WtInput"
+                                                     IsChecked="{Binding ScaleAutoChecked}" Style="{StaticResource RadioButtonRed}"/>
+                                            <RadioButton Grid.Row="1" Grid.Column="2" Margin="30,0,0,0"  Grid.ColumnSpan="2"
+                                                     Grid.RowSpan="2" Content="KeyBoard Entry" GroupName="WtInput" Foreground="White"
+                                                     IsChecked="{Binding ScaleManualChecked}" 
+                                                     Style="{StaticResource RadioButtonRed}" />
+
+                                            <Label Grid.Column="1" Grid.Row="4" Content="Measurement/Sample" 
+                                               VerticalContentAlignment="Center" Foreground="White" Grid.RowSpan="2"/>
+                                            <RadioButton Grid.Row="4" Grid.RowSpan="2" Grid.Column="2" Content="Single" GroupName="MSample"
+                                                     IsChecked="True" Style="{StaticResource RadioButtonRed}" Foreground="White"/>
+                                            <RadioButton Grid.Row="4" Grid.RowSpan="2" Grid.Column="3" Content="Double" GroupName="MSample"
+                                                     IsEnabled="False" Style="{StaticResource RadioButtonRed}" Foreground="White"/>
+
+                                            <Label Grid.Column="1" Grid.Row="7" Content="Repeat Measurement" 
+                                               VerticalContentAlignment="Center" Foreground="White" Grid.RowSpan="2"/>
+                                            <RadioButton Grid.Row="7" Grid.RowSpan="2" Grid.Column="2" Content="Enable" GroupName="Repeat"
+                                                     IsEnabled="False" Style="{StaticResource RadioButtonRed}" Foreground="White"/>
+                                            <RadioButton Grid.Row="7" Grid.Column="3" Grid.RowSpan="2" Content="Disable" GroupName="Repeat"
+                                                    IsChecked="True" Style="{StaticResource RadioButtonRed}" Foreground="White"/>
+
+                                        </Grid>
+                                    </GroupBox>
+
+                                    <GroupBox Grid.Row="1" Grid.Column="4" BorderThickness="0" Header="Misc." Foreground="Yellow">
+                                        <GroupBox.Effect>
+                                            <DropShadowEffect Color="Black" BlurRadius="10" Direction="721" ShadowDepth="2" RenderingBias="Quality" />
+                                        </GroupBox.Effect>
+                                        <Grid Margin="5">
+                                            <Grid.Background>
+                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                    <GradientStop Color="Black" Offset="0"/>
+                                                    <GradientStop Color="#FF535050" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Grid.Background>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="10"/>
+                                                <ColumnDefinition Width="90"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="10"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="15"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="10"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="10"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="0"/>
+                                                <RowDefinition Height="0"/>
+                                                <RowDefinition Height="15"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Rectangle Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+                                                        Fill="#FF444444" RadiusX="11" RadiusY="11"/>
+                                            
+                                            <CheckBox Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center" Grid.ColumnSpan="2"
+                                                  IsChecked="{Binding HotKeyChecked}" Style="{StaticResource CheckBoxStyle}"
+                                                  VerticalAlignment="Center" Content="  Hot Key Space Bar turn on" 
+                                                      Foreground="White" Margin="20,0,0,0" Panel.ZIndex="99"/>
+
+                                            <Label Grid.Column="2"  Grid.Row="3" Content="Bale Summary Depth " Panel.ZIndex="99"
+                                               HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White"/>
+
+                                            <Rectangle Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
+                                                        Fill="#FF444444" RadiusX="11" RadiusY="11"/>
+                                            
+                                            <TextBox x:Name="BaleSumDepth"  Background="AntiqueWhite" FontSize="18" Foreground="Black" IsReadOnly="True"
+                                                    MouseDoubleClick="BaleSumDepth_dclick"  PreviewTextInput="NumericOnly"
+                                                    Grid.Column="1" Grid.Row="3" Text="{Binding BaleSumDepth}" Width="60" HorizontalAlignment="Center"/>
+
+                                            <Rectangle Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"
+                                                        Fill="#FF444444" RadiusX="11" RadiusY="11"/>
+
+                                            <StackPanel Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal">
+                                                <RadioButton Grid.Row="7" Grid.Column="1" Style="{StaticResource RadioButtonRed}" Foreground="White"
+                                                         Content="Full Screen" GroupName="ScrSize" IsChecked="{Binding RbFullScr}"/>
+                                                <RadioButton Style="{StaticResource RadioButtonRed}" Margin="50,0,0,0" Foreground="White"
+                                                         Content="Normal Screen" GroupName="ScrSize" IsChecked="{Binding RbNormScr}" />    
+                                                
+                                            </StackPanel>
+                                            
+                                            
+
+
+                                        </Grid>
+                                    </GroupBox>
+                                </Grid>
+                            </TabItem>
+
+                            <TabItem Header="Product Groupings" FontSize="16" >
+                                <Grid>
+                                    <Grid.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="Black" Offset="0"/>
+                                            <GradientStop Color="CadetBlue" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Grid.Background>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="15"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="15"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="5*"/>
+                                        <ColumnDefinition Width="550"/>
+                                        <ColumnDefinition Width="730"/>
+                                        <ColumnDefinition Width="5*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid Grid.Row="1" Grid.Column="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="5"/>
+                                            <ColumnDefinition Width="275"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="5"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="40"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Grid.Row="0" Grid.Column="1" Margin="10,0,0,0"
+                                           Content="Serial Numbering" FontSize="16" VerticalAlignment="Center" Foreground="yellow"/>
+
+                                        <Border  Grid.Column="1" Grid.Row="1" Background="{DynamicResource ChartTitleForeground}"
+                                             Margin="5" CornerRadius="10" BorderThickness="1" BorderBrush="DimGray">
+                                            <Border.Effect>
+                                                <DropShadowEffect Color="Gray" BlurRadius="10" Direction="721" ShadowDepth="2" RenderingBias="Quality" />
+                                            </Border.Effect>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="0"/>
+                                                    <ColumnDefinition Width="50"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="0"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="0"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="1"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="1"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="10"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="2"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="2"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="5"/>
+                                                </Grid.RowDefinitions>
+                                                <Rectangle Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Fill="Transparent"/>
+                                                <Rectangle Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" Height="5" VerticalAlignment="Bottom" Fill="Black"/>
+
+                                                <Label Grid.Column="1" Grid.Row="1" Content="Serial Number as" Grid.ColumnSpan="2"
+                                                           Foreground="White" FontWeight="Normal" Panel.ZIndex="99" />
+                                                <Label Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" Content="Assign Serial Numbering Sequences" 
+                                                           Foreground="White" FontWeight="Normal" Panel.ZIndex="99"/>
+
+                                                <RadioButton  Margin="0" Grid.Row="3" Grid.Column="2" Panel.ZIndex="99" 
+                                                                  VerticalContentAlignment="Center" GroupName="SnType"
+                                                                  Style="{StaticResource RadioButtonRed}" Foreground="White"
+                                                                  Content="Numeric" IsChecked="True"/>
+
+                                                <RadioButton Margin="0" Grid.Row="5" Grid.Column="2" Panel.ZIndex="99"
+                                                                 VerticalContentAlignment="Center" GroupName="SnType" Width="120"
+                                                                 Style="{StaticResource RadioButtonRed}" Foreground="White"
+                                                                 HorizontalAlignment="Left" Opacity="0.5" 
+                                                                 Content="Time Stamp" IsEnabled="False"/>
+
+                                                <RadioButton Margin="0" Grid.Row="9" Grid.Column="2" Foreground="White"
+                                                                Style="{StaticResource RadioButtonRed}"
+                                                                 VerticalContentAlignment="Center" Panel.ZIndex="99"
+                                                                 IsChecked="{Binding BSnAll}" GroupName="SNType"
+                                                                 Content="One Global"/>
+
+                                                <RadioButton Margin="0" Grid.Row="11" Grid.Column="2" Foreground="White"
+                                                                 Style="{StaticResource RadioButtonRed}"
+                                                                 VerticalContentAlignment="Center" Panel.ZIndex="99"
+                                                                 IsChecked="{Binding BSnPt}" GroupName="SNType"
+                                                                 Content="Product Type"/>
+                                            </Grid>
+                                        </Border >
+
+                                        <Border Grid.Column="2" Grid.Row="1" Background="{DynamicResource ChartTitleForeground}"
+                                            Margin="5" CornerRadius="10" BorderThickness="1" BorderBrush="DimGray">
+                                            <Border.Effect>
+                                                <DropShadowEffect Color="Gray" BlurRadius="10" Direction="721" ShadowDepth="2" RenderingBias="Quality" />
+                                            </Border.Effect>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="0"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="0"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="5"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="5"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="5"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="5"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="25"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="5"/>
+                                                </Grid.RowDefinitions>
+                                                <Rectangle Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="2" Height="5" VerticalAlignment="Center" Fill="Black"/>
+                                                <Label Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" 
+                                                       Content="Serial Number Reset on" Grid.ColumnSpan="3" Foreground="White"/>
+
+                                                <RadioButton Margin="20,0,0,0" Grid.Column="1" Grid.Row="3" Foreground="White"
+                                                                 IsChecked="{Binding SNRolloverCheck}"  Panel.ZIndex="99"
+                                                                 VerticalContentAlignment="Center" Style="{StaticResource RadioButtonRed}"
+                                                                 Content="Rollover" GroupName="SerialReset" />
+                                                <RadioButton Margin="20,0,0,0" Grid.Column="1" Grid.Row="5" Foreground="White"
+                                                                 IsChecked="{Binding SNDayEndCheck}"  Panel.ZIndex="99"
+                                                                 VerticalContentAlignment="Center" Content="Day End" 
+                                                                Style="{StaticResource RadioButtonRed}"  GroupName="SerialReset"/>
+                                                <RadioButton Margin="20,0,0,0" Grid.Column="1" Grid.Row="7" Foreground="White"
+                                                                 IsChecked="{Binding SNMonthEndCheck}"  Panel.ZIndex="99"
+                                                                 VerticalContentAlignment="Center"  Content="Month End" 
+                                                                Style="{StaticResource RadioButtonRed}" GroupName="SerialReset"/>
+
+                                                <TextBox x:Name="Serialmax" Grid.Column="2" Grid.Row="3"  MouseDoubleClick="Serialmax_dlcick"
+                                                             IsEnabled="{Binding SNRolloverCheck}"  Panel.ZIndex="99"
+                                                         Width="100" PreviewTextInput="NumericOnly" Text="{Binding Serialmax}" Background="AntiqueWhite"/>
+
+                                                <Button Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="3" 
+                                                            Height="25" Width="100" Content="Reset" Command="{Binding SerialResetCommand}"
+                                                        Style="{StaticResource RoundButtonTemplate}" Foreground="Blue" >
+                                                    <Button.Background>
+                                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                                            <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                                            <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                                            <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                                            <GradientStop Color="#FF6AC176" Offset="1"/>
+                                                        </LinearGradientBrush>
+                                                    </Button.Background>
+                                                </Button>
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
+
+                                    <Grid Grid.Column="2" Grid.Row="1">
+                                        <ContentControl Content="{Binding LotProcessView}" OpacityMask="Black" Margin="0"/>
+                                    </Grid>
+
+                                </Grid>
+                            </TabItem>
+
+                            <TabItem Header="Time Events-Printings" FontSize="16" >
+                                <Grid>
+                                    <Grid.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="Black" Offset="0"/>
+                                            <GradientStop Color="CadetBlue" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Grid.Background>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="50"/>
+                                        <RowDefinition Height="5"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="420"/>
+                                        <ColumnDefinition Width="850"/>
+                                        <ColumnDefinition Width="0"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <GroupBox Grid.Column="1" Header="Day Events" Foreground="Yellow" Grid.Row="1" BorderThickness="0" >
+                                        <GroupBox.Effect>
+                                            <DropShadowEffect Color="Black" BlurRadius="10" Direction="721" ShadowDepth="1" RenderingBias="Quality" />
+                                        </GroupBox.Effect>
+                                        <Border  BorderThickness="1" CornerRadius="10" BorderBrush="DimGray" Margin="0,10,0,0">
+                                            <Grid Background="{DynamicResource ChartTitleForeground}" >
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="20"/>
+                                                    <ColumnDefinition Width="190"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="20"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="5"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="5"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="5"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="0"/>
+                                                    <RowDefinition Height="10"/>
+                                                </Grid.RowDefinitions>
+
+                                                <MaterialDesign:PackIcon Kind="TimelineClock" Grid.Column="0" HorizontalAlignment="Left" Grid.RowSpan="2"
+                                                VerticalAlignment="Top" Width="30" Height="30" Grid.ColumnSpan="2"/>
+
+                                                <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"  FontSize="16"  FontWeight="Medium" Margin="20,0,0,0"
+                                                Content="Set Events Calendar" VerticalAlignment="Top" Foreground="AntiqueWhite"/>
+
+                                                <Rectangle Grid.Column="0" Grid.ColumnSpan="5" Height="5" VerticalAlignment="Bottom" Fill="Black"></Rectangle>
+
+
+                                                <Label Grid.Row="1" Grid.Column="1" Content="DayEnd " VerticalAlignment="Center" FontSize="16"
+                                                Foreground="White" FontWeight="Medium" HorizontalAlignment="Center" Panel.ZIndex="99"/>
+
+                                                <xctk:TimePicker x:Name="PickEndDay" Format="Custom" FormatString="HH:mm"  
+                                                             Value="{Binding DayEndTime}" AllowSpin="False"
+                                                            Grid.Row="1" Grid.Column="2" Width="80" Height="27" Background="AntiqueWhite" 
+                                                            IsReadOnly="True" IsEnabled="true" FontSize="14" 
+                                                            Panel.ZIndex="99" MouseDoubleClick="PickEndDay_DClick"
+                                                            BorderThickness="1" BorderBrush="LightGray" ShowButtonSpinner="False"
+                                                            HorizontalAlignment="Center"  HorizontalContentAlignment="Center"/>
+
+                                                <CheckBox Grid.Row="3" Grid.Column="1" Content="Shift 1 : From DayEnd to" FontSize="14"
+                                                IsChecked="{Binding ShiftOneCheck}" Style="{StaticResource CheckBoxStyle}"
+                                                ToolTip="Shift 1 is from Day End to Select time" 
+                                                VerticalContentAlignment="Center"  HorizontalAlignment="Left" Panel.ZIndex="99"
+                                                Foreground="White" FontWeight="Medium" VerticalAlignment="Center"/>
+
+                                                <xctk:TimePicker x:Name="PickShiftOne" Format="Custom" FormatString="HH:mm"  
+                                                            Value="{Binding ShiftOneTime}" Panel.ZIndex="99"
+                                                            Grid.Row="3" Grid.Column="2" Width="80" Height="27" Background="AntiqueWhite" 
+                                                            IsEnabled="{Binding ShiftOneCheck}" AllowSpin="False" FontSize="14" 
+                                                            MouseDoubleClick="PickShiftOne_DClick" IsReadOnly="True" 
+                                                            BorderThickness="1" BorderBrush="LightGray" ShowButtonSpinner="False"
+                                                            HorizontalAlignment="Center"  HorizontalContentAlignment="Center"/>
+
+                                                <CheckBox Grid.Row="5" Grid.Column="1" Content="Shift 2: From Shift 1 to" FontSize="14"
+                                                IsChecked="{Binding ShiftTwoCheck}" Style="{StaticResource CheckBoxStyle}"
+                                                ToolTip="Shift 1 is from Shift 1 to Select time"
+                                                VerticalContentAlignment="Center"  HorizontalAlignment="Left" Panel.ZIndex="99"
+                                                Foreground="White" FontWeight="Medium" VerticalAlignment="Center"/>
+
+                                                <xctk:TimePicker x:Name="PickShiftTwo" Format="Custom" FormatString="HH:mm" 
+                                                Value="{Binding ShiftTwoTime}" Panel.ZIndex="99"
+                                                Grid.Row="5" Grid.Column="2" Width="80" Height="27" Background="AntiqueWhite" 
+                                                IsEnabled="{Binding ShiftTwoCheck}" AllowSpin="False" FontSize="14" 
+                                                MouseDoubleClick="PickShiftTwo_DClick" IsReadOnly="True"
+                                                ToolTip="Shift 2 time should be later than Shift 1 time"
+                                                BorderThickness="1" BorderBrush="LightGray" ShowButtonSpinner="False"
+                                                HorizontalAlignment="Center"  HorizontalContentAlignment="Center"/>
+
+                                                <CheckBox Grid.Row="7" Grid.Column="1" Content="Shift 3: From Shift 2 to" FontSize="14"
+                                                IsChecked="{Binding ShiftThreeCheck}" Style="{StaticResource CheckBoxStyle}"
+                                                ToolTip="Shift 3 is from Shift 2 to Select time" 
+                                                VerticalContentAlignment="Center"  HorizontalAlignment="Left" Panel.ZIndex="99"
+                                                Foreground="White" FontWeight="Medium" VerticalAlignment="Center"/>
+
+                                                <xctk:TimePicker x:Name="PickShiftThree" Format="Custom" FormatString="HH:mm"  Value="{Binding ShiftThreeTime}" 
+                                                Grid.Row="7" Grid.Column="2" Width="80" Height="27" Background="AntiqueWhite" 
+                                                IsEnabled="{Binding ShiftThreeCheck}" AllowSpin="False"  FontSize="14" 
+                                                MouseDoubleClick="PickShiftThree_DClick" IsReadOnly="True" Panel.ZIndex="99"
+                                                BorderThickness="1" BorderBrush="LightGray" ShowButtonSpinner="False"
+                                                StartTime="00:00:00" EndTime="07:00:00"
+                                                HorizontalAlignment="Center"  HorizontalContentAlignment="Center"/>
+
+                                                <Label Grid.Column="3" Grid.Row="1" Height="30" HorizontalAlignment="Center" FontSize="14"
+                                                Margin="0,0,0,0"  Content="Shift Name" Foreground="White" FontWeight="Medium"/>
+
+                                                <TextBox x:Name="ShiftOneName" MouseDoubleClick="ShiftOneName_DClick" IsReadOnly="true"
+                                                Text="{Binding ShiftOneName}" IsEnabled="{Binding ShiftOneCheck}"  Panel.ZIndex="99"
+                                                Grid.Column="3" Grid.Row="3" Width="75" Background="AntiqueWhite"/>
+                                                <TextBox x:Name="ShiftTwoName"  MouseDoubleClick="ShiftTwoName_DClick" IsReadOnly="true"
+                                                Text="{Binding ShiftTwoName}" IsEnabled="{Binding ShiftTwoCheck}"  Panel.ZIndex="99"
+                                                Grid.Column="3" Grid.Row="5" Width="75" Background="AntiqueWhite"/>
+                                                <TextBox x:Name="ShiftThreeName"  MouseDoubleClick="ShiftThreeName_DClick" IsReadOnly="true" Panel.ZIndex="99"
+                                                Text="{Binding ShiftThreeName}" IsEnabled="{Binding ShiftThreeCheck}"
+                                                Grid.Column="3" Grid.Row="7" Width="75" Background="AntiqueWhite"/>
+
+                                                <Rectangle Grid.Column="1" Grid.Row="3"  Grid.RowSpan="5" Grid.ColumnSpan="3" RadiusX="10" RadiusY="10"
+                                                Fill="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                            </Grid>
+                                        </Border>
+                                    </GroupBox>
+
+                                    <GroupBox Grid.Column="2" Grid.Row="1" Header="Enable Reports Event" 
+                                          Foreground="Yellow" BorderThickness="0" Grid.RowSpan="2" >
+                                        <GroupBox.Effect>
+                                            <DropShadowEffect Color="Black" BlurRadius="10" Direction="721" ShadowDepth="1" RenderingBias="Quality" />
+                                        </GroupBox.Effect>
+                                        <Border  BorderThickness="1" BorderBrush="DimGray"  Margin="0,10,0,0"  CornerRadius="10">
+                                            <Grid Background="{DynamicResource ChartTitleForeground}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="20"/>
+                                                    <ColumnDefinition Width="160"/>
+                                                    <ColumnDefinition Width="100"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="100"/>
+                                                    <ColumnDefinition Width="100"/>
+                                                    <ColumnDefinition Width="5"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="5"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="3"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="3"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="3"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="3"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="0"/>
+                                                </Grid.RowDefinitions>
+
+                                                <Rectangle Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="9" Fill="Gray"/>
+                                                <Rectangle Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="9" Fill="Gray"/>
+                                                <Rectangle Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="9" Fill="Gray"/>
+                                                <Rectangle Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="9" Fill="Gray"/>
+
+                                                <Rectangle Grid.Column="1" Width="2" Grid.RowSpan="9" Panel.ZIndex="100"
+                                                       HorizontalAlignment="Right" Grid.Row="1"  Fill="Gray"/>
+                                                <Rectangle Grid.Column="5" Width="2" Grid.RowSpan="8" Panel.ZIndex="100"
+                                                       HorizontalAlignment="Right" Grid.Row="1"  Fill="Gray"/>
+                                                <Rectangle Grid.Column="6" Width="2" Grid.RowSpan="9" Panel.ZIndex="100"
+                                                       HorizontalAlignment="Right" Grid.Row="1"  Fill="Gray"/>
+
+                                                <Rectangle Grid.Column="3" Grid.Row="5" Width="2"  Panel.ZIndex="100"
+                                                       HorizontalAlignment="Right"   Fill="Gray"/>
+
+                                                <Rectangle Grid.Column="4" Grid.Row="5" Width="2"  Panel.ZIndex="100"
+                                                       HorizontalAlignment="Right"   Fill="Gray"/>
+
+
+                                                <Rectangle Grid.Column="2" Width="2" Grid.RowSpan="9" Panel.ZIndex="100"
+                                                       HorizontalAlignment="Right" Grid.Row="1"  Fill="Gray"/>
+
+                                                <Rectangle Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="9" Margin="3" RadiusX="10" RadiusY="10"
+                                                       Fill="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+
+
+
+                                                <CheckBox Grid.Row="1" Grid.Column="1" Content="DayEnd Report" FontSize="16"
+                                                            IsChecked="{Binding DayEndRepCheck}"  Panel.ZIndex="99"
+                                                            Style="{StaticResource CheckBoxStyle}"
+                                                            Foreground="White" FontWeight="Medium" VerticalAlignment="Center"/>
+
+                                                <CheckBox Grid.Row="3" Grid.Column="1" Content="Month Report" FontSize="16"
+                                                            IsChecked="{Binding MonthEndRepCheck}" Panel.ZIndex="99"
+                                                            Style="{StaticResource CheckBoxStyle}"
+                                                            Foreground="White" FontWeight="Medium" VerticalAlignment="Center"/>
+
+                                                <CheckBox Grid.Row="5" Grid.Column="1" Content="Shifts Report" FontSize="16"
+                                                            IsChecked="{Binding ShiftRepCheck}" Panel.ZIndex="99"
+                                                            IsEnabled="{Binding ShiftOneCheck}" Style="{StaticResource CheckBoxStyle}"
+                                                            Foreground="White" FontWeight="Medium" VerticalAlignment="Center"/>
+
+                                                <CheckBox Grid.Row="9" Grid.Column="1" Content="Report" Panel.ZIndex="99" 
+                                                      Foreground="Yellow" FontWeight="Medium" Style="{StaticResource CheckBoxStyle}"
+                                                      IsChecked="{Binding BalePrintChecked}"/>
+                                                
+                                                <Button Grid.Column="2" Grid.Row="1" Width="80" Height="30" Content="Config." Panel.ZIndex="99"
+                                                    IsEnabled="{Binding DayEndRepCheck}" 
+                                                    Style="{StaticResource RoundButtonTemplate}">
+                                                    <Button.Background>
+                                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                                            <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                                            <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                                            <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                                            <GradientStop Color="#FF6AC176" Offset="1"/>
+                                                        </LinearGradientBrush>
+                                                    </Button.Background>
+                                                </Button>
+
+                                                <Button Grid.Column="2" Grid.Row="3" Width="80" Height="30" Content="Config." Panel.ZIndex="99"
+                                                    IsEnabled="{Binding MonthEndRepCheck}" 
+                                                    Style="{StaticResource RoundButtonTemplate}">
+                                                    <Button.Background>
+                                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                                            <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                                            <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                                            <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                                            <GradientStop Color="#FF6AC176" Offset="1"/>
+                                                        </LinearGradientBrush>
+                                                    </Button.Background>
+                                                </Button>
+
+                                                <Button Grid.Column="2" Grid.Row="5" Width="80" Height="30" Content="Config." Panel.ZIndex="99"
+                                                    IsEnabled="{Binding ShiftRepCheck}" 
+                                                    Style="{StaticResource RoundButtonTemplate}">
+                                                    <Button.Background>
+                                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                                            <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                                            <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                                            <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                                            <GradientStop Color="#FF6AC176" Offset="1"/>
+                                                        </LinearGradientBrush>
+                                                    </Button.Background>
+                                                </Button>
+
+                                                <Button Grid.Column="2" Grid.Row="9" Width="80" 
+                                                    Height="30" Content="Config." Panel.ZIndex="99"
+                                                    Command="{Binding PrintBaleConfigCommand}"
+                                                    Style="{StaticResource RoundButtonTemplate}">
+                                                    <Button.Background>
+                                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                                            <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                                            <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                                            <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                                            <GradientStop Color="#FF6AC176" Offset="1"/>
+                                                        </LinearGradientBrush>
+                                                    </Button.Background>
+                                                </Button>
+
+
+                                                <TextBox Grid.Row="9" Grid.Column="3" Margin="0,0,0,0" Width="400" 
+                                                     HorizontalAlignment="Left" IsReadOnly="True" 
+                                                     Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}"
+                                                     Text="{Binding BalePrintOutString}" Height="32" VerticalContentAlignment="Center"
+                                                     Grid.ColumnSpan="5"  Foreground="DarkBlue" Panel.ZIndex="99"/>
+
+
+                                                <Button Grid.Column="7" Grid.Row="9" Height="30"  Width="80" 
+                                                    Command="{Binding PrintBaleCommand}" Panel.ZIndex="99"
+                                                    Cursor="Hand" Style="{StaticResource RoundButtonTemplate}">
+                                                    <Button.Background>
+                                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                                            <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                                            <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                                            <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                                            <GradientStop Color="#FF6AC176" Offset="1"/>
+                                                        </LinearGradientBrush>
+                                                    </Button.Background>
+                                                    <StackPanel>
+                                                        <TextBlock Text="Print" Margin="0,3,0,0"/>
+                                                        <MaterialDesign:PackIcon Kind="Printer" Margin="42,-19,0,0" 
+                                                        VerticalAlignment="Center" Width="25" Height="25"/>
+                                                    </StackPanel>
+                                                </Button>
+
+                                                <RadioButton Grid.Row="5" Grid.Column="3" Content="Shift 1" GroupName="Report" 
+                                                            IsChecked="{Binding ReportArray[2], Mode=TwoWay}" IsEnabled="{Binding ShiftOneCheck}"
+                                                            Style="{StaticResource RadioButtonRed}" Foreground="White"/>
+
+                                                <RadioButton Grid.Row="5" Grid.Column="4" Content="Shift 2" GroupName="Report"
+                                                             IsChecked="{Binding ReportArray[3], Mode=TwoWay}" IsEnabled="{Binding ShiftTwoCheck}"
+                                                             Style="{StaticResource RadioButtonRed}" Foreground="White"/>
+
+                                                <RadioButton Grid.Row="5" Grid.Column="5" Content="Shift 3" GroupName="Report" 
+                                                            IsEnabled="{Binding ShiftThreeCheck}" IsChecked="{Binding ReportArray[4], Mode=TwoWay}" 
+                                                            Style="{StaticResource RadioButtonRed}" Foreground="White"/>
+
+                                                <Button Grid.Row="1" Grid.Column="6"  Content="Preview" 
+                                                            Style="{StaticResource RoundButtonTemplate}" Command="{Binding PreviewDayRepCommand}"
+                                                            Foreground="Blue" IsEnabled="{Binding DayEndRepCheck}"
+                                                            Width="80" Height="30">
+                                                    <Button.Background>
+                                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                                            <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                                            <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                                            <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                                            <GradientStop Color="#FF6AC176" Offset="1"/>
+                                                        </LinearGradientBrush>
+                                                    </Button.Background>
+                                                </Button>
+                                                <Button Grid.Row="3" Grid.Column="6"  Content="Preview" 
+                                                    Style="{StaticResource RoundButtonTemplate}" Command="{Binding PreviewMonthRepCommand}"
+                                                    Foreground="Blue" Width="80" Height="30">
+                                                    <Button.Background>
+                                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                                            <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                                            <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                                            <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                                            <GradientStop Color="#FF6AC176" Offset="1"/>
+                                                        </LinearGradientBrush>
+                                                    </Button.Background>
+                                                </Button>
+                                                <Button Grid.Row="5" Grid.Column="6"  Content="Preview" 
+                                                    Style="{StaticResource RoundButtonTemplate}" IsEnabled="{Binding ShiftRepCheck}" 
+                                                    Command="{Binding PreviewShiftRepCommand}" Foreground="Blue"
+                                                    Width="80" Height="30">
+                                                    <Button.Background>
+                                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                                            <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                                            <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                                            <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                                            <GradientStop Color="#FF6AC176" Offset="1"/>
+                                                        </LinearGradientBrush>
+                                                    </Button.Background>
+                                                </Button>
+
+                                                <Button Grid.Row="1" Grid.Column="7"  Style="{StaticResource RoundButtonTemplate}" 
+                                                Foreground="Blue" Width="80" Height="30" Command="{Binding PrintDayRepCommand}">
+                                                    <Button.Background>
+                                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                                            <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                                            <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                                            <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                                            <GradientStop Color="#FF6AC176" Offset="1"/>
+                                                        </LinearGradientBrush>
+                                                    </Button.Background>
+                                                    <StackPanel>
+                                                        <TextBlock Text="Print" Margin="0,3,0,0"/>
+                                                        <MaterialDesign:PackIcon Kind="Printer" Margin="42,-19,0,0" 
+                                                        VerticalAlignment="Center" Width="25" Height="25"/>
+                                                    </StackPanel>
+                                                </Button>
+                                                <Button Grid.Row="3" Grid.Column="7"  Style="{StaticResource RoundButtonTemplate}" 
+                                                Foreground="Blue" Width="80" Height="30" Command="{Binding PrintMonthRepCommand}">
+                                                    <Button.Background>
+                                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                                            <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                                            <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                                            <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                                            <GradientStop Color="#FF6AC176" Offset="1"/>
+                                                        </LinearGradientBrush>
+                                                    </Button.Background>
+                                                    <StackPanel>
+                                                        <TextBlock Text="Print" Margin="0,3,0,0"/>
+                                                        <MaterialDesign:PackIcon Kind="Printer" Margin="42,-19,0,0" 
+                                                        VerticalAlignment="Center" Width="25" Height="25"/>
+                                                    </StackPanel>
+                                                </Button>
+                                                <Button Grid.Row="5" Grid.Column="7"  Style="{StaticResource RoundButtonTemplate}" 
+                                                Command="{Binding PrintShiftRepCommand}" Foreground="Blue" Width="80" Height="30">
+                                                    <Button.Background>
+                                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                                            <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                                            <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                                            <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                                            <GradientStop Color="#FF6AC176" Offset="1"/>
+                                                        </LinearGradientBrush>
+                                                    </Button.Background>
+                                                    <StackPanel>
+                                                        <TextBlock Text="Print" Margin="0,3,0,0"/>
+                                                        <MaterialDesign:PackIcon Kind="Printer" Margin="42,-19,0,0" 
+                                                        VerticalAlignment="Center" Width="25" Height="25"/>
+                                                    </StackPanel>
+                                                </Button>
+
+                                            </Grid>
+                                        </Border>
+                                    </GroupBox>
+                                    <GroupBox Grid.Row="2" Grid.Column="1"  BorderThickness="0">
+                                        <GroupBox.Effect>
+                                            <DropShadowEffect Color="Black" BlurRadius="10" Direction="721" ShadowDepth="1" RenderingBias="Quality" />
+                                        </GroupBox.Effect>
+                                        <Grid>
+                                            <Grid.Background>
+                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                    <GradientStop Color="Black" Offset="0"/>
+                                                    <GradientStop Color="#FF535050" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Grid.Background>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="2"/>
+                                                <ColumnDefinition Width="110"/>
+                                                <ColumnDefinition Width="1"/>
+                                                <ColumnDefinition Width="1"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="0"/>
+                                            </Grid.ColumnDefinitions>
+
+
+                                            <Button  Grid.Column="1" Grid.Row="9"  Content="Printer" 
+                                                 HorizontalAlignment="Center" Command="{Binding PrinterDlgCommand}"
+                                                 ToolTip="Select File location" Height="28" Cursor="Hand"
+                                                 VerticalAlignment="Center" Width="100"
+                                                 Style="{StaticResource RoundButtonTemplate}">
+                                                <Button.Background>
+                                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                                        <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                                        <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                                        <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                                        <GradientStop Color="#FF6AC176" Offset="1"/>
+                                                    </LinearGradientBrush>
+                                                </Button.Background>
+                                            </Button>
+                                            <TextBox Grid.Column="2"  Text="{Binding SelectPrinter}" 
+                                                     HorizontalAlignment="Left" Panel.ZIndex="99" Width="250" 
+                                                     HorizontalContentAlignment="Center" Height="28"
+                                                     Background="White" IsReadOnly="True" Grid.ColumnSpan="3"/>
+                                        </Grid>
+                                    </GroupBox>
+                                </Grid>
+                            </TabItem>
+
+
+                            <TabItem Header="Lot Processing" FontSize="16" Visibility="Hidden">
+                                <Grid Margin="5" >
+                                    <ContentControl Content="{Binding LotConfigView}" OpacityMask="Black" Margin="0"/>
+                                </Grid>
+                            </TabItem>
+
+                            <TabItem Header="Summary Table" FontSize="16" Visibility="Hidden">
+                                <Grid>
+                                    <Grid.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="Black" Offset="0"/>
+                                            <GradientStop Color="CadetBlue" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Grid.Background>
+                                    <Border  BorderThickness="2" BorderBrush="Gray"
+                                         CornerRadius="20" Margin="10,15,10,10" Background="{DynamicResource ChartTitleForeground}">
+                                        <Border.Effect>
+                                            <DropShadowEffect Color="Gray" BlurRadius="15" Direction="721" ShadowDepth="2" RenderingBias="Quality" />
+                                        </Border.Effect>
+                                        <Grid Margin="12">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="10"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="10"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="50"/>
+                                                <ColumnDefinition Width="170"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="50"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Foreground="Yellow"
+                                       Content="Bale Summary Table Field Selections :" VerticalAlignment="Center" FontSize="20" ></Label>
+
+                                            <ListView x:Name="SelectedHdrList" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="5"  Height="50" FontSize="14" AllowDrop="False" 
+                                          SelectionMode="Single" IsEnabled="False"
+                                          ItemsSource="{Binding}" DataContext="{Binding SelectedHdrList , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          HorizontalAlignment="Stretch" VerticalAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,0,0" 
+                                          Background="Black">
+                                                <ListBox.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <VirtualizingStackPanel Orientation="Horizontal" />
+                                                    </ItemsPanelTemplate>
+                                                </ListBox.ItemsPanel>
+                                                <ListBox.ItemContainerStyle>
+                                                    <Style TargetType="{x:Type ListBoxItem}">
+                                                        <Setter Property="Padding" Value="5 0 5 0" />
+                                                        <Setter Property="Margin" Value="0 5 0 0" />
+                                                        <Setter Property="BorderThickness" Value="5,0,0,5" />
+                                                        <Setter Property="BorderBrush" Value="Gray" />
+                                                        <Setter Property="AllowDrop" Value="True" />
+                                                        <Setter Property="Background" >
+                                                            <Setter.Value>
+                                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                    <GradientStop Color="Black" Offset="0"/>
+                                                                    <GradientStop Color="White" Offset="1"/>
+                                                                    <GradientStop Color="#FEF7F5F5" Offset="0"/>
+                                                                </LinearGradientBrush>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                        <Setter Property="FontWeight" Value="Medium" />
+                                                        <Setter Property="VerticalAlignment" Value="Top" />
+                                                        <Setter Property="Height" Value="30" />
+                                                    </Style>
+                                                </ListBox.ItemContainerStyle>
+                                            </ListView>
+
+
+
+                                            <Button Grid.Row="4" Grid.Column="3" Height="35" Width="120" Content="Modify" FontSize="20"
+                                        Cursor="Hand" Command="{Binding ModSummaryTableCommand}">
+                                                <Button.Background>
+                                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                                        <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                                        <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                                        <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                                        <GradientStop Color="#FF35857E" Offset="1"/>
+                                                    </LinearGradientBrush>
+                                                </Button.Background>
+                                            </Button>
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+                            </TabItem>
+
+                        </TabControl>
+
+                    </Grid>
+                </TabItem>
+
+                <TabItem Width="{Binding MainTabWidth}"  Height="68"  IsEnabled="{Binding BLogin}" BorderThickness="1" >
+                    <TabItem.Header >
+                        <StackPanel Orientation="Horizontal">
+                            <MaterialDesign:PackIcon Kind="SerialPort" 
+                                                 VerticalAlignment="Center" Width="28" Height="28"/>
+                            <TextBlock Text="Serial"  Margin="2,0,0,0"  VerticalAlignment="Center" 
+                                   FontSize="16" FontWeight="Bold" FontFamily="Arial"/>
+                        </StackPanel>
+                    </TabItem.Header>
+
+                    <Grid Background="Gray">
+                        <TabControl TabStripPlacement="Top" FontSize="16" Background="Black" >
+                            <TabControl.Resources>
+                                <Style TargetType="{x:Type TabPanel}">
+                                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                                </Style>
+                                <Style TargetType="{x:Type TabItem}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type TabItem}">
+                                                <Grid x:Name="Panel">
+                                                    <Border 
+                                                    x:Name="Border"
+                                                    Background="LightSkyBlue"
+                                                    BorderBrush="Gray" 
+                                                    BorderThickness="1,1,3,0" 
+                                                    CornerRadius="6,6,0,0" >
+                                                        <ContentPresenter x:Name="ContentSite"
+                                                    VerticalAlignment="Center"
+                                                    HorizontalAlignment="Center"
+                                                    ContentSource="Header"
+                                                    Cursor="Hand"
+                                                    ToolTip="Click on tab to select Archives type"
+                                                    Margin="12,2,12,10"/>
+                                                    </Border>
+                                                </Grid>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsSelected" Value="True">
+                                                        <Setter TargetName="Panel" Property="Background" Value="Transparent" />
+                                                        <Setter Property="Foreground" Value="Black" />
+                                                    </Trigger>
+                                                    <Trigger Property="IsSelected" Value="False">
+                                                        <Setter TargetName="Panel" Property="Background" Value="Transparent" />
+                                                        <Setter Property="Foreground" Value="Gray" />
+                                                        <Setter TargetName="Border" Property="Background" Value="White" />
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </TabControl.Resources>
+
+                            <TabItem  IsEnabled="{Binding BLogin}" >
+                                <TabItem.Header >
+                                    <StackPanel Orientation="Horizontal">
+                                        <MaterialDesign:PackIcon Kind="SerialPort"  VerticalAlignment="Center"  Width="25" Height="25"/>
+                                        <TextBlock Text="Input" VerticalAlignment="Center" Margin="0,0,0,0" />
+                                    </StackPanel>
+                                </TabItem.Header>
+                                <Grid Background="{DynamicResource ChartTitleForeground}" Margin="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="630"/>
+                                        <ColumnDefinition Width="630"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid Grid.Column="1" >
+                                        <ContentControl  Content="{Binding ScaleView}" OpacityMask="Black" Margin="0"/>
+                                    </Grid>
+                                    <Grid Grid.Column="2" >
+                                        <ContentControl  Content="{Binding OscillatorView}" OpacityMask="Black" Margin="0,0,0,0"/>
+                                    </Grid>
+                                </Grid>
+
+                            </TabItem>
+
+                            <TabItem IsEnabled="{Binding BLogin}">
+                                <TabItem.Header >
+                                    <StackPanel Orientation="Horizontal">
+                                        <MaterialDesign:PackIcon Kind="SerialPort"  VerticalAlignment="Center"  Width="25" Height="25"/>
+                                        <TextBlock Text="Output" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                                    </StackPanel>
+                                </TabItem.Header>
+
+                                <Grid Background="{DynamicResource ChartTitleForeground}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="650"/>
+                                        <ColumnDefinition Width="650"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid Grid.Column="1" Grid.Row="0" Margin="0" >
+                                        <ContentControl Height="290" Content="{Binding SerialOneView}" OpacityMask="Black" Margin="0,5,15,5"/>
+                                    </Grid>
+                                </Grid>
+                            </TabItem>
+                        </TabControl>
+                    </Grid>
+                </TabItem>
+
+                <TabItem Width="{Binding MainTabWidth}"  Height="68" IsEnabled="{Binding BLogin}" IsSelected="{Binding SelectTypeTab}" >
+                    <TabItem.Header >
+                        <StackPanel Orientation="Horizontal">
+                            <MaterialDesign:PackIcon Kind="PackageVariant"
+                                                 VerticalAlignment="Center" Width="28" Height="28"/>
+                            <TextBlock Text="Material"  Margin="2,0,0,0"  VerticalAlignment="Center"
+                                   FontWeight="Bold" FontSize="16" FontFamily="Arial"/>
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Grid Grid.Column="1" Grid.Row="1">
+                        <Grid.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="Black" Offset="0"/>
+                                <GradientStop Color="CadetBlue" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Grid.Background>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="5"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="180"/>
+                            <ColumnDefinition Width="300"/>
+                            <ColumnDefinition Width="300"/>
+                            <ColumnDefinition Width="250"/>
+                            <ColumnDefinition Width="250"/>
+                            <ColumnDefinition Width="5*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Menu Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"  Visibility="Hidden"
+                                  HorizontalAlignment="Left" Height="20" Margin="10,10,0,0" VerticalAlignment="Top" Width="auto">
+                            <MenuItem Header="Stocks Options" Width="auto">
+                                <MenuItem Header="Define New Stock" HorizontalAlignment="Left" Width="auto" />
+                                <MenuItem x:Name="mn_DeleteStock" Header="Delete Selected Stock" HorizontalAlignment="Left" Width="auto" />
+                                <MenuItem x:Name="mn_Undo" Header="Undo-Delete Stock" HorizontalAlignment="Left" Width="auto"/>
+                                <MenuItem x:Name="mn_DeleteAll" Header="Delete All Stock" HorizontalAlignment="Left" Width="auto" />
+                                <Separator />
+                                <MenuItem x:Name="mn_CMR" Header="Custom Stock Relations" HorizontalAlignment="Left" Width="auto"/>
+                            </MenuItem>
+                            <MenuItem Header="Print Menu" Width="auto">
+                                <MenuItem Header="Selected Item" HorizontalAlignment="Left" Width="auto" Margin="0,0,0,0"/>
+                                <MenuItem Header="Print All" HorizontalAlignment="Left" Width="auto">
+                                    <MenuItem Header="Include Default Value" HorizontalAlignment="Left" Width="auto" Margin="0,0,0,0"/>
+                                    <MenuItem Header="Omit Default Value" HorizontalAlignment="Left" Width="auto" Margin="0,0,0,0"/>
+                                </MenuItem>
+                            </MenuItem>
+                            <MenuItem Header="LogFile"  Width="auto">
+                                <MenuItem Header="Show Log" HorizontalAlignment="Left" Width="auto" Margin="0,0,-0,0" />
+                            </MenuItem>
+                            <MenuItem Header="Maintenance" Width="auto">
+                                <MenuItem Header="BackUp" HorizontalAlignment="Left" Width="auto"/>
+                                <MenuItem Header="Restore" HorizontalAlignment="Left" Width="auto"/>
+                                <Separator />
+                                <MenuItem Header="View/Edit Sytem default" HorizontalAlignment="Left" Width="auto" Margin="0,0,0,0"/>
+                            </MenuItem>
+
+                            <MenuItem Header="User" Width="auto">
+                                <MenuItem Header="Log On" HorizontalAlignment="Left" Width="auto"/>
+                                <MenuItem Header="Log Off" HorizontalAlignment="Left" Width="auto" Margin="0,0,0,0"/>
+                            </MenuItem>
+                        </Menu>
+
+                        <Label Grid.Row="1" Grid.Column="1" Content="Material" Foreground="White"
+                                   Width="auto"  HorizontalAlignment="Stretch" FontSize="14"
+                                   VerticalAlignment="Top" Margin="5,10,5,0" Background="{DynamicResource gradientBrushSegmentedTabItem}"/>
+
+                        <Border BorderThickness="2" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" BorderBrush="#FFAEA9A9" Margin="0,4,0,0">
+                            <ListView x:Name="LstStock"  HorizontalAlignment="Stretch" Height="260" Margin="3,40,3,3" 
+                                      ItemsSource="{Binding ProductList, UpdateSourceTrigger=PropertyChanged}" SelectedIndex="{Binding StockSelectedIndex}" 
+                                      VerticalAlignment="Top" IsSynchronizedWithCurrentItem="False"  SelectedValue="{Binding StockSelectValue}" >
+                                <ListView.Background>
+                                    <LinearGradientBrush EndPoint="0.939,0.919" StartPoint="0.061,0.081">
+                                        <GradientStop Color="#FFFFE07E" Offset="0"/>
+                                        <GradientStop Color="#FFFFFAEA" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </ListView.Background>
+                            </ListView>
+                        </Border>
+                        <Grid Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="105"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="0"/>
+                                <RowDefinition Height="5"/>
+                            </Grid.RowDefinitions>
+
+
+                            <GroupBox Grid.Row="1" Grid.Column="1"  Margin="2" HorizontalAlignment="Stretch"  BorderThickness="0">
+                                <GroupBox.BorderBrush>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="Transparent" Offset="1"/>
+                                        <GradientStop Color="Black" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </GroupBox.BorderBrush>
+                                <GroupBox.Effect>
+                                    <DropShadowEffect Color="Black" BlurRadius="10" Direction="721" ShadowDepth="1" RenderingBias="Quality" />
+                                </GroupBox.Effect>
+                                <Border BorderThickness="2" BorderBrush="#FFAEA9A9" Margin="0,4,0,0">
+                                    <Grid Grid.Row="1" Grid.Column="1" Background="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" 
+                                          Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="0"/>
+                                            <ColumnDefinition Width="0"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="70"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="0"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="5"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="5"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBox x:Name="StockName"  Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Width="200"  
+                                                 Text="{Binding StockSelectValue}"  IsReadOnly="True" Background="AntiqueWhite"
+                                                 FontSize="20" MouseDoubleClick="StockName_DClick" />
+
+                                        <Label Grid.Column="3" Grid.Row="1" Content="Calibration" VerticalAlignment="Center" 
+                                               HorizontalAlignment="Right"  Foreground="White" Margin="0,3,0,6"/>
+
+                                        <ComboBox Grid.Column="4" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                  VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                                                  ItemsSource="{Binding CalibrationList, UpdateSourceTrigger=PropertyChanged}" 
+                                                  SelectedValue="{Binding SelCalValue,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                  SelectedIndex="{Binding CalNameIndex,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                  Background="AntiqueWhite" Height="auto" FontSize="16" Width="200" IsEnabled="{Binding BProCalMod}" Grid.RowSpan="2"/>
+
+                                        <Label  Grid.Column="3" Grid.Row="2" Content="Constants" Foreground="White"
+                                                VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,4,0,5"/>
+
+                                        <Label  Grid.Column="4" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                                Content="A"  Margin="20,0,0,0" Foreground="White"/>
+                                        <TextBlock Grid.Column="4" Grid.Row="2" Width="60" Height="25" 
+                                                   Text="{Binding Aval}" IsEnabled="False" FontSize="14" TextAlignment="Center" 
+                                                   Margin="50,0,0,0" HorizontalAlignment="Left" Background="Black" Foreground="white"/>
+
+                                        <Label  Grid.Column="4" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                                Content="B" Margin="0,0,80,0" Foreground="White"/>
+                                        <TextBlock Grid.Column="4" Grid.Row="2" Width="60" Height="25" 
+                                                   Text="{Binding Bval}" IsEnabled="False" FontSize="14" TextAlignment="Center" 
+                                                   Margin="0,0,10,0" HorizontalAlignment="Right" Background="Black" Foreground="white"/>
+                                    </Grid>
+                                </Border>
+                            </GroupBox>
+
+                            <Grid Grid.Row="2" Margin="0,0,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="5"/>
+                                </Grid.ColumnDefinitions>
+
+                                <GroupBox x:Name="GroupMoisture" Grid.Column="1"  Header="Moisture Limits" BorderThickness="0"
+                                              HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="Yellow" FontSize="14">
+                                    <GroupBox.BorderBrush>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="Black" Offset="0"/>
+                                            <GradientStop Color="#FF151515" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </GroupBox.BorderBrush>
+                                    <GroupBox.Effect>
+                                        <DropShadowEffect Color="Black" BlurRadius="10" Direction="721" ShadowDepth="1" RenderingBias="Quality" />
+                                    </GroupBox.Effect>
+
+                                    <Border BorderThickness="2" BorderBrush="#FFAEA9A9" Margin="0,4,0,0">
+                                        <Grid  Margin="5">
+                                            <Grid.Background>
+                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                    <GradientStop Color="Black" Offset="0"/>
+                                                    <GradientStop Color="#FF979797" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Grid.Background>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0"/>
+                                                <ColumnDefinition Width="135"/>
+                                                <ColumnDefinition Width="90"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="5"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Label Content="Caution Limits" Grid.Row="0" Grid.Column="1" Height="25" Foreground="White"
+                                                       Margin="0,13,0,0" Width="100" HorizontalAlignment="Left"  FontSize="14"/>
+
+                                            <Rectangle Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2" Margin="0,5,0,5" Fill="#FFD0DBE4"/>
+
+                                            <Label Content="Low" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right"
+                                                   FontSize="14" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="White"/>
+
+                                            <TextBox x:Name="MtLimitLow" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left"
+                                                     PreviewTextInput="NumericOnly" IsReadOnly="True"
+                                                     Height="auto" FontSize="20" Text="{Binding MinProdMoisture}" Background="AntiqueWhite"
+                                                     VerticalAlignment="Center" Width="85" Foreground="Blue" />
+
+                                            <Label Grid.Row="0" Grid.Column="3" Content="{Binding MoistureUnit}" VerticalAlignment="Center" Foreground="White"
+                                                   HorizontalAlignment="Left" Margin="0,0,0,0"  FontSize="14"/>
+
+
+                                            <Label Content="High" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" 
+                                                   FontSize="14" VerticalAlignment="Center" Foreground="White"/>
+                                            <TextBox x:Name="MtLimitHi" Grid.Row="3" Grid.Column="2"
+                                                         IsReadOnly="True"  Background="AntiqueWhite" 
+                                                        HorizontalAlignment="Left" Height="auto" FontSize="20" Text="{Binding MaxProdMoisture}"
+                                                        VerticalAlignment="Center" PreviewTextInput="NumericOnly"
+                                                        Width="85" Foreground="Blue" />
+                                            <Label FontSize="14" Grid.Row="3" Grid.Column="3" Foreground="White"
+                                                   Content="{Binding MoistureUnit}" HorizontalAlignment="Left" Height="27" />
+
+
+                                            <Label Content="Caution Low" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Grid.ColumnSpan="2"
+                                                           FontSize="12" VerticalAlignment="Center" Height="24"  Opacity="{Binding CoutionMtOpa}" />
+
+                                            <TextBox x:Name="CauMoistLow" Grid.Column="2" Grid.Row="1" Text="{Binding CautionMoistLow}"
+                                                             Background="AntiqueWhite" IsEnabled="{Binding BMtCauLimit}" Opacity="{Binding CoutionMtOpa}"
+                                                             IsReadOnly="True"
+                                                             HorizontalAlignment="Left"  VerticalAlignment="Center" Width="85" FontSize="20"/>
+
+                                            <Label Content="Caution High" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Grid.ColumnSpan="2"
+                                                           FontSize="12" VerticalAlignment="Center" Height="24" Opacity="{Binding CoutionMtOpa}"/>
+
+
+                                            <Label Grid.Column="3" Grid.Row="1" Content="{Binding MoistureUnit}" Margin="5,0,0,0" FontSize="14"
+                                                           HorizontalAlignment="Left" Height="27"  Width="auto" VerticalAlignment="Center"  Opacity="{Binding CoutionMtOpa}"/>
+
+
+                                            <TextBox x:Name="CauMoistHi" Grid.Column="2" Grid.Row="2" Text="{Binding CautionMoistHigh}"
+                                                            IsEnabled="{Binding BMtCauLimit}" Opacity="{Binding CoutionMtOpa}"
+                                                            IsReadOnly="True"  Background="AntiqueWhite" 
+                                                            HorizontalAlignment="Left" VerticalAlignment="Top" Width="85" FontSize="20"/>
+
+                                            <Label  Grid.Column="3" Grid.Row="2" Content="{Binding MoistureUnit}" Margin="5,0,0,0" FontSize="14"
+                                                           HorizontalAlignment="Left" Height="27"  Width="auto" VerticalAlignment="Center"  Opacity="{Binding CoutionMtOpa}"/>
+
+                                            <CheckBox x:Name="CbMCaution"  Grid.Column="1"  Grid.Row="1" IsChecked="{Binding MUseCaution}" IsEnabled="False" 
+                                                          Style="{StaticResource CheckBoxStyle}" Foreground="blue"
+                                                         Content="Enable" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.RowSpan="2"/>
+
+                                        </Grid>
+                                    </Border>
+                                </GroupBox>
+
+                                <GroupBox x:Name="GroupWeight" Grid.Column="2" Header="Scale Weight Limits" 
+                                              Foreground="Yellow"  HorizontalAlignment="Stretch" FontSize="14"
+                                              VerticalAlignment="Stretch"  BorderBrush="Black" BorderThickness="0">
+                                    <GroupBox.Effect>
+                                        <DropShadowEffect Color="Black" BlurRadius="10" Direction="721" 
+                                                  ShadowDepth="1" RenderingBias="Quality" />
+                                    </GroupBox.Effect>
+                                    <Border BorderThickness="2" BorderBrush="#FFAEA9A9" Margin="0,4,0,0">
+                                        <Grid Margin="5">
+                                            <Grid.Background>
+                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                    <GradientStop Color="Black" Offset="0"/>
+                                                    <GradientStop Color="#FF979797" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Grid.Background>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0"/>
+                                                <ColumnDefinition Width="135"/>
+                                                <ColumnDefinition Width="90"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="5"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Rectangle Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2" Margin="0,5,0,5" Fill="#FFD0DBE4"/>
+
+                                            <Label Content="Caution Limits" Grid.Row="0" Grid.Column="1" Height="25" Foreground="White"
+                                                       Margin="0,13,0,0" Width="100" HorizontalAlignment="Left"  FontSize="14"/>
+
+                                            <Label Content="Low" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right"
+                                                   FontSize="14" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="White"/>
+                                            <TextBox x:Name="WtLimitLow" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" 
+                                                     PreviewTextInput="NumericOnly"  IsReadOnly="True"
+                                                     FontSize="20" Text="{Binding MinProdWeight}" Foreground="Blue" 
+                                                     Background="AntiqueWhite" TextWrapping="Wrap" VerticalAlignment="Center" Width="85"/>
+                                            <Label Grid.Row="0" Grid.Column="3" Content="{Binding WtUnit}" VerticalAlignment="Center" Foreground="White"
+                                                   HorizontalAlignment="Left" Margin="0,0,0,0"  FontSize="14"/>
+
+                                            <Label Content="High" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" 
+                                                   FontSize="14" VerticalAlignment="Center" Foreground="White"/>
+                                            <TextBox x:Name="WtLimitHi" Grid.Row="3" Grid.Column="2" 
+                                                     PreviewTextInput="NumericOnly" IsReadOnly="True" Background="AntiqueWhite" 
+                                                     HorizontalAlignment="Left"  Text="{Binding MaxProdWeight}" 
+                                                     FontSize="20" VerticalAlignment="Center" Width="85" Foreground="Blue"/>
+                                            <Label FontSize="14" Grid.Row="3" Grid.Column="3" Foreground="White"
+                                                   Content="{Binding WtUnit}" HorizontalAlignment="Left" Height="27" />
+
+                                            <Label Content="Caution Low" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Grid.ColumnSpan="2"
+                                                           FontSize="12" VerticalAlignment="Center" Height="24"  Opacity="{Binding CoutionWtOpa}"/>
+                                            <Label Content="Caution High" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Grid.ColumnSpan="2"
+                                                           FontSize="12" VerticalAlignment="Center" Height="24" Opacity="{Binding CoutionWtOpa}"/>
+
+                                            <TextBox  Grid.Column="2" Grid.Row="1" Text="{Binding CautionWTLow}" Background="AntiqueWhite" 
+                                                      IsEnabled="{Binding BWtCauLimit}" Opacity="{Binding CoutionWtOpa}" IsReadOnly="True"
+                                                      HorizontalAlignment="Left"  VerticalAlignment="Center" Width="85" FontSize="20"/>
+
+                                            <TextBox Grid.Column="2" Grid.Row="2" Text="{Binding CautionWTHigh}" Opacity="{Binding CoutionWtOpa}"
+                                                     Background="AntiqueWhite" IsEnabled="{Binding BWtCauLimit}" IsReadOnly="True"
+                                                    HorizontalAlignment="Left"   VerticalAlignment="Top" Width="85" FontSize="20"/>
+
+                                            <Label Grid.Column="3" Grid.Row="1" Content="{Binding WtUnit}" Margin="5,0,0,0" FontSize="14"
+                                                           HorizontalAlignment="Left" Height="27"  Width="auto" VerticalAlignment="Center" Opacity="{Binding CoutionWtOpa}"/>
+                                            <Label  Grid.Column="3" Grid.Row="2"  Content="{Binding WtUnit}" Margin="5,0,0,0" FontSize="14"
+                                                           HorizontalAlignment="Left" Height="27"  Width="auto" VerticalAlignment="Center" Opacity="{Binding CoutionWtOpa}"/>
+
+                                            <CheckBox Grid.Column="1"  Grid.Row="1" IsChecked="{Binding WTUseCaution}" Grid.RowSpan="2" IsEnabled="False" 
+                                                          Style="{StaticResource CheckBoxStyle}" Foreground="blue"
+                                                              Content="Enable" HorizontalAlignment="Left"  VerticalAlignment="Center" />
+                                        </Grid>
+                                    </Border>
+                                </GroupBox>
+                            </Grid>
+                        </Grid>
+
+                        <Border  Grid.Column="4" Grid.Row="1" Background="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}"
+                             CornerRadius="10" BorderThickness="2" BorderBrush="Gray" Margin="10">
+                            <Border.Effect>
+                                <DropShadowEffect Color="Gray" BlurRadius="10" Direction="721" ShadowDepth="2" RenderingBias="Quality" />
+                            </Border.Effect>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0"/>
+                                    <ColumnDefinition Width="90"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="50"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="1" Content="Default Values" Grid.ColumnSpan="2" FontWeight="Normal"
+                                           Foreground="White" VerticalAlignment="Center" FontSize="16"/>
+                                <Label Content="Weight" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right"
+                                                   FontSize="14" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="Yellow"/>
+                                <TextBox x:Name="DefWeight" Grid.Row="1" Grid.Column="2" PreviewTextInput="NumericOnly"
+                                             HorizontalAlignment="Center"  FontSize="18" Text="{Binding PDWeight}" IsReadOnly="True"
+                                             Background="AntiqueWhite" TextWrapping="Wrap" VerticalAlignment="Center" Width="80" Foreground="Black"/>
+
+                                <Label Content="Net Weight" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right"
+                                                   FontSize="14" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="Yellow"/>
+                                <TextBox x:Name="DefNetWt" Grid.Row="2" Grid.Column="2" IsReadOnly="True" PreviewTextInput="NumericOnly"
+                                             HorizontalAlignment="Center"  FontSize="18" Text="{Binding PDNtWeight}" 
+                                             Background="AntiqueWhite" TextWrapping="Wrap" VerticalAlignment="Center" Width="80" Foreground="Black"/>
+
+                                <Label Content="Forte#" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right"
+                                                   FontSize="14" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="Yellow"/>
+                                <TextBox x:Name="DefForte" Grid.Row="3" Grid.Column="2" IsReadOnly="True" PreviewTextInput="NumericOnly"
+                                             HorizontalAlignment="Center"  FontSize="18" Text="{Binding PDForte}" 
+                                             Background="AntiqueWhite" TextWrapping="Wrap" VerticalAlignment="Center" Width="80" Foreground="Black"/>
+
+                                <Label Content="Moisture" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right"
+                                                   FontSize="14" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="Yellow"/>
+                                <TextBox x:Name="DefMoisture" Grid.Row="4" Grid.Column="2" IsReadOnly="True" 
+                                             HorizontalAlignment="Center" FontSize="18" Text="{Binding PDMoisture}" 
+                                             Background="AntiqueWhite" TextWrapping="Wrap" VerticalAlignment="Center" Width="80" Foreground="Black"/>
+
+                                <Label FontSize="14" Grid.Column="3" Grid.Row="1" Foreground="White"
+                                                   Content="{Binding WtUnit}" HorizontalAlignment="Left" Height="27" />
+
+                                <Label FontSize="14" Grid.Column="3" Grid.Row="2" Foreground="White"
+                                                   Content="{Binding WtUnit}" HorizontalAlignment="Left" Height="27" />
+
+                                <Label FontSize="14" Grid.Column="3" Grid.Row="4" Foreground="White"
+                                                   Content="{Binding MoistureUnit}" HorizontalAlignment="Left" Height="27" />
+                            </Grid>
+
+                        </Border>
+
+                        <Border  Grid.Column="4" Grid.Row="2" Background="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}"
+                             CornerRadius="10" BorderThickness="2" BorderBrush="Gray" Margin="10,0,10,0">
+                            <Border.Effect>
+                                <DropShadowEffect Color="Gray" BlurRadius="10" Direction="721" ShadowDepth="2" RenderingBias="Quality" />
+                            </Border.Effect>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0"/>
+                                    <ColumnDefinition Width="90"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="0"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="TareWeight" Grid.Column="2" Text="{Binding TareWeight}"
+                                              PreviewTextInput="NumericOnly" Width="80" FontSize="18"
+                                              Foreground="Black" Background="AntiqueWhite" IsReadOnly="True"/>
+                                <Label FontSize="14" Grid.Column="3" Foreground="White"
+                                                   Content="{Binding WtUnit}" HorizontalAlignment="Left" Height="27" />
+                                <Label Content="Tare Weight" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right"
+                                                   FontSize="14" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="Yellow"/>
+                            </Grid>
+                        </Border>
+                        <Border  Grid.Row="1" Grid.Column="5" Background="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}"
+                             CornerRadius="10" BorderThickness="2" BorderBrush="Gray" Margin="10">
+                            <Border.Effect>
+                                <DropShadowEffect Color="Gray" BlurRadius="10" Direction="721" ShadowDepth="2" RenderingBias="Quality" />
+                            </Border.Effect>
+                            <Grid Margin="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0"/>
+                                    <ColumnDefinition Width="90"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="10"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="1" Content="Meterial Labels" Grid.ColumnSpan="2" FontWeight="Normal"
+                                           Foreground="White" VerticalAlignment="Center" FontSize="16"/>
+
+                                <Label Content="{Binding LbFieldOne}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right"
+                                                   FontSize="14" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="Yellow"/>
+                                <TextBox x:Name="FieldOne" Grid.Row="1" Grid.Column="2" IsReadOnly="True"
+                                             HorizontalAlignment="Center" FontSize="18" Text="{Binding FieldOne}" 
+                                             Background="AntiqueWhite" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" Foreground="Black"/>
+                                <Label Content="{Binding LbFieldTwo}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right"
+                                                   FontSize="14" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="Yellow"/>
+                                <TextBox x:Name="FieldTwo" Grid.Row="2" Grid.Column="2" IsReadOnly="True"
+                                             HorizontalAlignment="Center" FontSize="18" Text="{Binding FieldTwo}"
+                                             Background="AntiqueWhite" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" Foreground="Black"/>
+                                <Label Content="{Binding LbFieldThree}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right"
+                                                   FontSize="14" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="Yellow"/>
+                                <TextBox x:Name="FieldThree"  Grid.Row="3" Grid.Column="2" IsReadOnly="True"
+                                             HorizontalAlignment="Center" FontSize="18" Text="{Binding FieldThree}" 
+                                             Background="AntiqueWhite" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" Foreground="Black"/>
+                                <Label Content="{Binding LbFieldFour}" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right"
+                                                   FontSize="14" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="Yellow"/>
+                                <TextBox x:Name="FieldFour"  Grid.Row="4" Grid.Column="2" IsReadOnly="True"
+                                             HorizontalAlignment="Center" FontSize="18" Text="{Binding FieldFour}" 
+                                             Background="AntiqueWhite" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" Foreground="Black"/>
+                            </Grid>
+                        </Border>
+
+                        <Button x:Name="btnMod" Content="Modify" HorizontalAlignment="Center" Foreground="DarkBlue"
+                                            Grid.Column="5" Grid.Row="2" Command="{Binding ModifyProdCommand}" FontSize="18"
+                                            VerticalAlignment="Center" Width="100" Height="35" Cursor="Hand" >
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                    <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                    <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                    <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                    <GradientStop Color="#FFF99402" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+
+                        <Grid Grid.Row="1" Grid.Column="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="5"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="5"/>
+                            </Grid.RowDefinitions>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+
+                <TabItem  Height="68"  Width="{Binding MainTabWidth}" IsEnabled="{Binding BLogin}">
+                    <TabItem.Header >
+                        <StackPanel Orientation="Horizontal">
+                            <MaterialDesign:PackIcon Kind="TruckDelivery" VerticalAlignment="Center" Width="26" Height="26"/>
+                            <TextBlock Text="Output" Margin="2,0,0,0" VerticalAlignment="Center"  
+                                   FontWeight="Bold" FontSize="18" FontFamily="Arial"/>
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Grid >
+                        <Grid.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="Black" Offset="0"/>
+                                <GradientStop Color="CadetBlue" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Grid.Background>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="500"/>
+                            <ColumnDefinition Width="500"/>
+                            <ColumnDefinition Width="0"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="1"  CornerRadius="10"  Background="{DynamicResource ChartTitleForeground}"
+                                        BorderThickness="1" BorderBrush="DimGray" Margin="0,20,0,10">
+                            <Border.Effect>
+                                <DropShadowEffect Color="Gray" BlurRadius="10" Direction="721" ShadowDepth="2" RenderingBias="Quality" />
+                            </Border.Effect>
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="5"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="5"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="5"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="5"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="2"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2"/>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="2"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Rectangle Grid.Column="1"  Grid.Row="2" Fill="Black" Grid.ColumnSpan="3"/>
+                                <Rectangle Grid.Column="1"  Grid.Row="4" Fill="Black" Grid.ColumnSpan="3"/>
+                                <Rectangle Grid.Column="1"  Grid.Row="6" Fill="Black" Grid.ColumnSpan="3"/>
+
+                                <CheckBox Grid.Row="0" Grid.Column="1" Content="Shared File output" Grid.ColumnSpan="2" 
+                                                    IsChecked="{Binding SharedFileChecked}" Style="{StaticResource CheckBoxStyle}"
+                                                    VerticalContentAlignment="Center" Panel.ZIndex="99" Foreground="Yellow"/>
+
+                                <Button Grid.Column="2" Grid.Row="1" Width="80" Height="30" Content="Config."
+                                                    Command="{Binding SharefileConfigCommand}" Panel.ZIndex="99"
+                                                    Style="{StaticResource RoundButtonTemplate}" Background="GhostWhite">
+                                </Button>
+
+                                <TextBox Grid.Row="1" Grid.Column="3" Margin="0,0,0,0" Width="300" 
+                                                     HorizontalAlignment="Left" IsReadOnly="True"
+                                                     Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" 
+                                                     Text="{Binding ShareFileOutString}" Height="27" VerticalContentAlignment="Center"
+                                                     Grid.ColumnSpan="5"  Foreground="DarkBlue" Panel.ZIndex="99"/>
+
+                                <Button Grid.Column="2" Grid.Row="7" Height="30"  Width="80" 
+                                                    Command="{Binding WriteSharedFileCommand}" Panel.ZIndex="99"
+                                                    Cursor="Hand" Style="{StaticResource RoundButtonTemplate}" >
+                                    <Button.Background>
+                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                            <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                            <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                            <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                            <GradientStop Color="#FF6AC176" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+                                    <StackPanel>
+                                        <TextBlock Text="Write" Margin="0,3,0,0"/>
+                                        <MaterialDesign:PackIcon Kind="Pencil" Margin="42,-19,0,0" 
+                                                        VerticalAlignment="Center" Width="25" Height="25"/>
+                                    </StackPanel>
+                                </Button>
+
+                                <Button x:Name="btnBrowse" Grid.Column="2"  Content="Location" 
+                                                    HorizontalAlignment="Center" Command="{Binding BrowseLocCommand}"
+                                                    ToolTip="Select File location" Height="30" Cursor="Hand"
+                                                    Grid.Row="3" VerticalAlignment="Center" Width="80" Panel.ZIndex="99"
+                                                    Style="{StaticResource RoundButtonTemplate}" Background="Bisque"/>
+
+                                <TextBox Grid.Row="3" Grid.Column="3" Text="{Binding SharedFilePath}" Height="27"
+                                                     IsEnabled="{Binding SharedFileChecked}" Width="200" Panel.ZIndex="99"
+                                                     Background="White" IsReadOnly="True" HorizontalAlignment="Left"/>
+
+                                <TextBox  x:Name="SharedFileName" Grid.Column="3" Grid.Row="5"  Height="27"
+                                                      MouseDoubleClick="SharedFileName_dclick" IsReadOnly="True"
+                                                      IsEnabled="{Binding SharedFileChecked}"  HorizontalAlignment="Left"
+                                                      Panel.ZIndex="99"  Background="AntiqueWhite" Width="200" 
+                                                      VerticalContentAlignment="Center" Foreground="Black" Text="{Binding SharedFileName}"/>
+
+                                <Button Grid.Row="5" Grid.Column="2"  Height="30" 
+                                                HorizontalAlignment="Center"  Panel.ZIndex="99"
+                                                Command="{Binding SaveSharedFileCommand}" Width="80"
+                                                Style="{StaticResource RoundButtonTemplate}">
+                                    <Button.Background>
+                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                            <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                            <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                            <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                            <GradientStop Color="#FF6AC176" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+                                    <StackPanel>
+                                        <TextBlock Text="Save" Margin="0,3,0,0"/>
+                                        <MaterialDesign:PackIcon Kind="ContentSave" Margin="42,-19,0,0" 
+                                                        VerticalAlignment="Center" Width="25" Height="25"/>
+                                    </StackPanel>
+                                </Button>
+
+                                <TextBox Grid.Row="9" Grid.Column="2" Margin="5,0,5,0"  VerticalAlignment="Center"
+                                                     Text="{Binding Outputstatus}" FontSize="14" HorizontalContentAlignment="Left"
+                                                     Grid.ColumnSpan="4" Foreground="White" Background="Transparent" Panel.ZIndex="99"/>
+
+                                <Label Grid.Row="9" Grid.Column="1" Content="Status :" Margin="0" Panel.ZIndex="99"
+                                                   Foreground="AntiqueWhite" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                    <Label.Effect>
+                                        <DropShadowEffect/>
+                                    </Label.Effect>
+                                </Label>
+
+                                <Rectangle Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="6">
+                                    <Rectangle.Fill>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="Black" Offset="0"/>
+                                            <GradientStop Color="Gray" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                            </Grid>
+                        </Border>
+
+                    </Grid>
+                </TabItem>
+            </TabControl>
+            <!---  End Row 1 -->
+
+            <!---  Row 2  Summary Row-->
+            <Grid Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="1" Margin="0,0,0,0"  Background="Transparent">
+                <Grid.Resources>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TabControl  TabStripPlacement="Bottom"  FontFamily="Verdana" FontSize="12" BorderThickness="0">
+                    <TabControl.Resources>
+                        <Style TargetType="{x:Type TabPanel}">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                        </Style>
+
+                        <Style TargetType="TabItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="TabItem">
+                                        <Grid Name="Panel">
+                                            <Border 
+                                        Name="Border"
+                                        Background="LightSkyBlue"
+                                        BorderBrush="Gray" 
+                                        BorderThickness="1,1,3,1" 
+                                        CornerRadius="0,0,6,6" >
+                                                <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Cursor="Hand"
+                                        ToolTip="Click on tab to select Archives type"
+                                        Margin="20,4,20,4"/>
+                                            </Border>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter TargetName="Panel" Property="Background" Value="Transparent" />
+                                                <Setter Property="Foreground" Value="Black" />
+                                            </Trigger>
+                                            <Trigger Property="IsSelected" Value="False">
+                                                <Setter TargetName="Panel" Property="Background" Value="Transparent" />
+                                                <Setter Property="Foreground" Value="Gray" />
+                                                <Setter TargetName="Border" Property="Background" Value="White" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </TabControl.Resources>
+
+                    <TabItem x:Name="BaleTab" Header="Data Table"  DataContext="{Binding}" 
+                         IsSelected="{Binding SelectBaletab, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                        <!--DataGrid-->
+                        <DataGrid x:Name="DataGridControl"  Margin="0,5,0,5"
+                                  AutoGeneratingColumn="OnAutoGeneratingColumn"
+                                  ColumnWidth="10*"
+                                  HorizontalAlignment="Left"
+                                  HorizontalContentAlignment="Center"
+                                  CanUserAddRows="False" 
+                                  AutoGenerateColumns="true" 
+                                  SelectedIndex="{Binding SelectData, Mode=TwoWay}" 
+                                  SelectionMode="Single"
+                                  Background="Transparent"  
+                                  ItemsSource="{Binding LvDatatable}"
+                                  AlternatingRowBackground="#FFE5ECE2" 
+                                  HorizontalGridLinesBrush="Gray" 
+                                  VerticalGridLinesBrush="Gray"
+                                  CanUserReorderColumns="False"
+                                  CanUserSortColumns="False"
+                                  EnableRowVirtualization="True" 
+                                  EnableColumnVirtualization="True"
+                                  IsSynchronizedWithCurrentItem="false"
+                                  IsReadOnly="True"
+                                  FontWeight="Medium" Grid.ColumnSpan="3" >
+
+                            <DataGrid.Effect>
+                                <DropShadowEffect ShadowDepth="4"
+                                          Direction="330"
+                                          Color="Black"
+                                          Opacity="0.5"
+                                          BlurRadius="4"/>
+                            </DataGrid.Effect>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn>
+                                    <DataGridTextColumn.Foreground>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="Black" Offset="0"/>
+                                            <GradientStop Color="White" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </DataGridTextColumn.Foreground>
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+
+                            <DataGrid.ColumnHeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="Background" Value="black"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                    <Setter Property="FontWeight" Value="Medium"/>
+                                    <Setter Property="BorderThickness" Value="1"/>
+                                    <Setter Property="BorderBrush" >
+                                        <Setter.Value>
+                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                <GradientStop Color="Black" Offset="0"/>
+                                                <GradientStop Color="White" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                </Style>
+                            </DataGrid.ColumnHeaderStyle>
+                        </DataGrid>
+                    </TabItem>
+
+                    <TabItem x:Name="LotTab" Header="Lot Summary" IsEnabled="{Binding LpEnable}" Visibility="Hidden">
+                        <ContentControl Grid.Column="1" Grid.Row="1" Margin="5"
+                                    Content="{Binding LotSummary}" OpacityMask="Black"/>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+            <!---  End Row 2  Summary Row-->
+
+            <!---  Row 3  Status Row-->
+
+            <DockPanel Grid.Row="3" Height="50" VerticalAlignment="Bottom" Grid.Column="0" Grid.ColumnSpan="4">
+                <DockPanel.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black" Offset="0"/>
+                        <GradientStop Color="White" Offset="0.3"/>
+                    </LinearGradientBrush>
+                </DockPanel.Background>
+
+                <StatusBar DockPanel.Dock="Bottom" BorderThickness="2" BorderBrush="White"  >
+                    <StatusBar.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="Black"/>
+                            <GradientStop Color="#FFDEDADA" Offset="0.514"/>
+                        </LinearGradientBrush>
+                    </StatusBar.Background>
+                    <StatusBar.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                        </ItemsPanelTemplate>
+                    </StatusBar.ItemsPanel>
+
+                    <StatusBarItem x:Name="SBInfo1" HorizontalAlignment="Left"  Grid.Column="0" Grid.ColumnSpan="2">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Status : "  FontSize="16"/>
+                            <TextBlock x:Name="tbStatus"  Text="{Binding StringStatus}" 
+                                    VerticalAlignment="Center" FontSize="20" Width="auto" Height="auto" Foreground="Blue">
+                                <TextBlock.Resources>
+                                    <Style TargetType="ScrollViewer">
+                                        <Setter Property="Effect">
+                                            <Setter.Value>
+                                                <DropShadowEffect ShadowDepth="4"
+                                              Direction="330"
+                                              Color="Black"
+                                              Opacity="0.5"
+                                              BlurRadius="4"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </TextBlock.Resources>
+                                <TextBlock.Effect>
+                                    <DropShadowEffect ShadowDepth="4"
+                                              Direction="330"
+                                              Color="Black"
+                                              Opacity="0.5"
+                                              BlurRadius="4"/>
+                                </TextBlock.Effect>
+
+                            </TextBlock>
+                        </StackPanel>
+                    </StatusBarItem>
+                </StatusBar>
+            </DockPanel>
+            <!---  End Row 3  Status Row-->
+
+        </Grid>
+    </Border>
+</Window>

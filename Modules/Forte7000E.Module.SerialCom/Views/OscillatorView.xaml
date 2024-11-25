@@ -1,0 +1,190 @@
+﻿<UserControl x:Class="Forte7000E.Module.SerialCom.Views.OscillatorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Forte7000E.Module.SerialCom.Views"
+             xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="290" d:DesignWidth="630">
+    <UserControl.Resources>
+        <ResourceDictionary Source="/WpfArchive.Windows.Theme;component/Theme.xaml"/>
+    </UserControl.Resources>
+    <Grid Margin="5">
+        <Border BorderThickness="1" CornerRadius="10" BorderBrush="DimGray" Margin="5">
+            <Border.Effect>
+                <DropShadowEffect Color="Gray" BlurRadius="10" Direction="721" ShadowDepth="2" RenderingBias="Quality" />
+            </Border.Effect>
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="black" Offset="0"/>
+                    <GradientStop Color="CadetBlue" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="5"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="125"/>
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+                <Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="9">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="Black" Offset="0"/>
+                            <GradientStop Color="Gray" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+
+
+                <Label Content="Oscillator Serial Port Connections :" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"  
+                       Grid.ColumnSpan="5" Foreground="Yellow" 
+                       VerticalAlignment="Top" FontFamily="Verdana" FontSize="16"/>
+
+
+                <Label Content="Port" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left"  
+                           VerticalAlignment="Bottom" FontFamily="Verdana" FontSize="14" Foreground="White"/>
+                <Label Content="Baudrate" Grid.Row="0"   Grid.Column="2" HorizontalAlignment="Left"
+                           VerticalAlignment="Bottom" FontFamily="Verdana" FontSize="14" Foreground="White"/>
+                <Label Content="Parity" Grid.Row="0"  Grid.Column="3" HorizontalAlignment="Left"  
+                           VerticalAlignment="Bottom" FontFamily="Verdana" FontSize="14" Foreground="White"/>
+                <Label Content="Data" Grid.Row="0"  Grid.Column="4" HorizontalAlignment="Left" 
+                           VerticalAlignment="Bottom" FontFamily="Verdana" FontSize="14" Foreground="White"/>
+                <Label Content="StopBit" Grid.Row="0"  Grid.Column="5" HorizontalAlignment="Left"  
+                           VerticalAlignment="Bottom" FontFamily="Verdana" FontSize="14" Foreground="White"/>
+                <Label Content="Oscillator Mode" Grid.Row="0"  Grid.Column="7" HorizontalAlignment="Left"  
+                           VerticalAlignment="Bottom" FontFamily="Verdana" FontSize="14" Foreground="White"/>
+
+                <ComboBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding ComPortLst}" 
+                            SelectedIndex="{Binding OscCommIndex}" HorizontalContentAlignment="Center"
+                            HorizontalAlignment="Left" FontSize="14" VerticalContentAlignment="Center"
+                            VerticalAlignment="Center" Width="70" IsReadOnly="True" Background="{x:Null}"/>
+
+                <ComboBox ItemsSource="{Binding BaudRateLst}" Grid.Column="2" Grid.Row="1"
+                            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                            HorizontalAlignment="Left" FontSize="14" SelectedIndex="{Binding OscBaudRateIndex}"
+                            VerticalAlignment="Center" Width="70" IsReadOnly="True" Background="{x:Null}"/>
+
+                <ComboBox ItemsSource="{Binding ParityLst}" Grid.Column="3" Grid.Row="1"
+                            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                            HorizontalAlignment="Left" FontSize="14" SelectedIndex="{Binding OscParityIndex}"
+                            VerticalAlignment="Center" Width="70" IsReadOnly="True" Background="{x:Null}"/>
+
+                <ComboBox ItemsSource="{Binding DataBitsLst}"  Grid.Column="4" Grid.Row="1" 
+                            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                            HorizontalAlignment="Left"  FontSize="14" SelectedIndex="{Binding OscDataBitIndex}"
+                            VerticalAlignment="Center" Width="70" IsReadOnly="True" Background="{x:Null}"/>
+
+                <ComboBox ItemsSource="{Binding StopBitLst}" Margin="0" Grid.Column="5" Grid.Row="1" 
+                            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                            HorizontalAlignment="Left" FontSize="14" SelectedIndex="{Binding OscStopBitIndex}"
+                            VerticalAlignment="Center" Width="70" IsReadOnly="True" Background="{x:Null}"/>
+
+                <ComboBox ItemsSource="{Binding DevModeList}" VerticalContentAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            HorizontalAlignment="Left" Grid.Column="7" Grid.Row="1"
+                            Foreground="Black" Width="120"  VerticalAlignment="Center"
+                            FontSize="16" FontWeight="Medium" SelectedIndex="{Binding SelOscModeIndex}"/>
+
+                <Grid Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="9" Margin="0,5,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Button Grid.Column="1" Grid.Row="0" Height="30" Width="100" 
+                                                    VerticalAlignment="Center" Foreground="DarkBlue"
+                                                    Style="{StaticResource RoundButtonTemplate}" Margin="0"
+                                                    Command="{Binding OscTestCommand}">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                <GradientStop Color="#FF6AC176" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                        <StackPanel>
+                            <TextBlock Text="Send" Margin="0,3,0,0"/>
+                            <MaterialDesign:PackIcon Kind="SerialPort" Margin="42,-19,0,0" 
+                                                        VerticalAlignment="Center" Width="25" Height="25"/>
+                        </StackPanel>
+                    </Button>
+
+                    <ComboBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding OscOptList}"
+                                HorizontalContentAlignment="Center"
+                                SelectedIndex="{Binding OscOptionIdx}"
+                                Width="100" HorizontalAlignment="Center" FontSize="16" VerticalAlignment="Center"/>
+
+                    <TextBox x:Name="ForteRange" Grid.Row="1" Grid.Column="5" Panel.ZIndex="99" Visibility="{Binding OscSimVis}"
+                                PreviewTextInput="NumericOnly" MouseDoubleClick="ForteRange_dclick" Width="80"
+                                Text="{Binding ForteRange}"  Background="AntiqueWhite"  Margin="20,0,0,0" FontSize="14" />
+
+                    <CheckBox  x:Name="cbRnForte" Grid.Row="1" Grid.Column="4" IsChecked="{x:Null}"  Panel.ZIndex="99" 
+                                Margin="10,0,0,0" Width="130" Content="Random Forte." FontSize="14"  Click="CbRnForte_click"
+                                HorizontalAlignment="Left" Grid.ColumnSpan="2" VerticalAlignment="Center" Style="{StaticResource CheckBoxStyle}"
+                                VerticalContentAlignment="Center" Foreground="White" Visibility="{Binding OscSimVis}"/>
+
+                    <TextBox Grid.Column="2" Grid.ColumnSpan="2"  TextWrapping="Wrap" Margin="0,5,5,0" Foreground="Yellow"
+                                Text="{Binding OscDataReceive, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Left"
+                                Grid.Row="0" Width="210" Height="auto" Grid.RowSpan="2"  VerticalAlignment="Stretch"
+                                HorizontalAlignment="Left" Background="Black" IsReadOnly="True" />
+
+                    <Label Content="Simulation Mode Parameters" Grid.Row="0" Margin="15,0,0,0" Visibility="{Binding OscSimVis}"
+                               Grid.Column="4" Grid.ColumnSpan="2" FontSize="14"  Foreground="Yellow" Panel.ZIndex="99"/>
+
+                    <Rectangle Grid.Column="4" Grid.ColumnSpan="3"  Visibility="{Binding OscSimVis}"
+                                                           Grid.RowSpan="2" Margin="15,5,10,5">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="Black" Offset="0"/>
+                                <GradientStop Color="#FF535050" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Grid>
+
+                <Border BorderThickness="1" Grid.Row="5" Height="50" Grid.Column="5" Width="250" 
+                            HorizontalAlignment="Right" Grid.ColumnSpan="4" BorderBrush="White"
+                            Margin="0,0,10,0" Visibility="{Binding OscOnLineVis}" >
+                    <Grid  Background="Gray" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="5"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Foreground="Yellow" HorizontalContentAlignment="Right" Grid.Column="1"
+                                    Content="Sensitivity" Height="30" HorizontalAlignment="Right" FontSize="16"/>
+                        <ComboBox Grid.Row="5" Grid.Column="2" SelectedIndex="{Binding SelOscSensIndex}"
+                                      ItemsSource="{Binding OscSens}" Width="140"  HorizontalAlignment="Center" Height="30"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

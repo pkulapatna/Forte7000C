@@ -1,0 +1,138 @@
+﻿
+                if (_SerialOscPort.IsOpen)
+                {
+                    if (_SerialOscPort.BytesToRead > 0)
+                    {
+                        byte[] inbyte = new byte[1];
+                        _SerialOscPort.Read(inbyte, 0, 1);
+                        if (inbyte.Length > 0)
+                        {
+                            byte value = (byte)inbyte.GetValue(0);
+                            //do other necessary processing you may want. 
+                            Console.WriteLine("value = " + value);
+                        }
+                    }
+                }
+
+
+                
+                    // var serialDevice = sender as SerialPort;
+                    //  var buffer = new byte[serialDevice.BytesToRead];
+                    //  serialDevice.Read(buffer, 0, buffer.Length);
+
+                    //  Console.WriteLine("Length = " + buffer.Length);
+
+
+                        var watch = System.Diagnostics.Stopwatch.StartNew();
+                         
+                        var elapsedMs = watch.ElapsedMilliseconds;
+
+                        Console.WriteLine("Print Report elapsedMs = " + elapsedMs);
+
+                        List<person>
+                        return connection.Query<person>($ "select * from people where Lastname  = '{lastName}'").tolist();
+
+
+
+
+        public Task<DataTable> GetDataSetAsync(ObservableCollection<string> selectedHdrList, int baleSumDepth)
+        {
+            string strquery = GetQueryStrFromList(selectedHdrList, baleSumDepth);
+
+            return (Task<DataTable>)Task.Run(() =>
+            {
+                SqlHandler.GetForteDataTable(strquery);
+            });
+        }
+
+
+
+        public async Task<DataTable> UpdateSummaryDataGridAsync(ObservableCollection<string> selectedHdrList, int baleSumDepth)
+        {
+       
+            DataTable MyData = new DataTable();
+
+            await Task.Run(() =>
+            {
+                string strquery = GetQueryStrFromList(selectedHdrList, baleSumDepth);
+                MyData = SqlHandler.GetForteDataTable(strquery);
+            });
+            return MyData;
+        }
+
+        
+                // UpdateSummaryDataGrid(_BaleSumDepth);
+
+                //DataTable NewTable  = await ProcessModel.UpdateSummaryDataGridAsync(_BaleSumDepth);
+
+                // await UpdateSummaryDataGrid(_BaleSumDepth);
+
+               //  lvDatatable = await ProcessModel.UpdateSummaryDataGridAsync(_BaleSumDepth);
+
+                //  lvDatatable = UpdateDataGrid(lvDatatable, NewTable);
+
+                // SummaryTable = await ProcessModel.UpdateSummaryTableAsync(_BaleSumDepth);
+
+
+                
+        private async Task UpdateSummaryDataGrid(int balecount)
+        {
+
+            await Task.Run(() => {
+               
+                return Task.CompletedTask;
+            });
+     
+        }
+
+         private void MoistureFromModel(double obj)
+        {
+            switch (ClassCommon.MoistureType)
+            {
+                case 0: // %MC == moisture from Sql database
+                    MoistureDat = obj.ToString("#0.00");
+                    break;
+
+                case 1: // %MR  = Moisture / ( 1- Moisture / 100)
+                    MoistureDat = (obj / (1 - obj / 100)).ToString("#0.00");
+                    break;
+
+                case 2: // %AD = (100 - moisture) / 0.9
+                    MoistureDat = ((100 - obj)/0.9).ToString("#0.00");
+                    break;
+
+                case 3: // %BD  = 100 - moisture
+                    MoistureDat =  (100 - obj).ToString("#0.00");
+                    break;
+            }
+            ChangeState(ClassCommon.ProcessState.Complete);
+            StringStatus = "Done!";
+            bReadReady = false;
+            bReading = false;
+        }
+
+        
+        private List<string> GetCalibratonList()
+        {
+            List<string> callist = new List<string>();
+            return callist;
+        }
+
+         //  System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => { UpdateUIListView(); }));
+
+         private void UpdateUIListView()
+        {
+         //   MessageBox.Show("Update Db done");
+          //  _eventAggregator.GetEvent<UpdateSqldataEvent>().Publish(ClassCommon._UID.ToString());
+        }
+
+
+        
+        public async Task ExecuteEverySecond(Action execute)
+        {
+            while (true)
+            {
+                execute();
+                await Task.Delay(1000);
+            }
+        }
